@@ -17,9 +17,10 @@ namespace Bizsol_ESMS_API.Controllers.Master
         private readonly IBrandMaster _IBrandMaster;
         private readonly IWarehouse _IWarehouse;
         private readonly IItemMaster _IItemMaster;
+        private readonly IConfigItemMaster _configItemMaster;
 
         public MasterController(IUOM uom, IDropDown _IdropDown, ILocationMaster _IlocationMaster, ICategory _Icategory, IGroupMaster _groupMaster
-        , ISubGroupMaster _IsubGroupMaster,IBrandMaster _brandMaster, IWarehouse iWarehouse, IItemMaster iItemMaster)
+        , ISubGroupMaster _IsubGroupMaster,IBrandMaster _brandMaster, IWarehouse iWarehouse, IItemMaster iItemMaster, IConfigItemMaster configItemMaster)
         {
             _IUOM = uom;
             _IDropDown = _IdropDown;
@@ -30,6 +31,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
             _IBrandMaster = _brandMaster;
             _IWarehouse = iWarehouse;
             _IItemMaster = iItemMaster;
+            _configItemMaster = configItemMaster;
         }
 
         #region DropDown
@@ -850,6 +852,57 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
         #endregion IItemMaster
 
+        #region ItemConfig
+        [HttpPost]
+        [Route("SaveConfig")]
+        public async Task<IActionResult> SaveConfig([FromBody] tblConfigItemMaster model)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _configItemMaster.SaveConfig(_bizsolESMSConnectionDetails, model);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ShowItemConfig")]
+        public async Task<IActionResult> ShowItemConfig()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _configItemMaster.ShowItemConfig(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        #endregion ItemConfig
     }
 }
 

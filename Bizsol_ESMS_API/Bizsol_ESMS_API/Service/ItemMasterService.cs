@@ -25,7 +25,7 @@ namespace Bizsol_ESMS_API.Service
                 return result.ToList();
             }
         }
-        public async Task<IEnumerable<dynamic>> ShowItemByCode(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
+        public async Task<dynamic> ShowItemByCode(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
