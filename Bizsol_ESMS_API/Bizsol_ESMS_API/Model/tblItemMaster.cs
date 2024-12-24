@@ -7,7 +7,7 @@ namespace Bizsol_ESMS_API.Model
         public int Code { get; set; } = 0;
         public string ItemName { get; set; } 
         public string DisplayName { get; set; }
-        public int ItemBarCode { get; set; } = 0;
+        public string ItemBarCode { get; set; }
         public string UOMName { get; set; } 
         public string HSNCode { get; set; }
         public string CategoryName { get; set; } 
