@@ -26,6 +26,9 @@ builder.Services.AddTransient<ICategory, CategoryService>();
 builder.Services.AddTransient<IBrandMaster, BrandMasterService>();
 builder.Services.AddTransient<IWarehouse, WarehouseService>();
 builder.Services.AddTransient<IItemMaster, ItemMasterService>();
+builder.Services.AddTransient<IUserMaster, UserMasterService>();
+builder.Services.AddTransient<IDesignationMaster, DesignationMasterService>();
+builder.Services.AddTransient<IUserGroupMaster, UserGroupMasterService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
