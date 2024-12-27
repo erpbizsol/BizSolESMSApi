@@ -68,5 +68,16 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+        public async Task<IEnumerable<dynamic>> GetUserModuleMasterList(string ConnectionString)
+        {
+            using (IDbConnection conn = new MySqlConnection(ConnectionString))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                string Text = "SELECT UserModuleMaster.Code,UserModuleMaster.ModuleDesp,UserModuleMaster.MasterModuleCode, GROUP_CONCAT(UserModuleOptionsDetails.OptionDesp ORDER BY UserModuleOptionsDetails.OptionDesp SEPARATOR ', ') AS OptionDescriptions FROM BizsolESMS_test.UserModuleMaster INNER JOIN BizsolESMS_test.UserModuleOptionsDetails ON UserModuleOptionsDetails.UserModuleMaster_Code = UserModuleMaster.Code GROUP BY UserModuleMaster.Code,UserModuleMaster.ModuleDesp,UserModuleMaster.MasterModuleCode;";
+                var result = await conn.QueryAsync<dynamic>(Text, parameters, commandType: CommandType.Text);
+
+                return result.ToList();
+            }
+        }
     }
 }

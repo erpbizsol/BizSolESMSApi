@@ -22,8 +22,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
         private readonly IDesignationMaster _IDesignationMaster;
 
         public MasterController(IUOM uom, IDropDown _IdropDown, ILocationMaster _IlocationMaster, ICategory _Icategory, IGroupMaster _groupMaster
-        , ISubGroupMaster _IsubGroupMaster,IBrandMaster _brandMaster, IWarehouse iWarehouse, IItemMaster iItemMaster, IConfigItemMaster configItemMaster)
-        , ISubGroupMaster _IsubGroupMaster,IBrandMaster _brandMaster, IWarehouse iWarehouse, IItemMaster iItemMaster, IUserGroupMaster iUserGroupMaster, IDesignationMaster iDesignationMaster)
+        , ISubGroupMaster _IsubGroupMaster,IBrandMaster _brandMaster, IWarehouse iWarehouse, IItemMaster iItemMaster, IConfigItemMaster configItemMaster, IUserGroupMaster iUserGroupMaster, IDesignationMaster iDesignationMaster)
         {
             _IUOM = uom;
             _IDropDown = _IdropDown;
@@ -856,6 +855,124 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
         #endregion IItemMaster
+
+        #region UserGroupMaster
+        [HttpGet]
+        [Route("GetUserGroupMasterList")]
+        public async Task<IActionResult> GetUserMasterList()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IUserGroupMaster.GetUserGroupMasterList(_bizsolESMSConnectionDetails.DefultMysqlTemp);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("SaveUserGroupMaster")]
+        public async Task<IActionResult> SaveUserGroupMaster([FromBody] tblUserGroupMaster _tblUserGroupMaster)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IUserGroupMaster.SaveUserGroupMaster(_bizsolESMSConnectionDetails.DefultMysqlTemp, _tblUserGroupMaster);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("GetUserGroupMasterByCode")]
+        public async Task<IActionResult> GetUserGroupMasterByCode(int Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IUserGroupMaster.GetUserGroupMasterByCode(_bizsolESMSConnectionDetails.DefultMysqlTemp, Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("DeleteUserGroupMaster")]
+        public async Task<IActionResult> DeleteUserGroupMaster(int Code, int UserMaster_Code, string Reason)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IUserGroupMaster.DeleteUserGroupMaster(_bizsolESMSConnectionDetails.DefultMysqlTemp,Code,UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        #endregion UserGroupMaster
+
+        [HttpGet]
+        [Route("GetDesignationMasterList")]
+        public async Task<IActionResult> GetDesignationMasterList()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IDesignationMaster.GetDesignationMasterList(_bizsolESMSConnectionDetails.DefultMysqlTemp);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
     }
 }
