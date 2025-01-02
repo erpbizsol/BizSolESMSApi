@@ -14,13 +14,12 @@ namespace Bizsol_ESMS_API.Model
         public string GroupName { get; set; } 
         public string SubGroupName { get; set; }
         public string BrandName { get; set; }
-        public decimal MRP { get; set; }
         public int ReorderLevel { get; set; } = 0;
         public int ReorderQty { get; set; } = 0;
         public string LocationName { get; set; }
-        public string BoxPacking { get; set; }
         public int QtyInBox { get; set; } = 0;
-
-
+        public string BoxPacking { get; set; }
+        public string BatchApplicable { get; set; }
+        public string MaintainExpiry { get; set; } 
     }
 }
