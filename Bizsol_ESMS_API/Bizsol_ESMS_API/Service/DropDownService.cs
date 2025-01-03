@@ -100,5 +100,51 @@ namespace Bizsol_ESMS_API.Service
             }
         }
 
+        public async Task<IEnumerable<dynamic>> GetCountryDropDown(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails)
+        {
+
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("Operation", "GetCountryLocation");
+                parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
+                parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetStateDropDown(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails)
+        {
+
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("Operation", "GetStateData");
+                parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
+                parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetCityDropDown(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails)
+        {
+
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("Operation", "GetCityData");
+                parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
+                parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+        
     }
 }

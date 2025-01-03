@@ -28,7 +28,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Operation", "INSERT");
                 parameters.Add("p_Code", uommodel.Code);
                 parameters.Add("p_UOMName", uommodel.UOMName);
-                parameters.Add("p_DigitAfterDecimal", uommodel.DigitAfterDecimal);
+                parameters.Add("p_DigitAfterDecimal",uommodel.DigitAfterDecimal);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 await conn.QueryAsync(sp_name, parameters, commandType: CommandType.StoredProcedure);
