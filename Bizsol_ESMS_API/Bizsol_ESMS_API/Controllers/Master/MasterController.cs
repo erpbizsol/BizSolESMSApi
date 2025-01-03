@@ -879,6 +879,28 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpGet]
+        [Route("GetUserMasterListByGroupCode")]
+        public async Task<IActionResult> GetUserMasterListByGroupCode(int Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IUserGroupMaster.GetUserMasterListByGroupCode(_bizsolESMSConnectionDetails.DefultMysqlTemp,Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
         [HttpPost]
         [Route("SaveUserGroupMaster")]
         public async Task<IActionResult> SaveUserGroupMaster([FromBody] tblUserGroupMaster _tblUserGroupMaster)

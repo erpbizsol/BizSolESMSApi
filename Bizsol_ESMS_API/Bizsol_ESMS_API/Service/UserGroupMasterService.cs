@@ -25,6 +25,21 @@ namespace Bizsol_ESMS_API.Service
                 return result.ToList();
             }
         }
+        public async Task<IEnumerable<dynamic>> GetUserMasterListByGroupCode(string ConnectionString,int Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(ConnectionString))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Code",Code);
+                parameters.Add("p_Mode", "USERLIST");
+                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("p_GroupName", "");
+                parameters.Add("p_GroupType", "");
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+
+                return result.ToList();
+            }
+        }
         public async Task<dynamic> GetUserGroupMasterByCode(string ConnectionString, int Code)
         {
             using (IDbConnection conn = new MySqlConnection(ConnectionString))
@@ -69,5 +84,6 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+
     }
 }

@@ -127,5 +127,49 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpPost]
+        [Route("SaveUserModuleMaster")]
+        public async Task<IActionResult> SaveUserModuleMaster([FromBody] IEnumerable<tblUserModuleMaster> _tblUserModuleMaster)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _UserMaster.SaveUserModuleMaster(_bizsolESMSConnectionDetails.DefultMysqlTemp, _tblUserModuleMaster);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("GetUserOptionsDetails")]
+        public async Task<IActionResult> GetUserOptionsDetails()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _UserMaster.GetUserOptionsDetails(_bizsolESMSConnectionDetails.DefultMysqlTemp);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

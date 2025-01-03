@@ -73,8 +73,29 @@ namespace Bizsol_ESMS_API.Service
             using (IDbConnection conn = new MySqlConnection(ConnectionString))
             {
                 DynamicParameters parameters = new DynamicParameters();
-                string Text = "SELECT UserModuleMaster.Code,UserModuleMaster.ModuleDesp,UserModuleMaster.MasterModuleCode, GROUP_CONCAT(UserModuleOptionsDetails.OptionDesp ORDER BY UserModuleOptionsDetails.OptionDesp SEPARATOR ', ') AS OptionDescriptions FROM BizsolESMS_test.UserModuleMaster INNER JOIN BizsolESMS_test.UserModuleOptionsDetails ON UserModuleOptionsDetails.UserModuleMaster_Code = UserModuleMaster.Code GROUP BY UserModuleMaster.Code,UserModuleMaster.ModuleDesp,UserModuleMaster.MasterModuleCode;";
+                string Text = "SELECT UserModuleMaster.Code,UserModuleMaster.ModuleDesp,UserModuleMaster.MasterModuleCode,UserModuleMaster.FormToOpen ,GROUP_CONCAT(UserModuleOptionsDetails.OptionDesp ORDER BY UserModuleOptionsDetails.OptionDesp SEPARATOR ', ') AS OptionDescriptions FROM BizsolESMS_test.UserModuleMaster LEFT JOIN BizsolESMS_test.UserModuleOptionsDetails ON UserModuleOptionsDetails.UserModuleMaster_Code = UserModuleMaster.Code GROUP BY UserModuleMaster.Code,UserModuleMaster.ModuleDesp,UserModuleMaster.MasterModuleCode,UserModuleMaster.FormToOpen;";
                 var result = await conn.QueryAsync<dynamic>(Text, parameters, commandType: CommandType.Text);
+
+                return result.ToList();
+            }
+        }
+        public async Task<dynamic> SaveUserModuleMaster(string ConnectionString, IEnumerable<tblUserModuleMaster> _tblUserModuleMaster)
+        {
+            using (IDbConnection conn = new MySqlConnection(ConnectionString))
+            {
+                var json = new JavaScriptSerializer().Serialize(_tblUserModuleMaster);
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_jsonData", json);
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_InsertUserOptionDetails", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetUserOptionsDetails(string ConnectionString)
+        {
+            using (IDbConnection conn = new MySqlConnection(ConnectionString))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                var result = await conn.QueryAsync<dynamic>("USP_GetUserOptionsDetails", parameters, commandType: CommandType.StoredProcedure);
 
                 return result.ToList();
             }

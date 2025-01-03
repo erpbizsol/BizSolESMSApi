@@ -9,5 +9,8 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<dynamic> GetUserMasterListByCode(string ConnectionString, int Code);
         public abstract Task<dynamic> DeleteUserMaster(string ConnectionString, int Code, int UserMaster_Code, string Reason);
         public abstract Task<IEnumerable<dynamic>> GetUserModuleMasterList(string ConnectionString);
+        public abstract Task<dynamic> SaveUserModuleMaster(string ConnectionString,IEnumerable<tblUserModuleMaster> _tblUserModuleMaster);
+        public abstract Task<IEnumerable<dynamic>> GetUserOptionsDetails(string ConnectionString);
+
     }
 }
