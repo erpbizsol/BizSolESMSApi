@@ -32,6 +32,7 @@ builder.Services.AddTransient<IUserGroupMaster, UserGroupMasterService>();
 builder.Services.AddTransient<IConfigItemMaster, ConfigItemMasterService>();
 builder.Services.AddTransient<ICity, CityMasterService>();
 builder.Services.AddTransient<IStateMaster,StateMasterServices>();
+builder.Services.AddTransient<ICustomerType,CustomerTypeService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
