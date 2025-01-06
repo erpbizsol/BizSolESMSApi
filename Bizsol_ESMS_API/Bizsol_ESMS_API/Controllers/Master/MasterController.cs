@@ -25,7 +25,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
         private readonly ICustomerType _ICustomerType;
 
         public MasterController(IUOM uom, IDropDown _IdropDown, ILocationMaster _IlocationMaster, ICategory _Icategory, IGroupMaster _groupMaster
-        , ISubGroupMaster _IsubGroupMaster,IBrandMaster _brandMaster, IWarehouse iWarehouse, IItemMaster iItemMaster, IConfigItemMaster configItemMaster, ICity iCity, IStateMaster stateMaster,
+        ,ISubGroupMaster _IsubGroupMaster,IBrandMaster _brandMaster, IWarehouse iWarehouse, IItemMaster iItemMaster, IConfigItemMaster configItemMaster, ICity iCity, IStateMaster stateMaster,
          IUserGroupMaster iUserGroupMaster, IDesignationMaster iDesignationMaster, ICustomerType iCustomerType)
         {
             _IUOM = uom;
@@ -251,6 +251,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
         #endregion DropDown
 
         #region IUOM
+
         [HttpPost]
         [Route("InsertUOMMaster")]
         public async Task<IActionResult> InsertUOMMaster([FromBody] tblUOMMaster model)

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\BizsolESMSBackupAPI\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj": {}
+    "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj": {}
   },
   "projects": {
-    "D:\\BizsolESMSBackupAPI\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj": {
+    "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\BizsolESMSBackupAPI\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj",
+        "projectUniqueName": "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj",
         "projectName": "Bizsol_ESMS_API",
-        "projectPath": "D:\\BizsolESMSBackupAPI\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj",
+        "projectPath": "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj",
         "packagesPath": "C:\\Users\\BizSol\\.nuget\\packages\\",
-        "outputPath": "D:\\BizsolESMSBackupAPI\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\obj\\",
+        "outputPath": "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

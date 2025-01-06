@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "S+uQk2kWmwY=",
+  "dgSpecHash": "cmWpYY3yeQo=",
   "success": true,
-  "projectFilePath": "D:\\BizsolESMSBackupAPI\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj",
+  "projectFilePath": "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\BizSol\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
     "C:\\Users\\BizSol\\.nuget\\packages\\csharpscriptserializer\\3.0.4\\csharpscriptserializer.3.0.4.nupkg.sha512",
