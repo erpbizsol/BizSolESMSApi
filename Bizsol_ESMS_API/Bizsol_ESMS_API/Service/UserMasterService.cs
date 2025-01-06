@@ -74,8 +74,10 @@ namespace Bizsol_ESMS_API.Service
             using (IDbConnection conn = new MySqlConnection(ConnectionString))
             {
                 DynamicParameters parameters = new DynamicParameters();
-                string Text = "SELECT UserModuleMaster.Code,UserModuleMaster.ModuleDesp,UserModuleMaster.MasterModuleCode,UserModuleMaster.FormToOpen ,GROUP_CONCAT(UserModuleOptionsDetails.OptionDesp ORDER BY UserModuleOptionsDetails.OptionDesp SEPARATOR ', ') AS OptionDescriptions FROM BizsolESMS_test.UserModuleMaster LEFT JOIN BizsolESMS_test.UserModuleOptionsDetails ON UserModuleOptionsDetails.UserModuleMaster_Code = UserModuleMaster.Code GROUP BY UserModuleMaster.Code,UserModuleMaster.ModuleDesp,UserModuleMaster.MasterModuleCode,UserModuleMaster.FormToOpen;";
-                var result = await conn.QueryAsync<dynamic>(Text, parameters, commandType: CommandType.Text);
+                parameters.Add("p_Mode", "ALLMODULES");
+                parameters.Add("p_CompanyCode", 0);
+                parameters.Add("p_UserCode", 0);
+                var result = await conn.QueryAsync<dynamic>("USP_GetModuleRights", parameters, commandType: CommandType.StoredProcedure);
 
                 return result.ToList();
             }
@@ -106,6 +108,7 @@ namespace Bizsol_ESMS_API.Service
             using (IDbConnection conn = new MySqlConnection(ConnectionString))
             {
                 DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "GETUSERRIGHTS");
                 parameters.Add("p_CompanyCode", CompanyCode);
                 parameters.Add("p_UserCode", UserCode);
                 var result = await conn.QueryAsync<dynamic>("USP_GetModuleRights", parameters, commandType: CommandType.StoredProcedure);

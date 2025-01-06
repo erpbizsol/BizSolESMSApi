@@ -9,5 +9,6 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<dynamic> SaveUserGroupMaster(string ConnectionString,tblUserGroupMaster tblUserGroupMaster);
         public abstract Task<dynamic> GetUserGroupMasterByCode(string ConnectionString,int Code);
         public abstract Task<dynamic> DeleteUserGroupMaster(string ConnectionString, int Code, int UserMaster_Code);
+        public abstract Task<IEnumerable<dynamic>> GetGroupListUserType(string ConnectionString);
     }
 }

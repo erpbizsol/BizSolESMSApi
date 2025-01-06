@@ -84,6 +84,20 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+        public async Task<IEnumerable<dynamic>> GetGroupListUserType(string ConnectionString)
+        {
+            using (IDbConnection conn = new MySqlConnection(ConnectionString))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_Mode", "USERGROUPLIST");
+                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("p_GroupName", "");
+                parameters.Add("p_GroupType", "");
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
 
+                return result.ToList();
+            }
+        }
     }
 }
