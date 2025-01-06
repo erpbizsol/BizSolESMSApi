@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Data;
 using MySql.Data.MySqlClient;
 using Nancy.Json;
+using Nancy;
 
 namespace Bizsol_ESMS_API.Service
 {
@@ -100,5 +101,18 @@ namespace Bizsol_ESMS_API.Service
                 return result.ToList();
             }
         }
+        public async Task<IEnumerable<dynamic>> GetUserModuleRightsList(string ConnectionString,int CompanyCode,int UserCode)
+        {
+            using (IDbConnection conn = new MySqlConnection(ConnectionString))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_CompanyCode", CompanyCode);
+                parameters.Add("p_UserCode", UserCode);
+                var result = await conn.QueryAsync<dynamic>("USP_GetModuleRights", parameters, commandType: CommandType.StoredProcedure);
+
+                return result.ToList();
+            }
+        }
+
     }
 }
