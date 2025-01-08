@@ -1464,7 +1464,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         [HttpPost]
         [Route("InsertAccountMaster")]
-        public async Task<IActionResult> InsertAccountMaster([FromBody] tblCustomerType tblModel)
+        public async Task<IActionResult> InsertAccountMaster([FromBody] VM_AccountMaster vmAccountMaster)
         {
 
             try
@@ -1472,7 +1472,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _ICustomerType.InsertAccountMaster(_bizsolESMSConnectionDetails, tblModel);
+                    var result = await _ICustomerType.InsertAccountMaster(_bizsolESMSConnectionDetails, vmAccountMaster);
                     return Ok(result);
                 }
                 else
@@ -1513,7 +1513,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         [HttpGet]
         [Route("ShowAccountMasterByCode")]
-        public async Task<IActionResult> ShowAccountMasterByCode(int Code)
+        public async Task<ActionResult<VM_AccountMasterForShow>> ShowAccountMasterByCode(int Code)
         {
 
             try
