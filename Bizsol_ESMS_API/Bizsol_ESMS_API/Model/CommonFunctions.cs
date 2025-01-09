@@ -12,7 +12,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml.Linq;
-using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
 
 namespace Bizsol_ESMS_API.Model
@@ -53,7 +52,7 @@ namespace Bizsol_ESMS_API.Model
             await Task.CompletedTask;
             return decryptedPassword.ToString();
         }
-       
+
         public static List<DataTable> DataTableArrayExecuteSqlQueryWithParameter(string conStr, string queryString, Dictionary<string, object> Params, CommandType commandType = CommandType.Text)
         {
             List<DataTable> dt = new List<DataTable>();
@@ -88,6 +87,13 @@ namespace Bizsol_ESMS_API.Model
             }
 
         }
-
+        public static List<Dictionary<string, object>> DatatableToDynamicList(DataTable dataTable)
+        {
+            return dataTable.AsEnumerable()
+                            .Select(r => r.Table.Columns.Cast<DataColumn>()
+                                         .Select(c => new KeyValuePair<string, object>(c.ColumnName, r[c.Ordinal]))
+                                         .ToDictionary(z => z.Key, z => z.Value))
+                                         .ToList();
+        }
     }
 }
