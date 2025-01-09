@@ -12,6 +12,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Xml.Linq;
+using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 
 namespace Bizsol_ESMS_API.Model
 {
@@ -50,6 +52,41 @@ namespace Bizsol_ESMS_API.Model
             }
             await Task.CompletedTask;
             return decryptedPassword.ToString();
+        }
+       
+        public static List<DataTable> DataTableArrayExecuteSqlQueryWithParameter(string conStr, string queryString, Dictionary<string, object> Params, CommandType commandType = CommandType.Text)
+        {
+            List<DataTable> dt = new List<DataTable>();
+            using (var connection = new MySqlConnection(conStr))
+            {
+                var command = new MySqlCommand(queryString, connection);
+                command.CommandType = commandType;
+                command.CommandTimeout = 0;
+                connection.Open();
+                if (Params != null)
+                {
+                    foreach (KeyValuePair<string, object> p in Params)
+                    {
+                        var dbParameter = command.CreateParameter();
+                        dbParameter.ParameterName = p.Key;
+                        dbParameter.Value = p.Value;
+                        command.Parameters.Add(dbParameter);
+                    }
+                }
+                using (var SqlDA = new MySqlDataAdapter())
+                {
+                    DataSet ds = new DataSet();
+                    SqlDA.SelectCommand = command;
+                    SqlDA.Fill(ds);
+
+                    foreach (var idt in ds.Tables)
+                    {
+                        dt.Add((DataTable)idt);
+                    }
+                    return dt;
+                }
+            }
+
         }
 
     }
