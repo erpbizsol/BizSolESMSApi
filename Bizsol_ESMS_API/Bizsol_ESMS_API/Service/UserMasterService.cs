@@ -116,6 +116,18 @@ namespace Bizsol_ESMS_API.Service
                 return result.ToList();
             }
         }
+        public async Task<dynamic> CheckUserOptionRight(string ConnectionString, int UserModuleMaster_Code, int UserMaster_Code,string Option)
+        {
+            using (IDbConnection conn = new MySqlConnection(ConnectionString))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_UserModuleMaster_Code", UserModuleMaster_Code);
+                parameters.Add("p_UserMaster_Code", UserMaster_Code);
+                parameters.Add("p_Option", Option);
+                var result = await conn.QueryAsync<dynamic>("USP_CheckUserOptionRight", parameters, commandType: CommandType.StoredProcedure);
 
+                return result.ToList();
+            }
+        }
     }
 }

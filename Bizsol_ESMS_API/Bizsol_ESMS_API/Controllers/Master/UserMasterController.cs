@@ -193,5 +193,27 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpGet]
+        [Route("CheckUserOptionRight")]
+        public async Task<IActionResult> CheckUserOptionRight(int UserModuleMaster_Code, int UserMaster_Code,string Option)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _UserMaster.CheckUserOptionRight(_bizsolESMSConnectionDetails.DefultMysqlTemp, UserModuleMaster_Code, UserMaster_Code,Option);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }
