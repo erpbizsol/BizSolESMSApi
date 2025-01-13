@@ -8,5 +8,7 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<dynamic> ShowItemByCode(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int code);
         public abstract Task<dynamic> InsertItem(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblItemMaster model);
         public abstract Task<dynamic> DeleteItem(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int code);
+
+        public abstract Task<IEnumerable<dynamic>> GetItemDetils(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
     }                                                                               
 }
