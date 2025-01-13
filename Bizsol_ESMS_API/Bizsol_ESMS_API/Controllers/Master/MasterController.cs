@@ -258,7 +258,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _IDropDown.GetCityDropDown(_bizsolESMSConnectionDetails);
+                    var result = await _IDropDown.GetWhereHouseDropDown(_bizsolESMSConnectionDetails);
                     return Ok(result);
                 }
                 else
@@ -281,7 +281,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _IDropDown.GetCityDropDown(_bizsolESMSConnectionDetails);
+                    var result = await _IDropDown.GetAccountDropDown(_bizsolESMSConnectionDetails);
                     return Ok(result);
                 }
                 else

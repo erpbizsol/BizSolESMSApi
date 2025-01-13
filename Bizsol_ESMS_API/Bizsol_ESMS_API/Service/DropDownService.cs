@@ -17,8 +17,6 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetGroup");
-                parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
-                parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -32,8 +30,6 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetUOM");
-                parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
-                parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -47,8 +43,6 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetCategory");
-                parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
-                parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -62,8 +56,6 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetSubGroupItem");
-                parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
-                parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -77,8 +69,6 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetBrand");
-                parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
-                parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -92,8 +82,6 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetItemLocation");
-                parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
-                parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -107,8 +95,6 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetCountryLocation");
-                parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
-                parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -122,8 +108,6 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetStateData");
-                parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
-                parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -137,8 +121,6 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetCityData");
-                parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
-                parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -152,8 +134,6 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetWherehouse");
-                parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
-                parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -167,8 +147,6 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetAccountMaster");
-                parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
-                parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
