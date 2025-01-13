@@ -99,7 +99,6 @@ namespace Bizsol_ESMS_API.Service
 
             }
         }
-
         public async Task<IEnumerable<dynamic>> GetCountryDropDown(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails)
         {
 
@@ -145,6 +144,35 @@ namespace Bizsol_ESMS_API.Service
 
             }
         }
-        
+        public async Task<IEnumerable<dynamic>> GetWhereHouseDropDown(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails)
+        {
+
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("Operation", "GetWherehouse");
+                parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
+                parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetAccountDropDown(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails)
+        {
+
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("Operation", "GetAccountMaster");
+                parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
+                parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
     }
 }

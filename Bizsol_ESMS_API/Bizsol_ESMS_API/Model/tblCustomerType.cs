@@ -8,8 +8,6 @@
         public string PANNo { get; set; }
         public string IsClient { get; set; }
         public string IsVendor { get; set; }
-       
-
     }
 }
 
