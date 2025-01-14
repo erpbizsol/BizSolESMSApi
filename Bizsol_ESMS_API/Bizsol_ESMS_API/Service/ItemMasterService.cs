@@ -2,6 +2,7 @@
 using Bizsol_ESMS_API.Model;
 using Dapper;
 using MySql.Data.MySqlClient;
+using Nancy;
 using Nancy.Json;
 using System.Data;
 
@@ -64,7 +65,7 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-        public async Task<IEnumerable<dynamic>> GetItemDetils(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
+        public async Task<IEnumerable<dynamic>> GetItemDetails(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
