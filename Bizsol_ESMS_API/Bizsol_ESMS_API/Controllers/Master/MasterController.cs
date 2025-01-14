@@ -24,10 +24,11 @@ namespace Bizsol_ESMS_API.Controllers.Master
         private readonly IStateMaster _StateMaster;
         private readonly ICustomerType _ICustomerType;
         private readonly ICurrentDate _CurrentDate;
+        private readonly IOrder _Order;
 
         public MasterController(IUOM uom, IDropDown _IdropDown, ILocationMaster _IlocationMaster, ICategory _Icategory, IGroupMaster _groupMaster
         ,ISubGroupMaster _IsubGroupMaster,IBrandMaster _brandMaster, IWarehouse iWarehouse, IItemMaster iItemMaster, IConfigItemMaster configItemMaster, ICity iCity, IStateMaster stateMaster,
-         IUserGroupMaster iUserGroupMaster, IDesignationMaster iDesignationMaster, ICustomerType iCustomerType,ICurrentDate currentDate)
+         IUserGroupMaster iUserGroupMaster, IDesignationMaster iDesignationMaster, ICustomerType iCustomerType,ICurrentDate currentDate, IOrder Order)
         {
             _IUOM = uom;
             _IDropDown = _IdropDown;
@@ -45,6 +46,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
             _StateMaster = stateMaster;
             _ICustomerType = iCustomerType;
             _CurrentDate = currentDate;
+            _Order = Order;
         }
 
         #region DropDown
@@ -1681,7 +1683,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
         #endregion CurrentDate
 
-
+       
     }
 }
 
