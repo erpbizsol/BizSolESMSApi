@@ -15,7 +15,8 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<IEnumerable<dynamic>> GetStateDropDown(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails); 
         public abstract Task<IEnumerable<dynamic>> GetCityDropDown(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
         public abstract Task<IEnumerable<dynamic>> GetWhereHouseDropDown(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
-        public abstract Task<IEnumerable<dynamic>> GetAccountDropDown(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
+        public abstract Task<IEnumerable<dynamic>> GetAccountIsVendorDropDown(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
+        public abstract Task<IEnumerable<dynamic>> GetAccountIsClientDropDown(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
 
     }
 }

@@ -74,7 +74,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Mode", "GetItemDetails");
                 parameters.Add("p_Code", 0);
                 parameters.Add("p_jsonData", "{}");
-                var result = await conn.QueryAsync<dynamic>("USP_ItemMaster", parameters, commandType: CommandType.StoredProcedure);
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
 
                 return result.ToList();
             }
