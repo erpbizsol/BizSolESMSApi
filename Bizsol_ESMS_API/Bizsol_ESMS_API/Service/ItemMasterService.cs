@@ -2,6 +2,7 @@
 using Bizsol_ESMS_API.Model;
 using Dapper;
 using MySql.Data.MySqlClient;
+using Nancy;
 using Nancy.Json;
 using System.Data;
 
@@ -64,14 +65,16 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-        public async Task<IEnumerable<dynamic>> GetItemDetils(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
+        public async Task<IEnumerable<dynamic>> GetItemDetails(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
                 DynamicParameters parameters = new DynamicParameters();
 
-                parameters.Add("p_Mode", "GetItemDetils");
-                var result = await conn.QueryAsync<dynamic>("USP_GetItemDetils", parameters, commandType: CommandType.StoredProcedure);
+                parameters.Add("p_Mode", "GetItemDetails");
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_jsonData", "{}");
+                var result = await conn.QueryAsync<dynamic>("USP_ItemMaster", parameters, commandType: CommandType.StoredProcedure);
 
                 return result.ToList();
             }

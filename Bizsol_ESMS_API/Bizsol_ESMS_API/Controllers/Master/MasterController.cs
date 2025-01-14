@@ -1090,15 +1090,15 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
 
         [HttpGet]
-        [Route("GetItemDetils")]
-        public async Task<IActionResult> GetItemDetils()
+        [Route("GetItemDetails")]
+        public async Task<IActionResult> GetItemDetails()
         {
             try
             {
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _IItemMaster.GetItemDetils(_bizsolESMSConnectionDetails);
+                    var result = await _IItemMaster.GetItemDetails(_bizsolESMSConnectionDetails);
                     return Ok(result);
                 }
                 else
