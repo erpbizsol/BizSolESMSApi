@@ -70,8 +70,10 @@ namespace Bizsol_ESMS_API.Service
             {
                 DynamicParameters parameters = new DynamicParameters();
 
-                parameters.Add("p_Mode", "GetItemDetils");
-                var result = await conn.QueryAsync<dynamic>("USP_GetItemDetils", parameters, commandType: CommandType.StoredProcedure);
+                parameters.Add("p_Mode", "GetItemDetails");
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_jsonData", "{}");
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
 
                 return result.ToList();
             }

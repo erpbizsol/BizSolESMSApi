@@ -273,15 +273,38 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
 
         [HttpGet]
-        [Route("GetAccountDropDown")]
-        public async Task<IActionResult> GetAccountDropDown()
+        [Route("GetAccountIsVendorDropDown")]
+        public async Task<IActionResult> GetAccountIsVendorDropDown()
         {
             try
             {
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _IDropDown.GetAccountDropDown(_bizsolESMSConnectionDetails);
+                    var result = await _IDropDown.GetAccountIsVendorDropDown(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetAccountIsClientDropDown")]
+        public async Task<IActionResult> GetAccountIsClientDropDown()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IDropDown.GetAccountIsClientDropDown(_bizsolESMSConnectionDetails);
                     return Ok(result);
                 }
                 else

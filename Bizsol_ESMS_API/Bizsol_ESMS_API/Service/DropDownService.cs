@@ -139,14 +139,27 @@ namespace Bizsol_ESMS_API.Service
 
             }
         }
-        public async Task<IEnumerable<dynamic>> GetAccountDropDown(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails)
+        public async Task<IEnumerable<dynamic>> GetAccountIsVendorDropDown(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails)
         {
 
             using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
 
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("Operation", "GetAccountMaster");
+                parameters.Add("Operation", "GetAccountIsVendor");
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetAccountIsClientDropDown(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails)
+        {
+
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("Operation", "GetAccountIsClient");
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
