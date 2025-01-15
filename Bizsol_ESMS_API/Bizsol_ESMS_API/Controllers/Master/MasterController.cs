@@ -254,8 +254,8 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
 
         [HttpGet]
-        [Route("GetWhereHouseDropDown")]
-        public async Task<IActionResult> GetWhereHouseDropDown()
+        [Route("GetWareHouseDropDown")]
+        public async Task<IActionResult> GetWareHouseDropDown()
         {
             try
             {
