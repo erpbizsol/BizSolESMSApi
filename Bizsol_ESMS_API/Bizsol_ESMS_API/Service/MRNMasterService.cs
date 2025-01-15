@@ -22,6 +22,9 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_UserMaster_Code", 0);
                 parameters.Add("p_jsonData", "{}");
                 parameters.Add("p_jsonData1", "{}");
+                parameters.Add("p_AccountName", "");
+                parameters.Add("p_ItemName", "");
+
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
 
                 return result.ToList();
@@ -36,11 +39,14 @@ namespace Bizsol_ESMS_API.Service
                 { "@p_UserMaster_Code", 0 },
                 { "@p_Code",Code},
                 { "@p_jsonData", "{}" },
-                { "@p_jsonData1", "{}" }
+                { "@p_jsonData1", "{}" },
+                { "@p_AccountName", "" },
+                { "@p_ItemName", "" },
+
             };
 
             var dataTables = await Task.Run(() => CommonFunctions.DataTableArrayExecuteSqlQueryWithParameter(bizsolESMSConnectionDetails.DefultMysqlTemp,
-                    "call USP_MRNMaster(@p_Mode,@p_UserMaster_Code,@p_Code,@p_jsonData, @p_jsonData1)",
+                    "call USP_MRNMaster(@p_Mode,@p_UserMaster_Code,@p_Code,@p_jsonData, @p_jsonData1,@p_AccountName,@p_ItemName)",
                     parameters,
                     CommandType.Text
                 ));
@@ -60,6 +66,9 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_UserMaster_Code", UserMaster_Code);
                 parameters.Add("p_jsonData", json);
                 parameters.Add("p_jsonData1", json1);
+                parameters.Add("p_AccountName", 0);
+                parameters.Add("p_ItemName", "");
+
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -74,7 +83,29 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_UserMaster_Code", UserMaster_Code);
                 parameters.Add("p_jsonData", "{}");
                 parameters.Add("p_jsonData1", "{}");
+                parameters.Add("p_AccountName", 0);
+                parameters.Add("p_ItemName", "");
+
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> GetRateByVendor(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,string VendorName,string ItemName)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("p_Mode", "GETRATE");
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("p_jsonData", "{}");
+                parameters.Add("p_jsonData1", "{}");
+                parameters.Add("p_AccountName", VendorName.Trim());
+                parameters.Add("p_ItemName", ItemName.Trim());
+
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+
                 return result;
             }
         }

@@ -113,7 +113,28 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
-
+        [HttpGet]
+        [Route("GetRateByVendor")]
+        public async Task<IActionResult> GetRateByVendor(string VendorName,string ItemName)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _MRNMaster.GetRateByVendor(_bizsolESMSConnectionDetails,VendorName, ItemName);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
         #endregion MRNMaster
 
     }
