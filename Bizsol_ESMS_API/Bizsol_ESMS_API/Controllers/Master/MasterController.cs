@@ -23,10 +23,12 @@ namespace Bizsol_ESMS_API.Controllers.Master
         private readonly ICity _ICity;
         private readonly IStateMaster _StateMaster;
         private readonly ICustomerType _ICustomerType;
+        private readonly ICurrentDate _CurrentDate;
+        private readonly IOrder _Order;
 
         public MasterController(IUOM uom, IDropDown _IdropDown, ILocationMaster _IlocationMaster, ICategory _Icategory, IGroupMaster _groupMaster
         ,ISubGroupMaster _IsubGroupMaster,IBrandMaster _brandMaster, IWarehouse iWarehouse, IItemMaster iItemMaster, IConfigItemMaster configItemMaster, ICity iCity, IStateMaster stateMaster,
-         IUserGroupMaster iUserGroupMaster, IDesignationMaster iDesignationMaster, ICustomerType iCustomerType)
+         IUserGroupMaster iUserGroupMaster, IDesignationMaster iDesignationMaster, ICustomerType iCustomerType,ICurrentDate currentDate, IOrder Order)
         {
             _IUOM = uom;
             _IDropDown = _IdropDown;
@@ -43,6 +45,8 @@ namespace Bizsol_ESMS_API.Controllers.Master
             _ICity = iCity;
             _StateMaster = stateMaster;
             _ICustomerType = iCustomerType;
+            _CurrentDate = currentDate;
+            _Order = Order;
         }
 
         #region DropDown
@@ -1653,6 +1657,33 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         #endregion AccountMaster
 
+        #region CurrentDate
+
+        [HttpGet]
+        [Route("GetCurrentDate")]
+        public async Task<IActionResult> GetCurrentDate()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _CurrentDate.GetCurrentDate(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        #endregion CurrentDate
+
+       
     }
 }
 
