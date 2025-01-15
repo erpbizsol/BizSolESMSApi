@@ -3,6 +3,6 @@
     public class VM_OrderMaster
     {
         public IEnumerable<tblOrder> OrderMaster { get; set; }
-        public IEnumerable<tblOrderDetials> OrderDetial { get; set; }
+        public IEnumerable<tblOrderDetials> OrderDetial { get; set; } 
     }
 }

@@ -9,7 +9,8 @@ namespace Bizsol_ESMS_API.Service
 {
     public class OrderService:IOrder
     {
-        string sp_name = "USP_AccountMaster";
+     
+        string sp_name = "USP_OrderMaster";
         public async Task<IEnumerable<dynamic>> ShowOrderMaster(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
@@ -18,8 +19,11 @@ namespace Bizsol_ESMS_API.Service
 
                 parameters.Add("p_Mode", "LOCATE");
                 parameters.Add("p_Code", 0);
+                parameters.Add("p_UserMaster_Code", 0);
                 parameters.Add("p_jsonData", "{}");
                 parameters.Add("p_jsonData1", "{}");
+                parameters.Add("p_AccountName", "");
+                parameters.Add("p_ItemName", "");
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
 
                 return result.ToList();
@@ -27,17 +31,21 @@ namespace Bizsol_ESMS_API.Service
         }
         public async Task<VM_OrderMasterForShow> ShowOrderMasterByCode(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
         {
+          
             VM_OrderMasterForShow vM_OrderMaster = new VM_OrderMasterForShow();
             var parameters = new Dictionary<string, object>
             {
-                { "@p_Mode", "ShowData" },
+                { "@p_Mode", "SHOWDATA" },
+                { "@p_UserMaster_Code", 0 },
                 { "@p_Code", Code },
                 { "@p_jsonData", "{}" },
-                { "@p_jsonData1", "{}" }
+                { "@p_jsonData1", "{}" },
+                { "@p_AccountName", "" },
+                { "@p_ItemName", "" }
             };
 
             var dataTables = await Task.Run(() => CommonFunctions.DataTableArrayExecuteSqlQueryWithParameter(bizsolESMSConnectionDetails.DefultMysqlTemp,
-                    "call USP_AccountMaster(@p_Mode,@p_Code,@p_jsonData, @p_jsonData1)",
+                    "call USP_OrderMaster(@p_Mode,@p_UserMaster_Code,@p_Code,@p_jsonData, @p_jsonData1,@p_AccountName,@p_ItemName)",
                     parameters,
                     CommandType.Text
                 ));
@@ -45,20 +53,23 @@ namespace Bizsol_ESMS_API.Service
             vM_OrderMaster.OrderDetial = CommonFunctions.DatatableToDynamicList(dataTables[1]);
             return vM_OrderMaster;
         }
-        public async Task<dynamic> DeleteOrderMaster(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
+        public async Task<dynamic> DeleteOrderMaster(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code,int UserMaster_Code)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("p_Code", Code);
+                parameters.Add("p_UserMaster_Code", UserMaster_Code);
                 parameters.Add("p_Mode", "DELETE");
                 parameters.Add("p_jsonData", "{}");
                 parameters.Add("p_jsonData1", "{}");
+                parameters.Add("p_AccountName", "");
+                parameters.Add("p_ItemName", "");
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
         }
-        public async Task<dynamic> InsertOrderMaster(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, VM_OrderMaster vmOrderMaster)
+        public async Task<dynamic> InsertOrderMaster(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, VM_OrderMaster vmOrderMaster, int UserMaster_Code)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
@@ -68,11 +79,32 @@ namespace Bizsol_ESMS_API.Service
 
                 parameters.Add("p_Code", vmOrderMaster.OrderMaster.FirstOrDefault().Code);
                 parameters.Add("p_Mode", "SAVE");
+                parameters.Add("p_UserMaster_Code", UserMaster_Code);
                 parameters.Add("p_jsonData", json);
                 parameters.Add("p_jsonData1", json1);
-
+                parameters.Add("p_AccountName", "");
+                parameters.Add("p_ItemName", "");
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result;
+            }
+        }
+
+
+        public async Task<IEnumerable<dynamic>> ClientWiseRate(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("p_Mode", "VenderWiseRate");
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("p_jsonData", "{}");
+                parameters.Add("p_jsonData1", "{}");
+                parameters.Add("p_AccountName", "");
+                parameters.Add("p_ItemName", "");
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
             }
         }
     }

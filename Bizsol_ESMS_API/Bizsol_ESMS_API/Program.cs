@@ -16,6 +16,7 @@ JsonConvert.DefaultSettings = () => new JsonSerializerSettings
     DateTimeZoneHandling = DateTimeZoneHandling.Local
 };
 
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
 builder.Services.AddTransient<IUOM, UOMService>();
 builder.Services.AddTransient<IDropDown, DropDownService>();

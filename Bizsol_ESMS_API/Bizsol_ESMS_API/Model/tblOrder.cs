@@ -8,6 +8,7 @@
         public string? ClientName { get; set; } = "";
         public string? BuyerPONo { get; set; } = "";
         public DateTime BuyerPODate { get; set; }
-       
+        
+
     }
 }
