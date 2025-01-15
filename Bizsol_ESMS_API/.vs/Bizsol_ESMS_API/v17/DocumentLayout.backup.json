@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7A52ADCD-C24C-4892-8B7D-30F32BEA742D}|Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj|d:\\weberp2.4core\\bizsolesmsapi\\bizsol_esms_api\\bizsol_esms_api\\controllers\\master\\mastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7A52ADCD-C24C-4892-8B7D-30F32BEA742D}|Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj|solutionrelative:bizsol_esms_api\\controllers\\master\\mastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7A52ADCD-C24C-4892-8B7D-30F32BEA742D}|Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj|d:\\weberp2.4core\\bizsolesmsapi\\bizsol_esms_api\\bizsol_esms_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A52ADCD-C24C-4892-8B7D-30F32BEA742D}|Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj|solutionrelative:bizsol_esms_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7A52ADCD-C24C-4892-8B7D-30F32BEA742D}|Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj|d:\\weberp2.4core\\bizsolesmsapi\\bizsol_esms_api\\bizsol_esms_api\\model\\tblitemmaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7A52ADCD-C24C-4892-8B7D-30F32BEA742D}|Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj|solutionrelative:bizsol_esms_api\\model\\tblitemmaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7A52ADCD-C24C-4892-8B7D-30F32BEA742D}|Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj|d:\\weberp2.4core\\bizsolesmsapi\\bizsol_esms_api\\bizsol_esms_api\\controllers\\master\\ordermastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A52ADCD-C24C-4892-8B7D-30F32BEA742D}|Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj|solutionrelative:bizsol_esms_api\\controllers\\master\\ordermastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7A52ADCD-C24C-4892-8B7D-30F32BEA742D}|Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj|d:\\weberp2.4core\\bizsolesmsapi\\bizsol_esms_api\\bizsol_esms_api\\service\\itemmasterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7A52ADCD-C24C-4892-8B7D-30F32BEA742D}|Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj|solutionrelative:bizsol_esms_api\\service\\itemmasterservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7A52ADCD-C24C-4892-8B7D-30F32BEA742D}|Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj|d:\\weberp2.4core\\bizsolesmsapi\\bizsol_esms_api\\bizsol_esms_api\\service\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A52ADCD-C24C-4892-8B7D-30F32BEA742D}|Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj|solutionrelative:bizsol_esms_api\\service\\orderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A52ADCD-C24C-4892-8B7D-30F32BEA742D}|Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj|d:\\weberp2.4core\\bizsolesmsapi\\bizsol_esms_api\\bizsol_esms_api\\interface\\iorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7A52ADCD-C24C-4892-8B7D-30F32BEA742D}|Bizsol_ESMS_API\\Bizsol_ESMS_API.csproj|solutionrelative:bizsol_esms_api\\interface\\iorder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -147,40 +151,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MasterController.cs",
-              "DocumentMoniker": "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Controllers\\Master\\MasterController.cs",
-              "RelativeDocumentMoniker": "Bizsol_ESMS_API\\Controllers\\Master\\MasterController.cs",
-              "ToolTip": "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Controllers\\Master\\MasterController.cs",
-              "RelativeToolTip": "Bizsol_ESMS_API\\Controllers\\Master\\MasterController.cs",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAowDkFAAAXAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Program.cs",
+              "RelativeDocumentMoniker": "Bizsol_ESMS_API\\Program.cs",
+              "ToolTip": "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Program.cs",
+              "RelativeToolTip": "Bizsol_ESMS_API\\Program.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABMAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-03T11:29:34.115Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ItemMasterService.cs",
-              "DocumentMoniker": "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Service\\ItemMasterService.cs",
-              "RelativeDocumentMoniker": "Bizsol_ESMS_API\\Service\\ItemMasterService.cs",
-              "ToolTip": "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Service\\ItemMasterService.cs",
-              "RelativeToolTip": "Bizsol_ESMS_API\\Service\\ItemMasterService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-03T10:18:01.944Z",
+              "WhenOpened": "2025-01-15T11:48:51.635Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "tblItemMaster.cs",
-              "DocumentMoniker": "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Model\\tblItemMaster.cs",
-              "RelativeDocumentMoniker": "Bizsol_ESMS_API\\Model\\tblItemMaster.cs",
-              "ToolTip": "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Model\\tblItemMaster.cs",
-              "RelativeToolTip": "Bizsol_ESMS_API\\Model\\tblItemMaster.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAvAAAAAAAAAA==",
+              "Title": "OrderMasterController.cs",
+              "DocumentMoniker": "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Controllers\\Master\\OrderMasterController.cs",
+              "RelativeDocumentMoniker": "Bizsol_ESMS_API\\Controllers\\Master\\OrderMasterController.cs",
+              "ToolTip": "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Controllers\\Master\\OrderMasterController.cs",
+              "RelativeToolTip": "Bizsol_ESMS_API\\Controllers\\Master\\OrderMasterController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-03T10:17:18.067Z",
+              "WhenOpened": "2025-01-15T06:18:15.445Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OrderService.cs",
+              "DocumentMoniker": "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Service\\OrderService.cs",
+              "RelativeDocumentMoniker": "Bizsol_ESMS_API\\Service\\OrderService.cs",
+              "ToolTip": "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Service\\OrderService.cs",
+              "RelativeToolTip": "Bizsol_ESMS_API\\Service\\OrderService.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAkwGgAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-15T06:16:03.678Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IOrder.cs",
+              "DocumentMoniker": "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Interface\\IOrder.cs",
+              "RelativeDocumentMoniker": "Bizsol_ESMS_API\\Interface\\IOrder.cs",
+              "ToolTip": "D:\\WebERP2.4Core\\BizSolESMSApi\\Bizsol_ESMS_API\\Bizsol_ESMS_API\\Interface\\IOrder.cs",
+              "RelativeToolTip": "Bizsol_ESMS_API\\Interface\\IOrder.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-15T06:15:22.568Z",
               "EditorCaption": ""
             }
           ]

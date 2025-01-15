@@ -313,6 +313,26 @@
   },
   {
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MasterController",
+    "Method": "GetAccountIsClientDropDown",
+    "RelativePath": "api/Master/GetAccountIsClientDropDown",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MasterController",
+    "Method": "GetAccountIsVendorDropDown",
+    "RelativePath": "api/Master/GetAccountIsVendorDropDown",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MasterController",
     "Method": "GetBrandDropDown",
     "RelativePath": "api/Master/GetBrandDropDown",
     "HttpMethod": "GET",
@@ -353,6 +373,16 @@
   },
   {
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MasterController",
+    "Method": "GetCurrentDate",
+    "RelativePath": "api/Master/GetCurrentDate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MasterController",
     "Method": "GetDesignationMasterList",
     "RelativePath": "api/Master/GetDesignationMasterList",
     "HttpMethod": "GET",
@@ -365,6 +395,26 @@
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MasterController",
     "Method": "GetDropDown",
     "RelativePath": "api/Master/GetDropDown",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MasterController",
+    "Method": "GetGroupListUserType",
+    "RelativePath": "api/Master/GetGroupListUserType",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MasterController",
+    "Method": "GetItemDetails",
+    "RelativePath": "api/Master/GetItemDetails",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -455,6 +505,16 @@
   },
   {
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MasterController",
+    "Method": "GetWhereHouseDropDown",
+    "RelativePath": "api/Master/GetWhereHouseDropDown",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MasterController",
     "Method": "InsertAccountMaster",
     "RelativePath": "api/Master/InsertAccountMaster",
     "HttpMethod": "POST",
@@ -462,8 +522,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "tblModel",
-        "Type": "Bizsol_ESMS_API.Model.tblCustomerType",
+        "Name": "vmAccountMaster",
+        "Type": "Bizsol_ESMS_API.Model.VM_AccountMaster",
         "IsRequired": true
       }
     ],
@@ -685,7 +745,17 @@
         "IsRequired": false
       }
     ],
-    "ReturnTypes": []
+    "ReturnTypes": [
+      {
+        "Type": "Bizsol_ESMS_API.Model.VM_AccountMasterForShow",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MasterController",
@@ -952,6 +1022,130 @@
       {
         "Name": "Code",
         "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
+    "Method": "ClientWiseRate",
+    "RelativePath": "api/OrderMaster/ClientWiseRate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
+    "Method": "DeleteOrderMaster",
+    "RelativePath": "api/OrderMaster/DeleteOrderMaster",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "UserMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Bizsol_ESMS_API.Model.spOutputParameter",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
+    "Method": "InsertOrderMaster",
+    "RelativePath": "api/OrderMaster/InsertOrderMaster",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vmOrderMaster",
+        "Type": "Bizsol_ESMS_API.Model.VM_OrderMaster",
+        "IsRequired": true
+      },
+      {
+        "Name": "UserMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
+    "Method": "ShowOrderMaster",
+    "RelativePath": "api/OrderMaster/ShowOrderMaster",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
+    "Method": "ShowOrderMasterByCode",
+    "RelativePath": "api/OrderMaster/ShowOrderMasterByCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Bizsol_ESMS_API.Model.VM_OrderMasterForShow",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.UserMasterController",
+    "Method": "CheckUserOptionRight",
+    "RelativePath": "api/UserMaster/CheckUserOptionRight",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserModuleMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "UserMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Option",
+        "Type": "System.String",
         "IsRequired": false
       }
     ],
