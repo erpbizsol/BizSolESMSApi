@@ -117,14 +117,14 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         [HttpGet]
         [Route("ClientWiseRate")]
-        public async Task<IActionResult> ClientWiseRate()
+        public async Task<IActionResult> ClientWiseRate(string ClientName, string ItemName)
         {
             try
             {
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _Order.ClientWiseRate(_bizsolESMSConnectionDetails);
+                    var result = await _Order.ClientWiseRate(_bizsolESMSConnectionDetails, ClientName, ItemName);
                     return Ok(result);
                 }
                 else
