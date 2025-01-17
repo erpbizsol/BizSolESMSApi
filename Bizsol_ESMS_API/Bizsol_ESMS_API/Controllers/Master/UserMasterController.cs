@@ -9,6 +9,8 @@ namespace Bizsol_ESMS_API.Controllers.Master
     public class UserMasterController : Controller
     {
         private readonly IUserMaster _UserMaster;
+
+        #region UserMaster
         public UserMasterController(IUserMaster userMaster)
         {
             _UserMaster = userMaster;
@@ -215,5 +217,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+
+        #endregion UserMaster
     }
 }
