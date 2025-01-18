@@ -14,8 +14,8 @@ namespace Bizsol_ESMS_API.Interface
     {
         public abstract Task<IEnumerable<dynamic>> ShowUOM(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
         public abstract Task<IEnumerable<dynamic>> ShowUOMMasterByCode(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int code);
-        public abstract Task<spOutputParameter> InsertUOM(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblUOMMaster model);
-        public abstract Task<spOutputParameter> DeleteUOM(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int code);
+        public abstract Task<spOutputParameter> InsertUOM(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblUOMMaster model, int UserMaster_Code);
+        public abstract Task<spOutputParameter> DeleteUOM(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int code, int UserMaster_Code);
 
 
     }
