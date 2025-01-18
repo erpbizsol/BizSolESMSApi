@@ -9,7 +9,7 @@ namespace Bizsol_ESMS_API.Service
     public class LocationMasterService: ILocationMaster
     {
         string sp_name = "USP_LocationMaster";
-        public async Task<spOutputParameter> InsertLocationMaster(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, tblLocationMaster Model)
+        public async Task<spOutputParameter> InsertLocationMaster(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, tblLocationMaster Model, int UserMaster_Code)
         {
             using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
@@ -19,6 +19,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("Operation", "INSERT");
                 parameters.Add("p_Code", Model.Code);
                 parameters.Add("p_LocationName", Model.LocationName);
+                parameters.Add("p_UserMaster_Code", UserMaster_Code);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 await conn.QueryAsync(sp_name, parameters, commandType: CommandType.StoredProcedure);
@@ -30,7 +31,7 @@ namespace Bizsol_ESMS_API.Service
             }
         }
 
-        public async Task<spOutputParameter> DeleteLocationMaster(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, int code)
+        public async Task<spOutputParameter> DeleteLocationMaster(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, int code, int UserMaster_Code)
         {
             using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
@@ -39,6 +40,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("Operation", "DELETE");
                 parameters.Add("p_Code", code);
                 parameters.Add("p_LocationName", null);
+                parameters.Add("p_UserMaster_Code", UserMaster_Code);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 await conn.QueryAsync(sp_name, parameters, commandType: CommandType.StoredProcedure);
@@ -60,8 +62,10 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("Operation", "SHOW");
                 parameters.Add("p_Code", null);
                 parameters.Add("p_LocationName", null);
+                parameters.Add("p_UserMaster_Code", 0);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
+
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -78,8 +82,10 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("Operation", "SHOW_BY_CODE");
                 parameters.Add("p_Code", code);
                 parameters.Add("p_LocationName", null);
+                parameters.Add("p_UserMaster_Code", 0);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
+
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 

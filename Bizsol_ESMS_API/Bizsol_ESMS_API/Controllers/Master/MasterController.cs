@@ -426,7 +426,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
         #region LocationMaster
         [HttpPost]
         [Route("InsertLocationMaster")]
-        public async Task<IActionResult> InsertLocationMaster([FromBody] tblLocationMaster model)
+        public async Task<IActionResult> InsertLocationMaster([FromBody] tblLocationMaster model,int UserMaster_Code)
         {
 
             try
@@ -434,7 +434,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _ILocationMaster.InsertLocationMaster(_bizsolESMSConnectionDetails, model);
+                    var result = await _ILocationMaster.InsertLocationMaster(_bizsolESMSConnectionDetails, model,UserMaster_Code);
                     return Ok(result);
                 }
                 else
@@ -499,7 +499,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         [HttpPost]
         [Route("DeleteLocationMaster")]
-        public async Task<ActionResult<spOutputParameter>> DeleteLocationMaster(int Code)
+        public async Task<ActionResult<spOutputParameter>> DeleteLocationMaster(int Code ,int UserMaster_Code)
         {
 
             try
@@ -507,7 +507,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _ILocationMaster.DeleteLocationMaster(_bizsolESMSConnectionDetails, Code);
+                    var result = await _ILocationMaster.DeleteLocationMaster(_bizsolESMSConnectionDetails, Code, UserMaster_Code);
                     return Ok(result);
                 }
                 else
