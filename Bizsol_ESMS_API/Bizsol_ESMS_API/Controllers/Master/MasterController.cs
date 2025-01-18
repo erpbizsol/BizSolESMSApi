@@ -327,7 +327,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         [HttpPost]
         [Route("InsertUOMMaster")]
-        public async Task<IActionResult> InsertUOMMaster([FromBody] tblUOMMaster model)
+        public async Task<IActionResult> InsertUOMMaster([FromBody] tblUOMMaster model, int UserMaster_Code)
         {
 
             try
@@ -335,7 +335,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _IUOM.InsertUOM(_bizsolESMSConnectionDetails, model);
+                    var result = await _IUOM.InsertUOM(_bizsolESMSConnectionDetails, model, UserMaster_Code);
                     return Ok(result);
                 }
                 else
@@ -399,7 +399,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         [HttpPost]
         [Route("DeleteUOM")]
-        public async Task<ActionResult<spOutputParameter>> DeleteUOM(int Code)
+        public async Task<ActionResult<spOutputParameter>> DeleteUOM(int Code, int UserMaster_Code)
         {
 
             try
@@ -407,7 +407,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _IUOM.DeleteUOM(_bizsolESMSConnectionDetails, Code);
+                    var result = await _IUOM.DeleteUOM(_bizsolESMSConnectionDetails, Code, UserMaster_Code);
                     return Ok(result);
                 }
                 else
