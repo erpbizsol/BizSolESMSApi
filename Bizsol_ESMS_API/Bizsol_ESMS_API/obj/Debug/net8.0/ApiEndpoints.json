@@ -245,6 +245,11 @@
         "Name": "Code",
         "Type": "System.Int32",
         "IsRequired": false
+      },
+      {
+        "Name": "UserMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -505,8 +510,8 @@
   },
   {
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MasterController",
-    "Method": "GetWhereHouseDropDown",
-    "RelativePath": "api/Master/GetWhereHouseDropDown",
+    "Method": "GetWareHouseDropDown",
+    "RelativePath": "api/Master/GetWareHouseDropDown",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -669,6 +674,11 @@
         "Name": "model",
         "Type": "Bizsol_ESMS_API.Model.tblUOMMaster",
         "IsRequired": true
+      },
+      {
+        "Name": "UserMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -1028,13 +1038,133 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MRNMasterController",
+    "Method": "DeleteMRNMaster",
+    "RelativePath": "api/MRNMaster/DeleteMRNMaster",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "UserMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Bizsol_ESMS_API.Model.spOutputParameter",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MRNMasterController",
+    "Method": "GetMRNMasterList",
+    "RelativePath": "api/MRNMaster/GetMRNMasterList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MRNMasterController",
+    "Method": "GetRateByVendor",
+    "RelativePath": "api/MRNMaster/GetRateByVendor",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "VendorName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ItemName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MRNMasterController",
+    "Method": "SaveMRNMaster",
+    "RelativePath": "api/MRNMaster/SaveMRNMaster",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vmMRNMaster",
+        "Type": "Bizsol_ESMS_API.Model.VM_MRNMaster",
+        "IsRequired": true
+      },
+      {
+        "Name": "UserMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MRNMasterController",
+    "Method": "ShowMRNMasterByCode",
+    "RelativePath": "api/MRNMaster/ShowMRNMasterByCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Bizsol_ESMS_API.Model.VM_MRNMasterList",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
     "Method": "ClientWiseRate",
     "RelativePath": "api/OrderMaster/ClientWiseRate",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "ClientName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ItemName",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
