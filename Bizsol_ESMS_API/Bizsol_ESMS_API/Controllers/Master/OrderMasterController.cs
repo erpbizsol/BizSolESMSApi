@@ -10,9 +10,11 @@ namespace Bizsol_ESMS_API.Controllers.Master
     {
 
         private readonly IOrder _Order;
+        private readonly IDispatchOrder _DispatchOrder;
 
-        public OrderMasterController(IOrder Order)
+        public OrderMasterController(IOrder Order,IDispatchOrder DispatchOrder)
         {
+            _DispatchOrder = DispatchOrder;
             _Order = Order;
         }
 
@@ -139,5 +141,149 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
 
         #endregion OrderMaster
+        #region Dispatch
+
+        [HttpGet]
+        [Route("GetClientWiseOrderNo")]
+        public async Task<IActionResult> GetClientWiseOrderNo(string ClientName)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.GetClientWiseOrderNo(_bizsolESMSConnectionDetails, ClientName);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("GetItemDetailByOrderNo")]
+        public async Task<IActionResult> GetItemDetailByOrderNo(string OrderNo)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.GetItemDetailByOrderNo(_bizsolESMSConnectionDetails,OrderNo);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("SaveDispatchOrderEntry")]
+        public async Task<IActionResult> SaveDispatchOrderEntry([FromBody] VM_SaveDispatchOrder vmDispatchOrder, int UserMaster_Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.SaveDispatchOrderEntry(_bizsolESMSConnectionDetails, vmDispatchOrder, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetDispatchOrderList")]
+        public async Task<IActionResult> GetDispatchOrderList()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.GetDispatchOrderList(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetDispatchOrderByCode")]
+        public async Task<ActionResult<VM_OrderMasterForShow>> GetDispatchOrderByCode(int Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.GetDispatchOrderByCode(_bizsolESMSConnectionDetails, Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("DeleteDispatchOrder")]
+        public async Task<ActionResult<spOutputParameter>> DeleteDispatchOrder(int Code, int UserMaster_Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.DeleteDispatchOrder(_bizsolESMSConnectionDetails, Code, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        #endregion Dispatch
     }
 }
