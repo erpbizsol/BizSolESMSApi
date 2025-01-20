@@ -10,7 +10,6 @@
         public string City {  get; set; }
         public string GSTIN {  get; set; }
         public string DefaultWarehouse { get; set; } = "N";
-        public string StoreWarehouse { get; set; } = "N";   
-        public string InTransitwarehouse { get; set; } = "N";
+
     }
 }
