@@ -45,7 +45,7 @@ namespace Bizsol_ESMS_API.Service
             };
 
             var dataTables = await Task.Run(() => CommonFunctions.DataTableArrayExecuteSqlQueryWithParameter(bizsolESMSConnectionDetails.DefultMysqlTemp,
-                    "call USP_MRNMaster(@p_Mode,@p_UserMaster_Code,@p_Code,@p_jsonData, @p_jsonData1,@p_AccountName,@p_ItemName)",
+                    "call USP_DispatchOrder(@p_Mode,@p_UserMaster_Code,@p_Code,@p_jsonData, @p_jsonData1,@p_AccountName,@p_ItemName)",
                     parameters,
                     CommandType.Text
                 ));
@@ -89,7 +89,6 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-
         public async Task<IEnumerable<dynamic>> GetClientWiseOrderNo(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, string ClientName)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
