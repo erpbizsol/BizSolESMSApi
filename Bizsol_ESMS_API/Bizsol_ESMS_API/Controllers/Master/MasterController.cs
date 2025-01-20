@@ -525,7 +525,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
         #region CategoryMaster
         [HttpPost]
         [Route("InsertCategoryMaster")]
-        public async Task<IActionResult> InsertCategoryMaster([FromBody] tblCategoryMaster model)
+        public async Task<IActionResult> InsertCategoryMaster([FromBody] tblCategoryMaster model, int UserMaster_Code)
         {
 
             try
@@ -533,7 +533,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _ICategory.InsertCategory(_bizsolESMSConnectionDetails, model);
+                    var result = await _ICategory.InsertCategory(_bizsolESMSConnectionDetails, model,UserMaster_Code);
                     return Ok(result);
                 }
                 else
@@ -598,7 +598,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         [HttpPost]
         [Route("DeleteCategoryMaster")]
-        public async Task<ActionResult<spOutputParameter>> DeleteCategoryMaster(int Code)
+        public async Task<ActionResult<spOutputParameter>> DeleteCategoryMaster(int Code, int UserMaster_Code)
         {
 
             try
@@ -606,7 +606,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _ICategory.DeleteCategory(_bizsolESMSConnectionDetails, Code);
+                    var result = await _ICategory.DeleteCategory(_bizsolESMSConnectionDetails, Code,UserMaster_Code);
                     return Ok(result);
                 }
                 else
@@ -624,7 +624,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
         #region GroupMaster
         [HttpPost]
         [Route("InsertGroupMaster")]
-        public async Task<IActionResult> InsertGroupMaster([FromBody] tblGroupMaster model)
+        public async Task<IActionResult> InsertGroupMaster([FromBody] tblGroupMaster model, int UserMaster_Code)
         {
 
             try
@@ -632,7 +632,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _GroupMaster.InsertGroup(_bizsolESMSConnectionDetails, model);
+                    var result = await _GroupMaster.InsertGroup(_bizsolESMSConnectionDetails, model,UserMaster_Code);
                     return Ok(result);
                 }
                 else
@@ -697,7 +697,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         [HttpPost]
         [Route("DeleteGroupMaster")]
-        public async Task<ActionResult<spOutputParameter>> DeleteGroupMaster(int Code)
+        public async Task<ActionResult<spOutputParameter>> DeleteGroupMaster(int Code, int UserMaster_Code)
         {
 
             try
@@ -705,7 +705,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _GroupMaster.DeleteGroup(_bizsolESMSConnectionDetails, Code);
+                    var result = await _GroupMaster.DeleteGroup(_bizsolESMSConnectionDetails, Code,UserMaster_Code);
                     return Ok(result);
                 }
                 else
@@ -723,7 +723,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
         #region SubGroupMaster
         [HttpPost]
         [Route("InsertSubGroupMaster")]
-        public async Task<IActionResult> InsertSubGroupMaster([FromBody] tblSubGroupMaster model)
+        public async Task<IActionResult> InsertSubGroupMaster([FromBody] tblSubGroupMaster model,int UserMaster_Code)
         {
 
             try
@@ -731,7 +731,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _ISubGroupMaster.InsertSubGroup(_bizsolESMSConnectionDetails, model);
+                    var result = await _ISubGroupMaster.InsertSubGroup(_bizsolESMSConnectionDetails, model, UserMaster_Code);
                     return Ok(result);
                 }
                 else
@@ -796,7 +796,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         [HttpPost]
         [Route("DeleteSubGroupMaster")]
-        public async Task<ActionResult<spOutputParameter>> DeleteSubGroupMaster(int Code)
+        public async Task<ActionResult<spOutputParameter>> DeleteSubGroupMaster(int Code,int UserMaster_Code)
         {
 
             try
@@ -804,7 +804,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _ISubGroupMaster.DeleteSubGroup(_bizsolESMSConnectionDetails, Code);
+                    var result = await _ISubGroupMaster.DeleteSubGroup(_bizsolESMSConnectionDetails, Code, UserMaster_Code);
                     return Ok(result);
                 }
                 else
@@ -822,7 +822,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
         #region BrandMaster
         [HttpPost]
         [Route("InsertBrandMaster")]
-        public async Task<IActionResult> InsertBrandMaster([FromBody] tblBrandMaster model)
+        public async Task<IActionResult> InsertBrandMaster([FromBody] tblBrandMaster model,int UserMaster_Code)
         {
 
             try
@@ -830,7 +830,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _IBrandMaster.InsertBrand(_bizsolESMSConnectionDetails, model);
+                    var result = await _IBrandMaster.InsertBrand(_bizsolESMSConnectionDetails, model,UserMaster_Code);
                     return Ok(result);
                 }
                 else
@@ -895,7 +895,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         [HttpPost]
         [Route("DeleteBrandMaster")]
-        public async Task<ActionResult<spOutputParameter>> DeleteBrandMaster(int Code)
+        public async Task<ActionResult<spOutputParameter>> DeleteBrandMaster(int Code,int  UserMaster_Code)
         {
 
             try
@@ -903,7 +903,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _IBrandMaster.DeleteBrand(_bizsolESMSConnectionDetails, Code);
+                    var result = await _IBrandMaster.DeleteBrand(_bizsolESMSConnectionDetails, Code, UserMaster_Code);
                     return Ok(result);
                 }
                 else
@@ -1021,7 +1021,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         [HttpPost]
         [Route("InsertItemMaster")]
-        public async Task<IActionResult> InsertItemMaster([FromBody] tblItemMaster tblitemMaster)
+        public async Task<IActionResult> InsertItemMaster([FromBody] tblItemMaster tblitemMaster,int UserMaster_Code)
         {
 
             try
@@ -1029,7 +1029,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _IItemMaster.InsertItem(_bizsolESMSConnectionDetails, tblitemMaster);
+                    var result = await _IItemMaster.InsertItem(_bizsolESMSConnectionDetails, tblitemMaster, UserMaster_Code);
                     return Ok(result);
                 }
                 else
@@ -1094,7 +1094,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         [HttpPost]
         [Route("DeleteItem")]
-        public async Task<ActionResult<spOutputParameter>> DeleteItem(int Code)
+        public async Task<ActionResult<spOutputParameter>> DeleteItem(int Code,int UserMaster_Code)
         {
 
             try
@@ -1102,7 +1102,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _IItemMaster.DeleteItem(_bizsolESMSConnectionDetails, Code);
+                    var result = await _IItemMaster.DeleteItem(_bizsolESMSConnectionDetails, Code, UserMaster_Code);
                     return Ok(result);
                 }
                 else
@@ -1459,7 +1459,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         [HttpPost]
         [Route("InsertStateMaster")]
-        public async Task<IActionResult> InsertStateMaster([FromBody] tblStateMaster model)
+        public async Task<IActionResult> InsertStateMaster([FromBody] tblStateMaster model,int UserMaster_Code)
         {
 
             try
@@ -1467,7 +1467,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _StateMaster.InsertState(_bizsolESMSConnectionDetails, model);
+                    var result = await _StateMaster.InsertState(_bizsolESMSConnectionDetails, model, UserMaster_Code);
                     return Ok(result);
                 }
                 else
@@ -1532,7 +1532,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         [HttpPost]
         [Route("DeleteStateMaster")]
-        public async Task<ActionResult<spOutputParameter>> DeleteStateMaster(int Code)
+        public async Task<ActionResult<spOutputParameter>> DeleteStateMaster(int Code,int UserMaster_Code)
         {
 
             try
@@ -1540,7 +1540,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _StateMaster.DeleteState(_bizsolESMSConnectionDetails, Code);
+                    var result = await _StateMaster.DeleteState(_bizsolESMSConnectionDetails, Code, UserMaster_Code);
                     return Ok(result);
                 }
                 else

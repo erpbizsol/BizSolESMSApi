@@ -9,7 +9,7 @@ namespace Bizsol_ESMS_API.Service
     public class StateMasterServices:IStateMaster
     {
         string sp_name = "USP_StateMaster";
-        public async Task<spOutputParameter> InsertState(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, tblStateMaster model)
+        public async Task<spOutputParameter> InsertState(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, tblStateMaster model, int UserMaster_Code)
         {
             using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
@@ -19,6 +19,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_StateCode", model.StateCode);
                 parameters.Add("p_StateName", model.StateName);
                 parameters.Add("p_CountryName", model.CountryName);
+                parameters.Add("p_UserMaster_Code", UserMaster_Code);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 await conn.QueryAsync(sp_name, parameters, commandType: CommandType.StoredProcedure);
@@ -28,7 +29,7 @@ namespace Bizsol_ESMS_API.Service
                 return outputParameter;
             }
         }
-        public async Task<spOutputParameter> DeleteState(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, int code)
+        public async Task<spOutputParameter> DeleteState(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, int code, int UserMaster_Code)
         {
             using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
@@ -40,6 +41,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_StateCode", null);
                 parameters.Add("p_StateName", null);
                 parameters.Add("p_CountryName", null);
+                parameters.Add("p_UserMaster_Code", UserMaster_Code);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 await conn.QueryAsync(sp_name, parameters, commandType: CommandType.StoredProcedure);
@@ -63,6 +65,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_StateCode", null);
                 parameters.Add("p_StateName", null);
                 parameters.Add("p_CountryName", null);
+               parameters.Add("p_UserMaster_Code",0 );
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
@@ -83,6 +86,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_StateCode",null);
                 parameters.Add("p_StateName", "");
                 parameters.Add("p_CountryName", "");
+                parameters.Add("p_UserMaster_Code",0);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);

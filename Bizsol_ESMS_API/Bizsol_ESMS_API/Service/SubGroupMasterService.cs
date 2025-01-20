@@ -9,7 +9,7 @@ namespace Bizsol_ESMS_API.Service
     public class SubGroupMasterService:ISubGroupMaster
     {
         string sp_name = "USP_SubGroupMaster";
-        public async Task<spOutputParameter> InsertSubGroup(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, tblSubGroupMaster model)
+        public async Task<spOutputParameter> InsertSubGroup(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, tblSubGroupMaster model, int UserMaster_Code)
         {
             using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
@@ -20,6 +20,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Code", model.Code);
                 parameters.Add("p_GroupName", model.GroupName);
                 parameters.Add("p_SubGroupName", model.SubGroupName);
+                parameters.Add("p_UserMaster_Code", UserMaster_Code);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 await conn.QueryAsync(sp_name, parameters, commandType: CommandType.StoredProcedure);
@@ -30,7 +31,7 @@ namespace Bizsol_ESMS_API.Service
             }
         }
 
-        public async Task<spOutputParameter> DeleteSubGroup(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, int code)
+        public async Task<spOutputParameter> DeleteSubGroup(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, int code, int UserMaster_Code)
         {
             using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
@@ -41,6 +42,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Code", code);
                 parameters.Add("p_GroupName", null);
                 parameters.Add("p_SubGroupName", null);
+                parameters.Add("p_UserMaster_Code", UserMaster_Code);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 await conn.QueryAsync(sp_name, parameters, commandType: CommandType.StoredProcedure);
@@ -63,6 +65,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Code", null);
                 parameters.Add("p_GroupName", null);
                 parameters.Add("p_SubGroupName", null);
+                parameters.Add("p_UserMaster_Code", 0);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
@@ -82,6 +85,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Code", code);
                 parameters.Add("p_GroupName", null);
                 parameters.Add("p_SubGroupName", null);
+                parameters.Add("p_UserMaster_Code", 0);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
