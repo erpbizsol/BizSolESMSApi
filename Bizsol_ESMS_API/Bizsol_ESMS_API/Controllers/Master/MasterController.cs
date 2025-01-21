@@ -921,7 +921,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
         #region WarehouseMaster
         [HttpPost]
         [Route("InsertWarehouseMaster")]
-        public async Task<IActionResult> InsertWarehouseMaster([FromBody] tblWarehouse model)
+        public async Task<IActionResult> InsertWarehouseMaster([FromBody] tblWarehouse model,int UserMaster_Code)
         {
 
             try
@@ -929,7 +929,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _IWarehouse.InsertWarehouse(_bizsolESMSConnectionDetails, model);
+                    var result = await _IWarehouse.InsertWarehouse(_bizsolESMSConnectionDetails, model,UserMaster_Code);
                     return Ok(result);
                 }
                 else
@@ -994,7 +994,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         [HttpPost]
         [Route("DeleteWarehouseMaster")]
-        public async Task<ActionResult<spOutputParameter>> DeleteWarehouseMaster(int Code)
+        public async Task<ActionResult<spOutputParameter>> DeleteWarehouseMaster(int Code,int UserMaster_Code)
         {
 
             try
@@ -1002,7 +1002,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _IWarehouse.DeleteWarehouse(_bizsolESMSConnectionDetails, Code);
+                    var result = await _IWarehouse.DeleteWarehouse(_bizsolESMSConnectionDetails, Code, UserMaster_Code);
                     return Ok(result);
                 }
                 else
