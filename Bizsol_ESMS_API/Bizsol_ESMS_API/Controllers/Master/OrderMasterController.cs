@@ -11,11 +11,13 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         private readonly IOrder _Order;
         private readonly IDispatchOrder _DispatchOrder;
+        private readonly IItemOpeningBalance _ItemOpeningBalance;
 
-        public OrderMasterController(IOrder Order,IDispatchOrder DispatchOrder)
+        public OrderMasterController(IOrder Order,IDispatchOrder DispatchOrder, IItemOpeningBalance itemOpeningBalance)
         {
             _DispatchOrder = DispatchOrder;
             _Order = Order;
+            _ItemOpeningBalance = itemOpeningBalance;
         }
 
         #region OrderMaster
@@ -285,5 +287,56 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
 
         #endregion Dispatch
+        #region ItemOpeningBalance
+
+        [HttpPost]
+        [Route("SaveItemOpeningBalance")]
+        public async Task<IActionResult> SaveItemOpeningBalance([FromBody] tblItemOpeningBalance ItemOpeningBalance, int UserMaster_Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _ItemOpeningBalance.SaveItemOpeningBalance(_bizsolESMSConnectionDetails, ItemOpeningBalance, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetItemOpeningBalance")]
+        public async Task<IActionResult> GetItemOpeningBalance()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _ItemOpeningBalance.GetItemOpeningBalance(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        #endregion ItemOpeningBalance
     }
 }

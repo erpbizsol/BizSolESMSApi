@@ -39,6 +39,7 @@ builder.Services.AddTransient<ICurrentDate,CurrentDateService>();
 builder.Services.AddTransient<IOrder,OrderService>();
 builder.Services.AddTransient<IMRNMaster,MRNMasterService>();
 builder.Services.AddTransient<IDispatchOrder,DispatchOrderService>();
+builder.Services.AddTransient<IItemOpeningBalance, ItemOpeningBalanceService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
