@@ -793,7 +793,29 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpGet]
+        [Route("ShowSubGroupByGroupName")]
+        public async Task<IActionResult> ShowSubGroupByGroupName(string GroupName)
+        {
 
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _ISubGroupMaster.ShowSubGroupByGroupName(_bizsolESMSConnectionDetails,GroupName);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
         [HttpPost]
         [Route("DeleteSubGroupMaster")]
         public async Task<ActionResult<spOutputParameter>> DeleteSubGroupMaster(int Code,int UserMaster_Code)

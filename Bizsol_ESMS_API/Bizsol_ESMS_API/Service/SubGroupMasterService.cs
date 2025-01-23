@@ -93,5 +93,24 @@ namespace Bizsol_ESMS_API.Service
 
             }
         }
+        public async Task<IEnumerable<dynamic>> ShowSubGroupByGroupName(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, string GroupName)
+        {
+            using (IDbConnection conn = new
+            MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("Operation", "GETSUBGROUPBYGROUP");
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_GroupName", GroupName);
+                parameters.Add("p_SubGroupName", null);
+                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
+                parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
     }
 }
