@@ -23,6 +23,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_jsonData1", "{}");
                 parameters.Add("p_AccountName", "");
                 parameters.Add("p_ItemName", "");
+                parameters.Add("p_OrderNoWithPrefix", "");
 
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
 
@@ -67,6 +68,8 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_jsonData1", json1);
                 parameters.Add("p_AccountName", 0);
                 parameters.Add("p_ItemName", "");
+                parameters.Add("p_OrderNoWithPrefix", "");
+
 
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result;
@@ -84,6 +87,8 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_jsonData1", "{}");
                 parameters.Add("p_AccountName", 0);
                 parameters.Add("p_ItemName", "");
+                parameters.Add("p_OrderNoWithPrefix", "");
+
 
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result;
@@ -102,6 +107,8 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_jsonData1", "{}");
                 parameters.Add("p_AccountName", ClientName.Trim());
                 parameters.Add("p_ItemName","");
+                parameters.Add("p_OrderNoWithPrefix", "");
+
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -113,12 +120,13 @@ namespace Bizsol_ESMS_API.Service
                 DynamicParameters parameters = new DynamicParameters();
 
                 parameters.Add("p_Mode", "GETITEMDETAIL");
-                parameters.Add("p_Code", OrderNo);
+                parameters.Add("p_Code", 0);
                 parameters.Add("p_UserMaster_Code", 0);
                 parameters.Add("p_jsonData", "{}");
                 parameters.Add("p_jsonData1", "{}");
                 parameters.Add("p_AccountName","");
                 parameters.Add("p_ItemName", "");
+                parameters.Add("p_OrderNoWithPrefix", OrderNo);
 
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result;
