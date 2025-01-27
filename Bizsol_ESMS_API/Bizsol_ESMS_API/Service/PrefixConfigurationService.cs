@@ -39,5 +39,35 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+        public async Task<IEnumerable<dynamic>> GetPerPageSizeList(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("p_Mode", "LOCATE");
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_PerPageOption", "");
+                parameters.Add("p_PerPage", 0);
+
+                var result = await conn.QueryAsync<dynamic>("USP_PerPageSizeConfiguration", parameters, commandType: CommandType.StoredProcedure);
+
+                return result.ToList();
+            }
+        }
+        public async Task<dynamic> SavePerPageSizeConfiguration(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblPerPageSize PerPageSize)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "Save");
+                parameters.Add("p_Code", PerPageSize.Code);
+                parameters.Add("p_PerPageOption", PerPageSize.PerPageOption);
+                parameters.Add("p_PerPage", PerPageSize.PerPage);
+
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_PerPageSizeConfiguration", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
     }
 }
