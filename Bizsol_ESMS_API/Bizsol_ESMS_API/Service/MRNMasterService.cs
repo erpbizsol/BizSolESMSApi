@@ -3,6 +3,7 @@ using Bizsol_ESMS_API.Model;
 using Dapper;
 using MySql.Data.MySqlClient;
 using Nancy.Json;
+using Org.BouncyCastle.Asn1;
 using System.Data;
 
 namespace Bizsol_ESMS_API.Service
@@ -109,5 +110,22 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+        public async Task<dynamic> ImportMRNMaster(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblImportMRNMaster ImportMRNMaster)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                var json = new JavaScriptSerializer().Serialize(ImportMRNMaster.JsonData);
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Code",0);
+                parameters.Add("p_AccountName", ImportMRNMaster.VendorName);
+                parameters.Add("p_VehicleNo", ImportMRNMaster.VehicleNo);
+                parameters.Add("p_UserMaster_Code", ImportMRNMaster.UserMaster_Code);
+                parameters.Add("p_jsonData", json);
+
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_ImportMRNMaster", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+
     }
 }
