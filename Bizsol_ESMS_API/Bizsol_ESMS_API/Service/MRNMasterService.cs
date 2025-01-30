@@ -117,12 +117,13 @@ namespace Bizsol_ESMS_API.Service
                 var json = new JavaScriptSerializer().Serialize(ImportMRNMaster.JsonData);
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("p_Code",0);
+                parameters.Add("p_Mode","SAVE");
                 parameters.Add("p_AccountName", ImportMRNMaster.VendorName);
                 parameters.Add("p_VehicleNo", ImportMRNMaster.VehicleNo);
                 parameters.Add("p_UserMaster_Code", ImportMRNMaster.UserMaster_Code);
                 parameters.Add("p_jsonData", json);
 
-                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_ImportMRNMaster", parameters, commandType: CommandType.StoredProcedure);
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("InsertPicklistFromJSON", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
         }
@@ -133,12 +134,13 @@ namespace Bizsol_ESMS_API.Service
                 var json = new JavaScriptSerializer().Serialize(ImportMRNMaster.JsonData);
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("p_Code", 0);
+                parameters.Add("p_Mode","GET");
                 parameters.Add("p_AccountName", ImportMRNMaster.VendorName);
                 parameters.Add("p_VehicleNo", ImportMRNMaster.VehicleNo);
                 parameters.Add("p_UserMaster_Code", ImportMRNMaster.UserMaster_Code);
                 parameters.Add("p_jsonData", json);
 
-                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("InsertPicklistFromJSON", parameters, commandType: CommandType.StoredProcedure);
+                var result = await conn.QueryAsync<dynamic>("InsertPicklistFromJSON", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
         }
