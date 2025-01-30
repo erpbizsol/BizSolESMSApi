@@ -158,6 +158,29 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
 
+        [HttpPost]
+        [Route("ImportMRNMasterForTemp")]
+        public async Task<IActionResult> ImportMRNMasterForTemp([FromBody] tblImportMRNMaster ImportMRNMaster)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _MRNMaster.ImportMRNMasterForTemp(_bizsolESMSConnectionDetails, ImportMRNMaster);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         #endregion MRNMaster
 
     }
