@@ -339,6 +339,30 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [HttpPost]
+        [Route("DeleteOpeningBalance")]
+        public async Task<IActionResult> DeleteOpeningBalance(int Code, int UserMaster_Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _ItemOpeningBalance.DeleteOpeningBalance(_bizsolESMSConnectionDetails, Code, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
         #endregion ItemOpeningBalance
     }
 }

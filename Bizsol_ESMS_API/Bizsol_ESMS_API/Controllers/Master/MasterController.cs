@@ -1046,7 +1046,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
         #endregion WarehouseMaster
 
-        #region IItemMaster
+        #region ItemMaster
 
         [HttpPost]
         [Route("InsertItemMaster")]
@@ -1167,7 +1167,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
-        #endregion IItemMaster
+        #endregion ItemMaster
 
         #region UserGroupMaster
         [HttpGet]

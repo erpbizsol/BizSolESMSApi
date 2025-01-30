@@ -17,6 +17,7 @@ namespace Bizsol_ESMS_API.Service
                 DynamicParameters parameters = new DynamicParameters();
 
                 parameters.Add("p_Mode", "LOCATE");
+                parameters.Add("p_Code", 0);
                 parameters.Add("p_UserMaster_Code", 0);
                 parameters.Add("p_jsonData", "{}");
 
@@ -32,10 +33,26 @@ namespace Bizsol_ESMS_API.Service
                 var json = new JavaScriptSerializer().Serialize(ItemOpeningBalance);
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("p_Mode", "SAVE");
+                parameters.Add("p_Code", 0);
                 parameters.Add("p_UserMaster_Code", UserMaster_Code);
                 parameters.Add("p_jsonData", json);
 
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_ItemOpeningBalance", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+
+        public async Task<dynamic> DeleteOpeningBalance(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, int code, int UserMaster_Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "DELETE");
+                parameters.Add("p_Code", code);
+                parameters.Add("p_UserMaster_Code", UserMaster_Code);
+                parameters.Add("p_jsonData","{}");
+                var result = await conn.QueryAsync("USP_ItemOpeningBalance", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
         }
