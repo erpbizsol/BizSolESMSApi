@@ -113,5 +113,30 @@ namespace Bizsol_ESMS_API.Service
 
             }
         }
+        public async Task<IEnumerable<dynamic>> WarehouseNameForDefault(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails)
+        {
+
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("Operation", "DEFAULT");
+                parameters.Add("p_Code", null);
+                parameters.Add("p_WarehouseName", null);
+                parameters.Add("p_WarehouseType", null);
+                parameters.Add("p_Address", null);
+                parameters.Add("p_Pin", null);
+                parameters.Add("p_City", null);
+                parameters.Add("p_GSTIN", null);
+                parameters.Add("p_DefaultWarehouse", null);
+                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
+                parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+
     }
 }

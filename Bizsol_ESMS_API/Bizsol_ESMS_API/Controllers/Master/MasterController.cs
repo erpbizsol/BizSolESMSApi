@@ -996,7 +996,28 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
-
+        [HttpGet]
+        [Route("WarehouseNameForDefault")]
+        public async Task<IActionResult> WarehouseNameForDefault()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IWarehouse.WarehouseNameForDefault(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
         [HttpGet]
         [Route("ShowWarehouseMasterByCode")]
         public async Task<IActionResult> ShowWarehouseMasterByCode(int Code)
