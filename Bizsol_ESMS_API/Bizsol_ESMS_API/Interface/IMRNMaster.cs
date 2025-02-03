@@ -11,5 +11,7 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<dynamic> ImportMRNMasterForTemp(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblImportMRNMaster ImportMRNMaster);
         public abstract Task<dynamic> DeleteMRNMaster(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int code,int UserMaster_Code);
         public abstract Task<dynamic> GetRateByVendor(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,string VendorName,string ItemName);
+        public abstract Task<dynamic> BoxUnloading(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblBoxUnloading model);
+
     }
 }

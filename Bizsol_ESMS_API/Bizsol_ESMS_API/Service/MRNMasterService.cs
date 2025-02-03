@@ -119,6 +119,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Code",0);
                 parameters.Add("p_Mode","SAVE");
                 parameters.Add("p_AccountName", ImportMRNMaster.VendorName);
+                parameters.Add("p_WarehouseName", ImportMRNMaster.WarehouseName);
                 parameters.Add("p_VehicleNo", ImportMRNMaster.VehicleNo);
                 parameters.Add("p_UserMaster_Code", ImportMRNMaster.UserMaster_Code);
                 parameters.Add("p_jsonData", json);
@@ -136,11 +137,22 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Code", 0);
                 parameters.Add("p_Mode","GET");
                 parameters.Add("p_AccountName", ImportMRNMaster.VendorName);
+                parameters.Add("p_WarehouseName", ImportMRNMaster.WarehouseName);
                 parameters.Add("p_VehicleNo", ImportMRNMaster.VehicleNo);
                 parameters.Add("p_UserMaster_Code", ImportMRNMaster.UserMaster_Code);
                 parameters.Add("p_jsonData", json);
 
                 var result = await conn.QueryAsync<dynamic>("InsertPicklistFromJSON", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> BoxUnloading(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblBoxUnloading BoxUnloading)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+               DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_BoxNo", BoxUnloading.BoxNo);
+                var result = await conn.QueryAsync<dynamic>("USP_UnloadingBox", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
         }
