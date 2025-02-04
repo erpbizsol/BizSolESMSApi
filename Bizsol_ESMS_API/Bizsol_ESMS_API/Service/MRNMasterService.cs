@@ -12,7 +12,7 @@ namespace Bizsol_ESMS_API.Service
     {
 
         string sp_name = "USP_MRNMaster";
-        public async Task<IEnumerable<dynamic>> GetMRNMasterList(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
+        public async Task<IEnumerable<dynamic>> GetMRNMasterList(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, string FromDate, string ToDate)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
@@ -25,6 +25,8 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_jsonData1", "{}");
                 parameters.Add("p_AccountName", "");
                 parameters.Add("p_ItemName", "");
+                parameters.Add("p_FromDate",FromDate);
+                parameters.Add("p_ToDate", ToDate);
 
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
 
@@ -43,11 +45,13 @@ namespace Bizsol_ESMS_API.Service
                 { "@p_jsonData1", "{}" },
                 { "@p_AccountName", "" },
                 { "@p_ItemName", "" },
+                { "@p_FromDate", "" },
+                { "@p_ToDate", "" },
 
             };
 
             var dataTables = await Task.Run(() => CommonFunctions.DataTableArrayExecuteSqlQueryWithParameter(bizsolESMSConnectionDetails.DefultMysqlTemp,
-                    "call USP_MRNMaster(@p_Mode,@p_UserMaster_Code,@p_Code,@p_jsonData, @p_jsonData1,@p_AccountName,@p_ItemName)",
+                    "call USP_MRNMaster(@p_Mode,@p_UserMaster_Code,@p_Code,@p_jsonData, @p_jsonData1,@p_AccountName,@p_ItemName,@p_FromDate,@p_ToDate)",
                     parameters,
                     CommandType.Text
                 ));
@@ -69,6 +73,8 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_jsonData1", json1);
                 parameters.Add("p_AccountName", 0);
                 parameters.Add("p_ItemName", "");
+                parameters.Add("p_FromDate", "");
+                parameters.Add("p_ToDate", "");
 
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result;
@@ -86,6 +92,8 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_jsonData1", "{}");
                 parameters.Add("p_AccountName", 0);
                 parameters.Add("p_ItemName", "");
+                parameters.Add("p_FromDate", "");
+                parameters.Add("p_ToDate", "");
 
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result;
@@ -104,6 +112,8 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_jsonData1", "{}");
                 parameters.Add("p_AccountName", VendorName.Trim());
                 parameters.Add("p_ItemName", ItemName.Trim());
+                parameters.Add("p_FromDate", "");
+                parameters.Add("p_ToDate", "");
 
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
 
@@ -153,6 +163,70 @@ namespace Bizsol_ESMS_API.Service
                DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("p_BoxNo", BoxUnloading.BoxNo);
                 var result = await conn.QueryAsync<dynamic>("USP_UnloadingBox", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> GetBoxValidateDetail(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblBoxValidation BoxValidation)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "GETDETAIL");
+                parameters.Add("p_BoxNo", BoxValidation.BoxNo);
+                parameters.Add("p_Code", BoxValidation.Code);
+                parameters.Add("p_ScanNo", BoxValidation.ScanNo);
+                parameters.Add("p_ScanQty",0);
+                parameters.Add("p_ReceivedQty",0);
+                parameters.Add("p_ManualQty", 0);
+                var result = await conn.QueryAsync<dynamic>("USP_BoxValidation", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> SaveManualBoxValidateDetail(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblBoxValidation BoxValidation)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode","MANUAL");
+                parameters.Add("p_BoxNo", BoxValidation.BoxNo);
+                parameters.Add("p_Code", BoxValidation.Code);
+                parameters.Add("p_ScanNo", BoxValidation.ScanNo);
+                parameters.Add("p_ScanQty", BoxValidation.ScanQty);
+                parameters.Add("p_ReceivedQty", BoxValidation.ReceivedQty);
+                parameters.Add("p_ManualQty", BoxValidation.ManualQty);
+                var result = await conn.QueryAsync<dynamic>("USP_BoxValidation", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> SaveScanBoxValidateDetail(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblBoxValidation BoxValidation)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "SCAN");
+                parameters.Add("p_BoxNo", BoxValidation.BoxNo);
+                parameters.Add("p_Code", BoxValidation.Code);
+                parameters.Add("p_ScanNo", BoxValidation.ScanNo);
+                parameters.Add("p_ScanQty", BoxValidation.ScanQty);
+                parameters.Add("p_ReceivedQty", BoxValidation.ReceivedQty);
+                parameters.Add("p_ManualQty", BoxValidation.ManualQty);
+                var result = await conn.QueryAsync<dynamic>("USP_BoxValidation", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> AutoUpdateReceivedQty(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblBoxValidation BoxValidation)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "UPDATEQTY");
+                parameters.Add("p_BoxNo", BoxValidation.BoxNo);
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_ScanNo", 0);
+                parameters.Add("p_ScanQty", 0);
+                parameters.Add("p_ReceivedQty", 0);
+                parameters.Add("p_ManualQty", 0);
+                var result = await conn.QueryAsync<dynamic>("USP_BoxValidation", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
         }
