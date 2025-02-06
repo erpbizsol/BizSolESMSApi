@@ -33,6 +33,27 @@ namespace Bizsol_ESMS_API.Service
                 return result.ToList();
             }
         }
+        public async Task<IEnumerable<dynamic>> ExportMRNMaster(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, string FromDate, string ToDate)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("p_Mode", "EXPORT");
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("p_jsonData", "{}");
+                parameters.Add("p_jsonData1", "{}");
+                parameters.Add("p_AccountName", "");
+                parameters.Add("p_ItemName", "");
+                parameters.Add("p_FromDate", FromDate);
+                parameters.Add("p_ToDate", ToDate);
+
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+
+                return result.ToList();
+            }
+        }
         public async Task<VM_MRNMasterList> GetMRNMasterByCode(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
         {
             VM_MRNMasterList vM_MRNMaster = new VM_MRNMasterList();
@@ -161,7 +182,9 @@ namespace Bizsol_ESMS_API.Service
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode","CHECK");
                 parameters.Add("p_BoxNo", BoxUnloading.BoxNo);
+                parameters.Add("p_Code", BoxUnloading.Code);
                 var result = await conn.QueryAsync<dynamic>("USP_UnloadingBox", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -230,6 +253,33 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-
+        public async Task<dynamic> GetMRNDetailForUnloading(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode","GET");
+                parameters.Add("p_BoxNo","");
+                parameters.Add("p_Code",0);
+                var result = await conn.QueryAsync<dynamic>("USP_UnloadingBox", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> GetMRNDetailForValidate(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "VALIDATE");
+                parameters.Add("p_BoxNo", "");
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_ScanNo", "");
+                parameters.Add("p_ScanQty", 0);
+                parameters.Add("p_ReceivedQty", 0);
+                parameters.Add("p_ManualQty", 0);
+                var result = await conn.QueryAsync<dynamic>("USP_BoxValidation", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
     }
 }

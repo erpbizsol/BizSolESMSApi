@@ -15,6 +15,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
         {
             _MRNMaster = MRNMaster;
         }
+
         #region MRNMaster
 
         [HttpPost]
@@ -181,6 +182,29 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
 
+        [HttpGet]
+        [Route("ExportMRNMaster")]
+        public async Task<IActionResult> ExportMRNMaster(string FromDate, string ToDate)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _MRNMaster.ExportMRNMaster(_bizsolESMSConnectionDetails, FromDate, ToDate);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         #endregion MRNMaster
 
         #region BoxUnloading
@@ -207,6 +231,29 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpGet]
+        [Route("GetMRNDetailForUnloading")]
+        public async Task<IActionResult> GetMRNDetailForUnloading()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _MRNMaster.GetMRNDetailForUnloading(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         #endregion BoxUnloading
 
         #region BoxValidation
@@ -299,7 +346,28 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
-
+        [HttpGet]
+        [Route("GetMRNDetailForValidate")]
+        public async Task<IActionResult> GetMRNDetailForValidate()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _MRNMaster.GetMRNDetailForValidate(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
         #endregion BoxValidation
     }
 }
