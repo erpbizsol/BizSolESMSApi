@@ -3,6 +3,7 @@
     public class tblCustomerType
     {
         public int Code { get; set; } = 0;
+        public string AccountCode { get; set; }
         public string AccountName { get; set; }
         public string DisplayName { get; set; }
         public string PANNo { get; set; }
