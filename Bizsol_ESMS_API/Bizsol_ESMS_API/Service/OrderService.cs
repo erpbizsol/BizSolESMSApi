@@ -88,8 +88,6 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-
-
         public async Task<IEnumerable<dynamic>> ClientWiseRate(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, string ClientName, string ItemName)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
@@ -107,5 +105,40 @@ namespace Bizsol_ESMS_API.Service
                 return result.ToList();
             }
         }
+        public async Task<dynamic> ImportOrder(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblImportOrder ImportOrder)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                var json = new JavaScriptSerializer().Serialize(ImportOrder.JsonData);
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_Mode", "SAVE");
+                parameters.Add("p_AccountName", ImportOrder.ClientName);
+                parameters.Add("p_ClientType", ImportOrder.ClientType);
+                parameters.Add("p_UserMaster_Code", ImportOrder.UserMaster_Code);
+                parameters.Add("p_jsonData", json);
+
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("InsertPicklistFromJSON", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> ImportOrderForTemp(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblImportOrder ImportOrder)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                var json = new JavaScriptSerializer().Serialize(ImportOrder.JsonData);
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_Mode", "GET");
+                parameters.Add("p_AccountName", ImportOrder.ClientName);
+                parameters.Add("p_ClientType", ImportOrder.ClientType);
+                parameters.Add("p_UserMaster_Code", ImportOrder.UserMaster_Code);
+                parameters.Add("p_jsonData", json);
+
+                var result = await conn.QueryAsync<dynamic>("UDF_ImportOrder", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+
     }
 }

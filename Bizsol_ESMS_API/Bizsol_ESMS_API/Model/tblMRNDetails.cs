@@ -3,7 +3,7 @@
     public class tblMRNDetails
     {
         public int Code { get; set; }
-        public string? ItemName { get; set; } = "";
+        public string? ItemCode { get; set; } = "";
         public double BillQtyBox { get; set; }
         public double ReceivedQtyBox { get; set; }
         public double BillQty { get; set; }

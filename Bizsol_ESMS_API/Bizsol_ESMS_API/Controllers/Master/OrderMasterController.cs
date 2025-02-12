@@ -8,7 +8,6 @@ namespace Bizsol_ESMS_API.Controllers.Master
     [ApiController]
     public class OrderMasterController : Controller
     {
-
         private readonly IOrder _Order;
         private readonly IDispatchOrder _DispatchOrder;
         private readonly IItemOpeningBalance _ItemOpeningBalance;
@@ -141,7 +140,51 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpPost]
+        [Route("ImportOrder")]
+        public async Task<IActionResult> ImportOrder([FromBody] tblImportOrder ImportOrder)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.ImportOrder(_bizsolESMSConnectionDetails, ImportOrder);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
+        [HttpPost]
+        [Route("ImportOrderForTemp")]
+        public async Task<IActionResult> ImportOrderForTemp([FromBody] tblImportOrder ImportOrder)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.ImportOrderForTemp(_bizsolESMSConnectionDetails, ImportOrder);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
         #endregion OrderMaster
 
         #region Dispatch
