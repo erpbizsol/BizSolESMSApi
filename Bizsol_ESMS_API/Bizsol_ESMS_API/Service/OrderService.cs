@@ -118,7 +118,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_UserMaster_Code", ImportOrder.UserMaster_Code);
                 parameters.Add("p_jsonData", json);
 
-                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("InsertPicklistFromJSON", parameters, commandType: CommandType.StoredProcedure);
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("UDF_ImportOrder", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
         }
