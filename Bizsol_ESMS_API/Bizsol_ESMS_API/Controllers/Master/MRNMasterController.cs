@@ -205,6 +205,30 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
 
+        [HttpGet]
+        [Route("MRNDetailsByCode")]
+        public async Task<ActionResult<VM_MRNMasterList>> MRNDetailsByCode(int Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _MRNMaster.MRNDetailsByCode(_bizsolESMSConnectionDetails, Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         #endregion MRNMaster
 
         #region BoxUnloading
