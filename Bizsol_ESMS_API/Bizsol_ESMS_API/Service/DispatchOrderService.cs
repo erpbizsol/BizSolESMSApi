@@ -132,5 +132,25 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+
+        public async Task<IEnumerable<dynamic>> GetClientWiseShowOrder(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, string ClientName)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("p_Mode", "GETCLIENT");
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("p_jsonData", "{}");
+                parameters.Add("p_jsonData1", "{}");
+                parameters.Add("p_AccountName", ClientName.Trim());
+                parameters.Add("p_ItemName", "");
+                parameters.Add("p_OrderNoWithPrefix", "");
+
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
     }
 }

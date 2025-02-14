@@ -283,6 +283,29 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
 
         [HttpGet]
+        [Route("GetClientWiseShowOrder")]
+        public async Task<IActionResult> GetClientWiseShowOrder(string ClientName)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.GetClientWiseShowOrder(_bizsolESMSConnectionDetails,ClientName);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
         [Route("GetDispatchOrderByCode")]
         public async Task<ActionResult<VM_OrderMasterForShow>> GetDispatchOrderByCode(int Code)
         {

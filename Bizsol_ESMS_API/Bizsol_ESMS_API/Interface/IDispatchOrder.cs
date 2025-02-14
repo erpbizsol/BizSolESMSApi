@@ -10,5 +10,6 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<dynamic> DeleteDispatchOrder(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int code, int UserMaster_Code);
         public abstract Task<IEnumerable<dynamic>> GetClientWiseOrderNo(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,string ClientName);
         public abstract Task<IEnumerable<dynamic>> GetItemDetailByOrderNo(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string OrderNo);
+        public abstract Task<IEnumerable<dynamic>> GetClientWiseShowOrder(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string ClientName);
     }
 }

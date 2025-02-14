@@ -27,9 +27,9 @@ namespace Bizsol_ESMS_API.Controllers.Master
         private readonly IStateMaster _StateMaster;
         private readonly ICustomerType _ICustomerType;
         private readonly ICurrentDate _CurrentDate;
-        private readonly IOrder _Order;
+        private readonly IOrder _Order; 
         private readonly ICheckRelatedRecord _CheckRelatedRecord;
-
+         
         public MasterController(IUOM uom, IDropDown _IdropDown, ILocationMaster _IlocationMaster, ICategory _Icategory, IGroupMaster _groupMaster
         ,ISubGroupMaster _IsubGroupMaster,IBrandMaster _brandMaster, IWarehouse iWarehouse, IItemMaster iItemMaster, IConfigItemMaster configItemMaster,
         ICity iCity, IStateMaster stateMaster,IUserGroupMaster iUserGroupMaster, IDesignationMaster iDesignationMaster,
