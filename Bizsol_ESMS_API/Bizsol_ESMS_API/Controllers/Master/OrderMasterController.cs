@@ -284,14 +284,14 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         [HttpGet]
         [Route("GetClientWiseShowOrder")]
-        public async Task<IActionResult> GetClientWiseShowOrder(string ClientName)
+        public async Task<IActionResult> GetClientWiseShowOrder(string Mode)
         {
             try
             {
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _DispatchOrder.GetClientWiseShowOrder(_bizsolESMSConnectionDetails,ClientName);
+                    var result = await _DispatchOrder.GetClientWiseShowOrder(_bizsolESMSConnectionDetails, Mode);
                     return Ok(result);
                 }
                 else
@@ -354,7 +354,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
         [HttpGet]
         [Route("GetOrderDetailsForDispatch")]
-        public async Task<ActionResult<VM_OrderMasterForShow>> GetOrderDetailsForDispatch(int Code)
+        public async Task<ActionResult<VM_OrderMasterForShow>> GetOrderDetailsForDispatch(int Code,string Mode)
         {
 
             try
@@ -362,7 +362,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _DispatchOrder.GetOrderDetailsForDispatch(_bizsolESMSConnectionDetails, Code);
+                    var result = await _DispatchOrder.GetOrderDetailsForDispatch(_bizsolESMSConnectionDetails, Code,Mode);
                     return Ok(result);
                 }
                 else
@@ -407,6 +407,30 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
                     var result = await _DispatchOrder.ManualItemForDispatch(_bizsolESMSConnectionDetails, Dispatch);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("GetMarkasCompeteByOrderNo")]
+        public async Task<ActionResult<spOutputParameter>> GetMarkasCompeteByOrderNo(int Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.GetMarkasCompeteByOrderNo(_bizsolESMSConnectionDetails, Code);
                     return Ok(result);
                 }
                 else

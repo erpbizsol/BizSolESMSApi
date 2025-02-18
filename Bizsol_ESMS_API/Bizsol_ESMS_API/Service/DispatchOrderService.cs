@@ -4,6 +4,7 @@ using Dapper;
 using MySql.Data.MySqlClient;
 using Nancy.Json;
 using System.Data;
+using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
 namespace Bizsol_ESMS_API.Service
 {
@@ -132,18 +133,18 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-        public async Task<IEnumerable<dynamic>> GetClientWiseShowOrder(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, string ClientName)
+        public async Task<IEnumerable<dynamic>> GetClientWiseShowOrder(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,string Mode)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
                 DynamicParameters parameters = new DynamicParameters();
 
-                parameters.Add("p_Mode", "GETCLIENT");
+                parameters.Add("p_Mode", Mode.Trim());
                 parameters.Add("p_Code", 0);
                 parameters.Add("p_UserMaster_Code", 0);
                 parameters.Add("p_jsonData", "{}");
                 parameters.Add("p_jsonData1", "{}");
-                parameters.Add("p_AccountName", ClientName.Trim());
+                parameters.Add("p_AccountName","");
                 parameters.Add("p_ItemName", "");
                 parameters.Add("p_OrderNoWithPrefix", "");
 
@@ -151,23 +152,18 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-        public async Task<VM_OrderMasterForShow> GetOrderDetailsForDispatch(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
+        public async Task<VM_OrderMasterForShow> GetOrderDetailsForDispatch(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code,string Mode)
         {
 
             VM_OrderMasterForShow vM_OrderMaster = new VM_OrderMasterForShow();
             var parameters = new Dictionary<string, object>
             {
-                { "@p_Mode", "ORDERDETAILS" },
-                { "@p_UserMaster_Code", 0 },
-                { "@p_Code", Code },
-                { "@p_jsonData", "{}" },
-                { "@p_jsonData1", "{}" },
-                { "@p_AccountName", "" },
-                { "@p_ItemName", "" }
+                { "@p_Mode", Mode.Trim()},
+                { "@p_UserMaster_Code", 0},
+                { "@p_Code", Code }
             };
-
             var dataTables = await Task.Run(() => CommonFunctions.DataTableArrayExecuteSqlQueryWithParameter(bizsolESMSConnectionDetails.DefultMysqlTemp,
-                    "call USP_OrderMaster(@p_Mode,@p_UserMaster_Code,@p_Code,@p_jsonData, @p_jsonData1,@p_AccountName,@p_ItemName)",
+                    "call USP_ModeWiseDispatch(@p_Mode,@p_UserMaster_Code,@p_Code)",
                     parameters,
                     CommandType.Text
                 ));
@@ -207,6 +203,25 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+
+        public async Task<dynamic> GetMarkasCompeteByOrderNo(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "GETCode");
+                parameters.Add("p_Code", Code);
+                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("p_jsonData", "{}");
+                parameters.Add("p_jsonData1", "{}");
+                parameters.Add("p_AccountName", "{}");
+                parameters.Add("p_ItemName", "");
+                parameters.Add("p_OrderNoWithPrefix", "");
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+
 
     }
 }
