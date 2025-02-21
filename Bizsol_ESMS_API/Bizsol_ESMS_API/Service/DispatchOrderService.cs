@@ -199,11 +199,11 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_ScanQty", Dispatch.ScanQty);
                 parameters.Add("p_ManualQty", Dispatch.ManualQty);
                 parameters.Add("p_DispatchQty", Dispatch.DispatchQty);
+                parameters.Add("p_DispatchQty", Dispatch.DispatchMaster_Code);
                 var result = await conn.QueryAsync<dynamic>("USP_SaveManualDispatchOrder", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
         }
-
         public async Task<dynamic> GetMarkasCompeteByOrderNo(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))

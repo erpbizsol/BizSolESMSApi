@@ -8,5 +8,6 @@
         public int ScanQty { get; set; }
         public int ManualQty { get; set; }
         public int DispatchQty { get; set; }
+        public int DispatchMaster_Code { get; set; }
     }
 }
