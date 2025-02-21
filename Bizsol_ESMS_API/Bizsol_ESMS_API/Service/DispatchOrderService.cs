@@ -187,12 +187,12 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-        public async Task<dynamic> ManualItemForDispatch(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblScanDispatch Dispatch)
+        public async Task<dynamic> ManualItemForDispatch(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblScanDispatch Dispatch,string Mode)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("p_Mode", "MANUAL");
+                parameters.Add("p_Mode", Mode);
                 parameters.Add("p_Code", Dispatch.Code);
                 parameters.Add("p_ScanNo", Dispatch.ScanNo);
                 parameters.Add("p_UserMaster_Code", Dispatch.UserMaster_Code);

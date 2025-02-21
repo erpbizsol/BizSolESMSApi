@@ -399,14 +399,14 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
         [HttpPost]
         [Route("ManualItemForDispatch")]
-        public async Task<IActionResult> ManualItemForDispatch([FromBody] tblScanDispatch Dispatch)
+        public async Task<IActionResult> ManualItemForDispatch([FromBody] tblScanDispatch Dispatch,string Mode)
         {
             try
             {
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _DispatchOrder.ManualItemForDispatch(_bizsolESMSConnectionDetails, Dispatch);
+                    var result = await _DispatchOrder.ManualItemForDispatch(_bizsolESMSConnectionDetails, Dispatch, Mode);
                     return Ok(result);
                 }
                 else
