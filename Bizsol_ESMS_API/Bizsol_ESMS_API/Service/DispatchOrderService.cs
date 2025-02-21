@@ -222,7 +222,5 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-
-
     }
 }
