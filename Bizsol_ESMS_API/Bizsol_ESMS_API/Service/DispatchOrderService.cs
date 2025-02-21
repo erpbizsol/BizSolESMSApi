@@ -152,18 +152,18 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-        public async Task<VM_OrderMasterForShow> GetOrderDetailsForDispatch(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code,string Mode)
+        public async Task<VM_OrderMasterForShow> GetOrderDetailsForDispatch(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code,string Mode,int DispatchMaster_Code)
         {
 
             VM_OrderMasterForShow vM_OrderMaster = new VM_OrderMasterForShow();
             var parameters = new Dictionary<string, object>
             {
                 { "@p_Mode", Mode.Trim()},
-                { "@p_UserMaster_Code", 0},
+                { "@p_DispatchMaster_Code", DispatchMaster_Code},
                 { "@p_Code", Code }
             };
             var dataTables = await Task.Run(() => CommonFunctions.DataTableArrayExecuteSqlQueryWithParameter(bizsolESMSConnectionDetails.DefultMysqlTemp,
-                    "call USP_ModeWiseDispatch(@p_Mode,@p_UserMaster_Code,@p_Code)",
+                    "call USP_ModeWiseDispatch(@p_Mode,@p_DispatchMaster_Code,@p_Code)",
                     parameters,
                     CommandType.Text
                 ));

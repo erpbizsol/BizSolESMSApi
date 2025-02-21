@@ -354,7 +354,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
         [HttpGet]
         [Route("GetOrderDetailsForDispatch")]
-        public async Task<ActionResult<VM_OrderMasterForShow>> GetOrderDetailsForDispatch(int Code,string Mode)
+        public async Task<ActionResult<VM_OrderMasterForShow>> GetOrderDetailsForDispatch(int Code,string Mode,int DispatchMaster_Code)
         {
 
             try
@@ -362,7 +362,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _DispatchOrder.GetOrderDetailsForDispatch(_bizsolESMSConnectionDetails, Code,Mode);
+                    var result = await _DispatchOrder.GetOrderDetailsForDispatch(_bizsolESMSConnectionDetails, Code,Mode, DispatchMaster_Code);
                     return Ok(result);
                 }
                 else
