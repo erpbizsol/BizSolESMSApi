@@ -80,31 +80,24 @@ namespace Bizsol_ESMS_API.Service
             vM_MRNMaster.MRNDetails = CommonFunctions.DatatableToDynamicList(dataTables[1]);
             return vM_MRNMaster;
         }
-        public async Task<VM_MRNMasterList> MRNDetailsByCode(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
+        public async Task<dynamic> MRNDetailsByCode(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
         {
-            VM_MRNMasterList vM_MRNMaster = new VM_MRNMasterList();
-            var parameters = new Dictionary<string, object>
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
-                { "@p_Mode", "DETAILS" },
-                { "@p_UserMaster_Code", 0 },
-                { "@p_Code",Code},
-                { "@p_jsonData", "{}" },
-                { "@p_jsonData1", "{}" },
-                { "@p_AccountName", "" },
-                { "@p_ItemName", "" },
-                { "@p_FromDate", "" },
-                { "@p_ToDate", "" },
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Code", Code);
+                parameters.Add("p_Mode", "DETAILS");
+                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("p_jsonData", "{}");
+                parameters.Add("p_jsonData1", "{}");
+                parameters.Add("p_AccountName", 0);
+                parameters.Add("p_ItemName", "");
+                parameters.Add("p_FromDate", "");
+                parameters.Add("p_ToDate", "");
 
-            };
-
-            var dataTables = await Task.Run(() => CommonFunctions.DataTableArrayExecuteSqlQueryWithParameter(bizsolESMSConnectionDetails.DefultMysqlTemp,
-                    "call USP_MRNMaster(@p_Mode,@p_UserMaster_Code,@p_Code,@p_jsonData, @p_jsonData1,@p_AccountName,@p_ItemName,@p_FromDate,@p_ToDate)",
-                    parameters,
-                    CommandType.Text
-                ));
-            vM_MRNMaster.MRNMaster = CommonFunctions.DatatableToDynamicList(dataTables[0]);
-            vM_MRNMaster.MRNDetails = CommonFunctions.DatatableToDynamicList(dataTables[1]);
-            return vM_MRNMaster;
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
         }
         public async Task<dynamic> SaveMRNMaster(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, VM_MRNMaster vmMRNMaster,int UserMaster_Code)
         {

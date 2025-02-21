@@ -207,7 +207,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         [HttpGet]
         [Route("MRNDetailsByCode")]
-        public async Task<ActionResult<VM_MRNMasterList>> MRNDetailsByCode(int Code)
+        public async Task<ActionResult> MRNDetailsByCode(int Code)
         {
 
             try
