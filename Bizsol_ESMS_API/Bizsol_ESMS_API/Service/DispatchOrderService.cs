@@ -171,18 +171,19 @@ namespace Bizsol_ESMS_API.Service
             vM_OrderMaster.OrderDetial = CommonFunctions.DatatableToDynamicList(dataTables[1]);
             return vM_OrderMaster;
         }
-        public async Task<dynamic> ScanItemForDispatch(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblScanDispatch Dispatch)
+        public async Task<dynamic> ScanItemForDispatch(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblScanDispatch Dispatch, string Mode)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("p_Mode", "SCAN");
+                parameters.Add("p_Mode", Mode);
                 parameters.Add("p_Code", Dispatch.Code);
                 parameters.Add("p_ScanNo", Dispatch.ScanNo);
                 parameters.Add("p_UserMaster_Code", Dispatch.UserMaster_Code);
                 parameters.Add("p_ScanQty", Dispatch.ScanQty);
                 parameters.Add("p_ManualQty", Dispatch.ManualQty);
                 parameters.Add("p_DispatchQty", Dispatch.DispatchQty);
+                parameters.Add("p_DispatchMaster_Code", Dispatch.DispatchMaster_Code);
                 var result = await conn.QueryAsync<dynamic>("USP_SaveScanDispatchOrder", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
