@@ -2,7 +2,7 @@
 {
     public class tblOrderDetials
     {
-        public string? ItemName { get; set; } = "";
+        public string? ItemCode { get; set; } = "";
         public double QtyBox { get; set; } =0;
         public double OrderQty { get; set; } =0;
         public double Rate { get; set; } =0;

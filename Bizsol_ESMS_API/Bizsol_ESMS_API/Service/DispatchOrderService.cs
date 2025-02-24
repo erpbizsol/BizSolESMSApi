@@ -89,8 +89,6 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_AccountName", 0);
                 parameters.Add("p_ItemName", "");
                 parameters.Add("p_OrderNoWithPrefix", "");
-
-
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }

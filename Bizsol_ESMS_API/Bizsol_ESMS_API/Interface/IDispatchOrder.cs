@@ -15,7 +15,6 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<VM_OrderMasterForShow> GetOrderDetailsForDispatch(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int code,string Mode,int DispatchMaster_Code);
         public abstract Task<dynamic> ScanItemForDispatch(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblScanDispatch Dispatch , string Mode);
         public abstract Task<dynamic> ManualItemForDispatch(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblScanDispatch Dispatch,string Mode);
-
         public abstract Task<dynamic> GetMarkasCompeteByOrderNo(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int Code);
 
     }
