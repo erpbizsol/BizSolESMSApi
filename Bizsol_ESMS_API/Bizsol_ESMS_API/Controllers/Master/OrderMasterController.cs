@@ -521,5 +521,29 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
         #endregion ItemOpeningBalance
+
+        [HttpGet]
+        [Route("ShowBoxNumber")]
+        public async Task<IActionResult> ShowBoxNumber(string PickListNo)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.ShowBoxNumber(_bizsolESMSConnectionDetails, PickListNo);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

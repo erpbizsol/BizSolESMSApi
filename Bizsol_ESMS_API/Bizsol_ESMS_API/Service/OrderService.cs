@@ -139,6 +139,19 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+        public async Task<IEnumerable<dynamic>> ShowBoxNumber(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, string PickListNo)
+        {
+            using (IDbConnection conn = new
+            MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                string sp_name1 = "USP_BoxNo";
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_PickListNo", PickListNo);
+                var result = await conn.QueryAsync<dynamic>(sp_name1, parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
 
     }
 }

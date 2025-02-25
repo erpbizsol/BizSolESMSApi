@@ -11,6 +11,7 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<IEnumerable<dynamic>> ClientWiseRate(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,string ClientName, string ItemName);
         public abstract Task<dynamic> ImportOrder(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblImportOrder ImportOrder);
         public abstract Task<dynamic> ImportOrderForTemp(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblImportOrder ImportOrder);
+        public abstract Task<IEnumerable<dynamic>> ShowBoxNumber(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string PickListNo);
 
     }
 }
