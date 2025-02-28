@@ -7,6 +7,8 @@
         public string? ScanNo { get; set; } = "";
         public int ScanQty { get; set; }
         public int ManualQty { get; set; } 
-        public int ReceivedQty { get; set; } 
+        public int ReceivedQty { get; set; }
+        public string PickListNo { get; set; } = "";
+        public string IsManual { get; set; } = "";
     }
 }

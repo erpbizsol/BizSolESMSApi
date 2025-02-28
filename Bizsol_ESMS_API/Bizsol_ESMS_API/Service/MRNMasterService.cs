@@ -202,7 +202,9 @@ namespace Bizsol_ESMS_API.Service
             {
                DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("p_Mode","CHECK");
-                parameters.Add("p_BoxNo", BoxUnloading.BoxNo);
+                parameters.Add("p_BoxNo", BoxUnloading.BoxNo.Trim());
+                parameters.Add("p_PickListNo", BoxUnloading.PickListNo.Trim());
+                parameters.Add("p_IsManual", BoxUnloading.IsManual.Trim());
                 parameters.Add("p_Code", BoxUnloading.Code);
                 var result = await conn.QueryAsync<dynamic>("USP_UnloadingBox", parameters, commandType: CommandType.StoredProcedure);
                 return result;
@@ -220,6 +222,9 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_ScanQty",0);
                 parameters.Add("p_ReceivedQty",0);
                 parameters.Add("p_ManualQty", 0);
+                parameters.Add("p_PickListNo", BoxValidation.PickListNo.Trim());
+                parameters.Add("p_IsManual", BoxValidation.IsManual.Trim());
+
                 var result = await conn.QueryAsync<dynamic>("USP_BoxValidation", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -236,6 +241,8 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_ScanQty", BoxValidation.ScanQty);
                 parameters.Add("p_ReceivedQty", BoxValidation.ReceivedQty);
                 parameters.Add("p_ManualQty", BoxValidation.ManualQty);
+                parameters.Add("p_PickListNo", BoxValidation.PickListNo.Trim());
+                parameters.Add("p_IsManual", BoxValidation.IsManual.Trim());
                 var result = await conn.QueryAsync<dynamic>("USP_BoxValidation", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -252,6 +259,8 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_ScanQty", BoxValidation.ScanQty);
                 parameters.Add("p_ReceivedQty", BoxValidation.ReceivedQty);
                 parameters.Add("p_ManualQty", BoxValidation.ManualQty);
+                parameters.Add("p_PickListNo", BoxValidation.PickListNo.Trim());
+                parameters.Add("p_IsManual", BoxValidation.IsManual.Trim());
                 var result = await conn.QueryAsync<dynamic>("USP_BoxValidation", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -268,6 +277,8 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_ScanQty", 0);
                 parameters.Add("p_ReceivedQty", 0);
                 parameters.Add("p_ManualQty", 0);
+                parameters.Add("p_PickListNo", BoxValidation.PickListNo.Trim());
+                parameters.Add("p_IsManual", BoxValidation.IsManual.Trim());
                 var result = await conn.QueryAsync<dynamic>("USP_BoxValidation", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -279,6 +290,8 @@ namespace Bizsol_ESMS_API.Service
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("p_Mode","GET");
                 parameters.Add("p_BoxNo","");
+                parameters.Add("p_PickListNo", "");
+                parameters.Add("p_IsManual", "");
                 parameters.Add("p_Code",0);
                 var result = await conn.QueryAsync<dynamic>("USP_UnloadingBox", parameters, commandType: CommandType.StoredProcedure);
                 return result;
@@ -296,6 +309,8 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_ScanQty", 0);
                 parameters.Add("p_ReceivedQty", 0);
                 parameters.Add("p_ManualQty", 0);
+                parameters.Add("p_PickListNo", "");
+                parameters.Add("p_IsManual","");
                 var result = await conn.QueryAsync<dynamic>("USP_BoxValidation", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
