@@ -18,6 +18,8 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<IEnumerable<dynamic>> GetAccountIsVendorDropDown(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
         public abstract Task<IEnumerable<dynamic>> GetAccountIsClientDropDown(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
         public abstract Task<IEnumerable<dynamic>> GetOrderNoList(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
+        public abstract Task<IEnumerable<dynamic>> GetUserNameList(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
+        public abstract Task<IEnumerable<dynamic>> GetDesignationList(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
 
     }
 }

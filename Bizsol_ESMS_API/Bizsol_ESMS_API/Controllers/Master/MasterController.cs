@@ -29,12 +29,13 @@ namespace Bizsol_ESMS_API.Controllers.Master
         private readonly ICurrentDate _CurrentDate;
         private readonly IOrder _Order; 
         private readonly ICheckRelatedRecord _CheckRelatedRecord;
+        private readonly IEmployeeMaster _EmployeeMaster;
          
         public MasterController(IUOM uom, IDropDown _IdropDown, ILocationMaster _IlocationMaster, ICategory _Icategory, IGroupMaster _groupMaster
         ,ISubGroupMaster _IsubGroupMaster,IBrandMaster _brandMaster, IWarehouse iWarehouse, IItemMaster iItemMaster, IConfigItemMaster configItemMaster,
         ICity iCity, IStateMaster stateMaster,IUserGroupMaster iUserGroupMaster, IDesignationMaster iDesignationMaster,
         ICustomerType iCustomerType,ICurrentDate currentDate, IOrder Order,
-        ICheckRelatedRecord checkRelatedRecord)
+        ICheckRelatedRecord checkRelatedRecord, IEmployeeMaster _IEmployeeMaster)
         {
             _IUOM = uom;
             _IDropDown = _IdropDown;
@@ -54,6 +55,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
             _CurrentDate = currentDate;
             _Order = Order;
             _CheckRelatedRecord = checkRelatedRecord;
+            _EmployeeMaster = _IEmployeeMaster;
         }
 
         #region DropDown
@@ -339,6 +341,52 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
                     var result = await _IDropDown.GetOrderNoList(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetUserNameList")]
+        public async Task<IActionResult> GetUserNameList()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IDropDown.GetUserNameList(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetDesignationList")]
+        public async Task<IActionResult> GetDesignationList()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IDropDown.GetDesignationList(_bizsolESMSConnectionDetails);
                     return Ok(result);
                 }
                 else
@@ -1781,8 +1829,108 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
-     
+
         #endregion DeleteRelatedRecord
+
+        #region EmployeeMaster
+        [HttpPost]
+        [Route("InsertEmployeeMaster")]
+        public async Task<IActionResult> InsertEmployeeMaster([FromBody] tblEmployeeMaster model, int UserMaster_Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _EmployeeMaster.InsertEmployeeMaster(_bizsolESMSConnectionDetails, model, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ShowEmployeeMaster")]
+        public async Task<IActionResult> ShowEmployeeMaster()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _EmployeeMaster.ShowEmployeeMaster(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ShowEmployeeMasterByCode")]
+        public async Task<IActionResult> ShowEmployeeMasterByCode(int Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _EmployeeMaster.ShowEmployeeMasterByCode(_bizsolESMSConnectionDetails, Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("DeleteEmployeeMaster")]
+        public async Task<ActionResult<spOutputParameter>> DeleteEmployeeMaster(int Code, int UserMaster_Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _EmployeeMaster.DeleteEmployeeMaster(_bizsolESMSConnectionDetails, Code, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        
+        #endregion EmployeeMaster
     }
 }
 

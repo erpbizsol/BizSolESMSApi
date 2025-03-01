@@ -178,5 +178,31 @@ namespace Bizsol_ESMS_API.Service
 
             }
         }
+        public async Task<IEnumerable<dynamic>> GetUserNameList(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails)
+        {
+
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("Operation", "GetUser");
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetDesignationList(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails)
+        {
+
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("Operation", "Designation");
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
     }
 }
