@@ -444,6 +444,30 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
 
+        [HttpGet]
+        [Route("GetEmployeeList")]
+        public async Task<IActionResult> GetEmployeeList(int UserMaster_Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.GetEmployeeList(_bizsolESMSConnectionDetails, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         #endregion Dispatch
 
         #region ItemOpeningBalance

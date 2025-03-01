@@ -153,5 +153,19 @@ namespace Bizsol_ESMS_API.Service
             }
         }
 
+        public async Task<IEnumerable<dynamic>> GetEmployeeList(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, int UserMaster_Code)
+        {
+            using (IDbConnection conn = new
+            MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                string sp_name1 = "USP_UserList";
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_UserMaster_Code", UserMaster_Code);
+                var result = await conn.QueryAsync<dynamic>(sp_name1, parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+
     }
 }
