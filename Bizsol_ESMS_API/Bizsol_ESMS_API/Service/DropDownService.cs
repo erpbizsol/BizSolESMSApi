@@ -204,5 +204,18 @@ namespace Bizsol_ESMS_API.Service
 
             }
         }
+        public async Task<IEnumerable<dynamic>> GetReportType(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails)
+        {
+
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("Operation", "ReportType");
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
     }
 }

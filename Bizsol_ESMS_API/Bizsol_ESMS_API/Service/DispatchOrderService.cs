@@ -182,6 +182,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_ManualQty", Dispatch.ManualQty);
                 parameters.Add("p_DispatchQty", Dispatch.DispatchQty);
                 parameters.Add("p_DispatchMaster_Code", Dispatch.DispatchMaster_Code);
+                parameters.Add("p_packedBy", Dispatch.PackedBy);
                 var result = await conn.QueryAsync<dynamic>("USP_SaveScanDispatchOrder", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -199,6 +200,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_ManualQty", Dispatch.ManualQty);
                 parameters.Add("p_DispatchQty", Dispatch.DispatchQty);
                 parameters.Add("p_DispatchMaster_Code", Dispatch.DispatchMaster_Code);
+                parameters.Add("p_packedBy", Dispatch.PackedBy);
                 var result = await conn.QueryAsync<dynamic>("USP_SaveManualDispatchOrder", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }

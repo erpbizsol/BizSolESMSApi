@@ -9,5 +9,6 @@
         public int ManualQty { get; set; }
         public int DispatchQty { get; set; }
         public int DispatchMaster_Code { get; set; }
+        public string? PackedBy { get; set; }
     }
 }

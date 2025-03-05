@@ -43,6 +43,7 @@ builder.Services.AddTransient<IItemOpeningBalance, ItemOpeningBalanceService>();
 builder.Services.AddTransient<IPrefixConfiguration, PrefixConfigurationService>();
 builder.Services.AddTransient<ICheckRelatedRecord, CheckRelatedRecordService>();
 builder.Services.AddTransient<IEmployeeMaster,EmployeeMasterServices>();
+builder.Services.AddTransient<IReport,ReportService>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
