@@ -1,6 +1,7 @@
 ﻿using Bizsol_ESMS_API.Interface;
 using Bizsol_ESMS_API.Model;
 using Dapper;
+using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using System.Data;
 namespace Bizsol_ESMS_API.Service
@@ -28,7 +29,6 @@ namespace Bizsol_ESMS_API.Service
                 return new List<dynamic>();
             }
         }
-
-     
+       
     }
 }
