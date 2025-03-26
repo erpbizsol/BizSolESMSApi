@@ -16,7 +16,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
         public ReportController(IReport report)
         {
             _report = report;
-           
+
         }
         [HttpGet]
         [Route("GetLocationReport")]
