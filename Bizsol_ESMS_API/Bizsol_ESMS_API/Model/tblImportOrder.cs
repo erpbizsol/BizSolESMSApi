@@ -5,6 +5,7 @@
         public List<Dictionary<string, object>> JsonData { get; set; }
         public string? ClientName { get; set; }
         public string? ClientType { get; set; }
+        public string? OrderNo { get; set; }
         public int UserMaster_Code { get; set; }
     }
 }

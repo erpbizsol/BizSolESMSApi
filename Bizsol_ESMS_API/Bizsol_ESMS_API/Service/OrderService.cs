@@ -115,6 +115,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Mode", "SAVE");
                 parameters.Add("p_AccountName", ImportOrder.ClientName);
                 parameters.Add("p_ClientType", ImportOrder.ClientType);
+                parameters.Add("p_OrderNo", ImportOrder.OrderNo);
                 parameters.Add("p_UserMaster_Code", ImportOrder.UserMaster_Code);
                 parameters.Add("p_jsonData", json);
 
@@ -132,6 +133,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Mode", "GET");
                 parameters.Add("p_AccountName", ImportOrder.ClientName);
                 parameters.Add("p_ClientType", ImportOrder.ClientType);
+                parameters.Add("p_OrderNo", ImportOrder.OrderNo);
                 parameters.Add("p_UserMaster_Code", ImportOrder.UserMaster_Code);
                 parameters.Add("p_jsonData", json);
 
@@ -152,7 +154,6 @@ namespace Bizsol_ESMS_API.Service
 
             }
         }
-
         public async Task<IEnumerable<dynamic>> GetEmployeeList(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, int UserMaster_Code)
         {
             using (IDbConnection conn = new

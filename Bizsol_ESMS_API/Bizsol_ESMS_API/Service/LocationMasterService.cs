@@ -91,5 +91,20 @@ namespace Bizsol_ESMS_API.Service
 
             }
         }
+        public async Task<dynamic> CreateLocationFromItemMaster(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, tblLocationMaster Model, int UserMaster_Code, string IsCheckExists)
+        {
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_ItemMaster_Code", Model.Code);
+                parameters.Add("p_LocationName", Model.LocationName);
+                parameters.Add("p_UserMaster_Code", UserMaster_Code);
+                parameters.Add("p_IsCheckExists", IsCheckExists.Trim());
+                var result = await conn.QueryAsync("USP_CreateLocationFromItemMaster", parameters, commandType: CommandType.StoredProcedure);
+
+                return result;
+            }
+        }
+
     }
 }

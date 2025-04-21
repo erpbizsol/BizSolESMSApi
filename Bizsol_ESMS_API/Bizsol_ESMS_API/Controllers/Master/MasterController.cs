@@ -621,6 +621,31 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpPost]
+        [Route("CreateLocationFromItemMaster")]
+        public async Task<IActionResult> CreateLocationFromItemMaster([FromBody] tblLocationMaster model,int UserMaster_Code,string IsCheckExists)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _ILocationMaster.CreateLocationFromItemMaster(_bizsolESMSConnectionDetails, model,UserMaster_Code, IsCheckExists);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
         #endregion LocationMaster
 
         #region CategoryMaster

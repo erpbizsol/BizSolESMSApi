@@ -183,6 +183,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_DispatchQty", Dispatch.DispatchQty);
                 parameters.Add("p_DispatchMaster_Code", Dispatch.DispatchMaster_Code);
                 parameters.Add("p_packedBy", Dispatch.PackedBy);
+                parameters.Add("p_BoxNo", Dispatch.BoxNo);
                 var result = await conn.QueryAsync<dynamic>("USP_SaveScanDispatchOrder", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
