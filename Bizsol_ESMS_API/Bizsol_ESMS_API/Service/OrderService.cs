@@ -167,6 +167,99 @@ namespace Bizsol_ESMS_API.Service
 
             }
         }
+        public async Task<dynamic> ImportSalesReturn(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblSalesReturn SalesReturn)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                var json = new JavaScriptSerializer().Serialize(SalesReturn.JsonData);
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_Mode", "SAVE");
+                parameters.Add("p_AccountMaster_Code", SalesReturn.ClientMaster_Code);
+                parameters.Add("p_ReasonMaster_Code", SalesReturn.ReasonMaster_Code);
+                parameters.Add("p_OrderNo", SalesReturn.OrderNo);
+                parameters.Add("p_UserMaster_Code", SalesReturn.UserMaster_Code);
+                parameters.Add("p_jsonData", json);
+
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("UDF_ImportSalesReturn", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> ImportSalesReturnForTemp(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblSalesReturn SalesReturn)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                var json = new JavaScriptSerializer().Serialize(SalesReturn.JsonData);
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_Mode", "GET");
+                parameters.Add("p_AccountMaster_Code", SalesReturn.ClientMaster_Code);
+                parameters.Add("p_ReasonMaster_Code", SalesReturn.ReasonMaster_Code);
+                parameters.Add("p_OrderNo", SalesReturn.OrderNo);
+                parameters.Add("p_UserMaster_Code", SalesReturn.UserMaster_Code);
+                parameters.Add("p_jsonData", json);
+
+                var result = await conn.QueryAsync<dynamic>("UDF_ImportSalesReturn", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<IEnumerable<dynamic>> ShowSalesReturnMaster(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_Mode", "LOCATE");
+                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("p_ReasonMaster_Code", 0);
+                var result = await conn.QueryAsync<dynamic>("USP_SalesReturnMaster", parameters, commandType: CommandType.StoredProcedure);
+
+                return result.ToList();
+            }
+        }
+        public async Task<IEnumerable<dynamic>> ShowSalesReturnMasterDetail(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,int Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("p_Code",Code);
+                parameters.Add("p_Mode", "GETSALERETURNITEM");
+                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("p_ReasonMaster_Code", 0);
+                var result = await conn.QueryAsync<dynamic>("USP_SalesReturnMaster", parameters, commandType: CommandType.StoredProcedure);
+
+                return result.ToList();
+            }
+        }
+        public async Task<dynamic> SaveSalesReturnScanDetail(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblScanSalesReturn SalesReturn)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "SCAN");
+                parameters.Add("p_Code", SalesReturn.Code);
+                parameters.Add("p_ScanNo", SalesReturn.ScanNo);
+
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_SaveScanSalesReturn", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> UpdateReasonMaster_CodeInSaleReturn(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,int Code,int ReasonMaster_Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "UPDATEREASON");
+                parameters.Add("p_Code",Code);
+                parameters.Add("p_UserMaster_Code",0);
+                parameters.Add("p_ReasonMaster_Code", ReasonMaster_Code);
+
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_SalesReturnMaster", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
 
     }
 }

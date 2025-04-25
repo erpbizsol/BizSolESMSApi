@@ -13,6 +13,12 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<dynamic> ImportOrderForTemp(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblImportOrder ImportOrder);
         public abstract Task<IEnumerable<dynamic>> ShowBoxNumber(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string PickListNo);
         public abstract Task<IEnumerable<dynamic>> GetEmployeeList(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int UserMaster_Code);
+        public abstract Task<dynamic> ImportSalesReturn(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblSalesReturn SalesReturn);
+        public abstract Task<dynamic> ImportSalesReturnForTemp(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblSalesReturn SalesReturn);
+        public abstract Task<IEnumerable<dynamic>> ShowSalesReturnMaster(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
+        public abstract Task<IEnumerable<dynamic>> ShowSalesReturnMasterDetail(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int Code);
+        public abstract Task<dynamic> SaveSalesReturnScanDetail(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblScanSalesReturn SalesReturn);
+        public abstract Task<dynamic> UpdateReasonMaster_CodeInSaleReturn(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int Code,int ReasonMaster_Code);
 
     }
 }
