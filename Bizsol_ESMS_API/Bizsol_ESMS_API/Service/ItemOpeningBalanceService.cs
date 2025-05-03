@@ -41,7 +41,6 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-
         public async Task<dynamic> DeleteOpeningBalance(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, int code, int UserMaster_Code)
         {
             using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))

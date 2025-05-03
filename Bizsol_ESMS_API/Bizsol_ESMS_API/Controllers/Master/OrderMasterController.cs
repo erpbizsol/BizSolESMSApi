@@ -544,6 +544,52 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpPost]
+        [Route("ImportOpeningBalance")]
+        public async Task<IActionResult> ImportOpeningBalance([FromBody] tblImportOpeningBalance OpeningBalance)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.ImportOpeningBalance(_bizsolESMSConnectionDetails, OpeningBalance);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("ImportOpeningBalanceForTemp")]
+        public async Task<IActionResult> ImportOpeningBalanceForTemp([FromBody] tblImportOpeningBalance OpeningBalance)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.ImportOpeningBalanceForTemp(_bizsolESMSConnectionDetails, OpeningBalance);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         #endregion ItemOpeningBalance
 
         [HttpGet]
@@ -705,5 +751,75 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
         #endregion SalesReturn
+        #region StockAudit
+
+        [HttpGet]
+        [Route("GetStockAuditList")]
+        public async Task<IActionResult> GetStockAuditList()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.GetStockAuditList(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("ScanStockAudit")]
+        public async Task<IActionResult> ScanStockAudit([FromBody] tblStockAudit StockAudit)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.ScanStockAudit(_bizsolESMSConnectionDetails, StockAudit);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("ManualStockAudit")]
+        public async Task<IActionResult> ManualStockAudit(int Code,int UserMaster_Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.ManualStockAudit(_bizsolESMSConnectionDetails,Code,UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        #endregion StockAudit
+
     }
 }

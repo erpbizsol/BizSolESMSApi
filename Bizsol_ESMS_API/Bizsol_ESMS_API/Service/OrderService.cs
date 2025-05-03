@@ -260,6 +260,78 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+        public async Task<dynamic> ImportOpeningBalance(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblImportOpeningBalance OpeningBalance)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                var json = new JavaScriptSerializer().Serialize(OpeningBalance.JsonData);
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "SAVE");
+                parameters.Add("p_WarehouseName", OpeningBalance.WarehouseName);
+                parameters.Add("p_UserMaster_Code", OpeningBalance.UserMaster_Code);
+                parameters.Add("p_jsonData", json);
+
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_ImportItemOpeningBalance", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> ImportOpeningBalanceForTemp(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblImportOpeningBalance OpeningBalance)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                var json = new JavaScriptSerializer().Serialize(OpeningBalance.JsonData);
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "GET");
+                parameters.Add("p_WarehouseName", OpeningBalance.WarehouseName);
+                parameters.Add("p_UserMaster_Code", OpeningBalance.UserMaster_Code);
+                parameters.Add("p_jsonData", json);
+
+                var result = await conn.QueryAsync<dynamic>("USP_ImportItemOpeningBalance", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetStockAuditList(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "LOCATE");
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_ScanNo", "");
+                parameters.Add("p_UserMaster_Code",0);
+                var result = await conn.QueryAsync<dynamic>("USP_GetStockAuditDetails", parameters, commandType: CommandType.StoredProcedure);
+
+                return result.ToList();
+            }
+        }
+        public async Task<dynamic> ScanStockAudit(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblStockAudit StockAudit)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_Mode", "SCAN");
+                parameters.Add("p_ScanNo",StockAudit.ScanNo);
+                parameters.Add("p_UserMaster_Code", StockAudit.UserMaster_Code);
+                var result = await conn.QueryAsync<dynamic>("USP_GetStockAuditDetails", parameters, commandType: CommandType.StoredProcedure);
+
+                return result.ToList();
+            }
+        }
+        public async Task<dynamic> ManualStockAudit(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,int Code,int UserMaster_Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Code", Code);
+                parameters.Add("p_Mode", "COMPLETE");
+                parameters.Add("p_ScanNo", "");
+                parameters.Add("p_UserMaster_Code", UserMaster_Code);
+                var result = await conn.QueryAsync<dynamic>("USP_GetStockAuditDetails", parameters, commandType: CommandType.StoredProcedure);
+
+                return result.ToList();
+            }
+        }
 
     }
 }
