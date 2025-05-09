@@ -1,6 +1,7 @@
 ﻿using Bizsol_ESMS_API.Interface;
 using Bizsol_ESMS_API.Model;
 using Dapper;
+using Microsoft.Graph.Models.IdentityGovernance;
 using MySql.Data.MySqlClient;
 using Nancy.Json;
 using System.Data;
@@ -330,6 +331,74 @@ namespace Bizsol_ESMS_API.Service
                 var result = await conn.QueryAsync<dynamic>("USP_GetStockAuditDetails", parameters, commandType: CommandType.StoredProcedure);
 
                 return result.ToList();
+            }
+        }
+        public async Task<dynamic> ImportTATReport(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblTATReport TATReport)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                var json = new JavaScriptSerializer().Serialize(TATReport.JsonData);
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "SAVE");
+                parameters.Add("p_TATDate", TATReport.TATDate);
+                parameters.Add("p_IsCheck", TATReport.IsCheck);
+                parameters.Add("p_UserMaster_Code", TATReport.UserMaster_Code);
+                parameters.Add("p_jsonData", json);
+
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_ImportTATReport", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> ImportTATReportForTemp(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblTATReport TATReport)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                var json = new JavaScriptSerializer().Serialize(TATReport.JsonData);
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "GET");
+                parameters.Add("p_TATDate", TATReport.TATDate);
+                parameters.Add("p_IsCheck", TATReport.IsCheck);
+                parameters.Add("p_UserMaster_Code", TATReport.UserMaster_Code);
+                parameters.Add("p_jsonData", json);
+
+                var result = await conn.QueryAsync<dynamic>("USP_ImportTATReport", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetTATReportList(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,string TATDate,string Type)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", Type.Trim());
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_POD", "");
+                parameters.Add("p_VehicleNo", "");
+                parameters.Add("p_Redispatch", "");
+                parameters.Add("p_Remark", "");
+                parameters.Add("p_TATDate", TATDate);
+                parameters.Add("p_UserMaster_Code",0);
+                var result = await conn.QueryAsync<dynamic>("USP_GetTATReport", parameters, commandType: CommandType.StoredProcedure);
+
+                return result.ToList();
+            }
+        }
+        public async Task<dynamic> SaveTATDetails(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblSaveTATMaster TATMaster)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("p_Mode", "SAVE");
+                parameters.Add("p_Code", TATMaster.Code);
+                parameters.Add("p_POD", TATMaster.POD);
+                parameters.Add("p_VehicleNo", TATMaster.VehicleNo.Trim());
+                parameters.Add("p_Redispatch", TATMaster.Redispatch);
+                parameters.Add("p_Remark", TATMaster.Remark.Trim());
+                parameters.Add("p_TATDate","");
+                parameters.Add("p_UserMaster_Code", TATMaster.UserMaster_Code);
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_GetTATReport", parameters, commandType: CommandType.StoredProcedure);
+                return result;
             }
         }
 

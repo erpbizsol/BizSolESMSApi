@@ -1,6 +1,7 @@
 ﻿using Bizsol_ESMS_API.Interface;
 using Bizsol_ESMS_API.Model;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Graph.Models.IdentityGovernance;
 
 namespace Bizsol_ESMS_API.Controllers.Master
 {
@@ -751,6 +752,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
         #endregion SalesReturn
+
         #region StockAudit
 
         [HttpGet]
@@ -821,5 +823,97 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
         #endregion StockAudit
 
+        #region TATReport
+        [HttpPost]
+        [Route("ImportTATReport")]
+        public async Task<IActionResult> ImportTATReport([FromBody] tblTATReport TATReport)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.ImportTATReport(_bizsolESMSConnectionDetails, TATReport);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("ImportTATReportForTemp")]
+        public async Task<IActionResult> ImportTATReportForTemp([FromBody] tblTATReport TATReport)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.ImportTATReportForTemp(_bizsolESMSConnectionDetails, TATReport);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("GetTATReportList")]
+        public async Task<IActionResult> GetTATReportList(string TATDate,string Type)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.GetTATReportList(_bizsolESMSConnectionDetails,TATDate, Type);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("SaveTATDetails")]
+        public async Task<IActionResult> SaveTATDetails([FromBody] tblSaveTATMaster TATMaster)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.SaveTATDetails(_bizsolESMSConnectionDetails, TATMaster);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        #endregion TATReport
     }
 }
