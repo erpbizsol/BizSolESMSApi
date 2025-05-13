@@ -21,6 +21,7 @@ namespace Bizsol_ESMS_API.Model
         public byte[] UserImage { get; set; }
         public string UserMobileNo { get; set; } = "";
         public int DesignationMaster_Code { get; set; } 
+        public int DefaultPage { get; set; } 
         public string UserLocation { get; set; } = "";
         public string LoginAllowFromSystem { get; set; } = "";
         public string OTPApplicable { get; set; } = "N";
