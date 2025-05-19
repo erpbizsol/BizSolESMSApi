@@ -4,6 +4,7 @@ using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using System.Data;
+using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 namespace Bizsol_ESMS_API.Service
 {
     public class ReportService : IReport
@@ -29,6 +30,37 @@ namespace Bizsol_ESMS_API.Service
                 return new List<dynamic>();
             }
         }
-       
+        public async Task<IEnumerable<dynamic>> GetReportType(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, string ModuleDesp)
+        {
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                string query = $"SELECT Code, DisplayName FROM F_ReportConfiguration WHERE ModuleDescription = '{ModuleDesp.Trim()}'";
+                DynamicParameters parameters = new DynamicParameters();
+                    var result = await conn.QueryAsync<dynamic>(query, parameters, commandType: CommandType.Text);
+                    return result;
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetStockLedgerList(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails,tblStockLedger StockLedger)
+        {
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                var data = CommonFunctions.DataTableArrayExecuteSqlQueryWithParameter(
+                    _bizsolESMSConnectionDetails.DefultMysqlTemp,
+                    "SELECT ProcedureName FROM F_ReportConfiguration WHERE ModuleDescription = 'Stock Ledger' AND DisplayName = @DisplayName",
+                    new Dictionary<string, object> { { "@DisplayName", StockLedger.ReportType } }
+                )[0];
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_GroupMaster", StockLedger.GroupMaster);
+                parameters.Add("p_SubGroupMaster", StockLedger.SubGroupMaster);
+                parameters.Add("p_ItemMaster_Code", StockLedger.ItemMaster_Code);
+                parameters.Add("p_FromDate", StockLedger.FromDate);
+                parameters.Add("p_ToDate", StockLedger.ToDate);
+                parameters.Add("p_ReportType", StockLedger.ReportType);
+                var result = await conn.QueryAsync<dynamic>(data.Rows[0]["ProcedureName"].ToString(), parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+
     }
 }
