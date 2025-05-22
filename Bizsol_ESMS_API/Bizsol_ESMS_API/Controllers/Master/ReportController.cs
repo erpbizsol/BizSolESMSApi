@@ -5,6 +5,10 @@ using System.Data;
 using Bizsol_ESMS_API.Interface;
 using Microsoft.Graph.Models;
 using System.Composition;
+using Bizsol_ESMS_API.Service;
+using Google.Protobuf;
+using static Bizsol_ESMS_API.Controllers.Master.ReportController;
+
 
 namespace Bizsol_ESMS_API.Controllers.Master
 {
@@ -18,6 +22,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
             _report = report;
 
         }
+
         [HttpGet]
         [Route("GetLocationReport")]
         public async Task<IActionResult> GetLocationReport(string Templete)
@@ -42,5 +47,9 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         }
 
+
+     
+
     }
 }
+

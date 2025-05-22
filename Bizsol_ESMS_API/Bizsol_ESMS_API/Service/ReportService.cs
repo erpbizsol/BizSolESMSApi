@@ -4,6 +4,7 @@ using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using System.Data;
+using static Bizsol_ESMS_API.Controllers.Master.ReportController;
 namespace Bizsol_ESMS_API.Service
 {
     public class ReportService : IReport
