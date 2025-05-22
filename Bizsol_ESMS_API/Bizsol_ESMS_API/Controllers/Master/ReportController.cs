@@ -46,6 +46,52 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
 
         }
+        [HttpGet]
+        [Route("GetReportType")]
+        public async Task<IActionResult> GetReportType(string ModuleDesp)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _report.GetReportType(_bizsolESMSConnectionDetails, ModuleDesp);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+
+        }
+        [HttpPost]
+        [Route("GetStockLedgerList")]
+        public async Task<IActionResult> GetStockLedgerList([FromBody] tblStockLedger StockLedger)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _report.GetStockLedgerList(_bizsolESMSConnectionDetails, StockLedger);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+
+        }
 
 
      

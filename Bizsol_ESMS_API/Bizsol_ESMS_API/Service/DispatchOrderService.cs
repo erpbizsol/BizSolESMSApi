@@ -183,6 +183,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_DispatchQty", Dispatch.DispatchQty);
                 parameters.Add("p_DispatchMaster_Code", Dispatch.DispatchMaster_Code);
                 parameters.Add("p_packedBy", Dispatch.PackedBy);
+                parameters.Add("p_BoxNo", Dispatch.BoxNo);
                 var result = await conn.QueryAsync<dynamic>("USP_SaveScanDispatchOrder", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -222,5 +223,25 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+        public async Task<IEnumerable<dynamic>> GetDispatchReport(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("p_Mode", "DISPATCHREPORT");
+                parameters.Add("p_Code", Code);
+                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("p_jsonData", "{}");
+                parameters.Add("p_jsonData1", "{}");
+                parameters.Add("p_AccountName", "");
+                parameters.Add("p_ItemName", "");
+                parameters.Add("p_OrderNoWithPrefix", "");
+
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+
     }
 }

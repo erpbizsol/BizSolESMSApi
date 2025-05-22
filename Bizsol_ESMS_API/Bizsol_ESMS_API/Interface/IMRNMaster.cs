@@ -20,6 +20,8 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<dynamic> AutoUpdateReceivedQty(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblBoxValidation model);
         public abstract Task<dynamic> GetMRNDetailForUnloading(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
         public abstract Task<dynamic> GetMRNDetailForValidate(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
+        public abstract Task<IEnumerable<dynamic>> GetExportBoxUnloading(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int Code);
+        public abstract Task<dynamic> MRNDetailsByVehicleNo(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,string MRNDate,string VehicleNo);
 
     }
 }

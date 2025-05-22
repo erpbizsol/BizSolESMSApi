@@ -203,9 +203,9 @@ namespace Bizsol_ESMS_API.Service
                DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("p_Mode","CHECK");
                 parameters.Add("p_BoxNo", BoxUnloading.BoxNo.Trim());
-                parameters.Add("p_PickListNo", BoxUnloading.PickListNo.Trim());
+                parameters.Add("p_MRNDate", BoxUnloading.MRNDate.Trim());
                 parameters.Add("p_IsManual", BoxUnloading.IsManual.Trim());
-                parameters.Add("p_Code", BoxUnloading.Code);
+                parameters.Add("p_VehicleNo", BoxUnloading.VehicleNo.Trim());
                 var result = await conn.QueryAsync<dynamic>("USP_UnloadingBox", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -290,9 +290,9 @@ namespace Bizsol_ESMS_API.Service
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("p_Mode","GET");
                 parameters.Add("p_BoxNo","");
-                parameters.Add("p_PickListNo", "");
+                parameters.Add("p_MRNDate","");
                 parameters.Add("p_IsManual", "");
-                parameters.Add("p_Code",0);
+                parameters.Add("p_VehicleNo", ""); 
                 var result = await conn.QueryAsync<dynamic>("USP_UnloadingBox", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -315,5 +315,37 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+        public async Task<IEnumerable<dynamic>> GetExportBoxUnloading(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Code", Code);
+                parameters.Add("p_Mode", "EXPORTUNLOADING");
+                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("p_jsonData", "{}");
+                parameters.Add("p_jsonData1", "{}");
+                parameters.Add("p_AccountName", 0);
+                parameters.Add("p_ItemName", "");
+                parameters.Add("p_FromDate", "");
+                parameters.Add("p_ToDate", "");
+
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> MRNDetailsByVehicleNo(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, string MRNDate,string VehicleNo)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_MRNDate", MRNDate);
+                parameters.Add("p_VehicleNo", VehicleNo);
+
+                var result = await conn.QueryAsync<dynamic>("USP_GetMRNDetailsByVehicleNo", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+
     }
 }

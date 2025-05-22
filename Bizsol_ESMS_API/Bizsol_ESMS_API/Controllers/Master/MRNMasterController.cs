@@ -228,6 +228,28 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpGet]
+        [Route("MRNDetailsByVehicleNo")]
+        public async Task<ActionResult> MRNDetailsByVehicleNo(string MRNDate,string VehicleNo)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _MRNMaster.MRNDetailsByVehicleNo(_bizsolESMSConnectionDetails, MRNDate, VehicleNo);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
         #endregion MRNMaster
 
@@ -380,6 +402,28 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
                     var result = await _MRNMaster.GetMRNDetailForValidate(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("GetExportBoxUnloading")]
+        public async Task<IActionResult> GetExportBoxUnloading(int Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _MRNMaster.GetExportBoxUnloading(_bizsolESMSConnectionDetails,Code);
                     return Ok(result);
                 }
                 else

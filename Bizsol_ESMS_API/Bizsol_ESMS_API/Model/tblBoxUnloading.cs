@@ -3,8 +3,8 @@
     public class tblBoxUnloading
     {
         public string? BoxNo { get; set; } = "";
-        public string? PickListNo { get; set; } = "";
+        public string? MRNDate { get; set; } = "";
         public string? IsManual { get; set; } = "";
-        public int Code { get; set; } 
+        public string? VehicleNo { get; set; } = "";
     }
 }

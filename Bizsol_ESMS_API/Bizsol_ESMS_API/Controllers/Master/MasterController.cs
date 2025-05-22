@@ -30,12 +30,13 @@ namespace Bizsol_ESMS_API.Controllers.Master
         private readonly IOrder _Order; 
         private readonly ICheckRelatedRecord _CheckRelatedRecord;
         private readonly IEmployeeMaster _EmployeeMaster;
+        private readonly IReasonMaster _ReasonMaster;
          
         public MasterController(IUOM uom, IDropDown _IdropDown, ILocationMaster _IlocationMaster, ICategory _Icategory, IGroupMaster _groupMaster
         ,ISubGroupMaster _IsubGroupMaster,IBrandMaster _brandMaster, IWarehouse iWarehouse, IItemMaster iItemMaster, IConfigItemMaster configItemMaster,
         ICity iCity, IStateMaster stateMaster,IUserGroupMaster iUserGroupMaster, IDesignationMaster iDesignationMaster,
         ICustomerType iCustomerType,ICurrentDate currentDate, IOrder Order,
-        ICheckRelatedRecord checkRelatedRecord, IEmployeeMaster _IEmployeeMaster)
+        ICheckRelatedRecord checkRelatedRecord, IEmployeeMaster _IEmployeeMaster, IReasonMaster _IReasonMaster)
         {
             _IUOM = uom;
             _IDropDown = _IdropDown;
@@ -56,6 +57,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
             _Order = Order;
             _CheckRelatedRecord = checkRelatedRecord;
             _EmployeeMaster = _IEmployeeMaster;
+            _ReasonMaster = _IReasonMaster;
         }
 
         #region DropDown
@@ -614,6 +616,31 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 else
                 {
                     return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("CreateLocationFromItemMaster")]
+        public async Task<IActionResult> CreateLocationFromItemMaster([FromBody] tblLocationMaster model,int UserMaster_Code,string IsCheckExists)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _ILocationMaster.CreateLocationFromItemMaster(_bizsolESMSConnectionDetails, model,UserMaster_Code, IsCheckExists);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+
+
                 }
             }
             catch (Exception ex)
@@ -1952,8 +1979,32 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
-        
+
         #endregion EmployeeMaster
+        #region ReasonMaster
+        [HttpGet]
+        [Route("GetReasonMasterList")]
+        public async Task<IActionResult> GetReasonMasterList()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _ReasonMaster.GetReasonMasterList(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        #endregion ReasonMaster
     }
 }
 
