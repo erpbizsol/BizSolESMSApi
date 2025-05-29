@@ -4,6 +4,7 @@
     {
         public int Code { get; set; }
         public string? LocationName { get; set; } = "";
+        public string? Mode { get; set; } = "";
       
     }
 }

@@ -30,7 +30,6 @@ namespace Bizsol_ESMS_API.Service
                 return outputParameter;
             }
         }
-
         public async Task<spOutputParameter> DeleteLocationMaster(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, int code, int UserMaster_Code)
         {
             using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
@@ -51,7 +50,6 @@ namespace Bizsol_ESMS_API.Service
                 return outputParameter;
             }
         }
-
         public async Task<IEnumerable<dynamic>> ShowLocationMaster(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails)
         {
 
@@ -71,7 +69,6 @@ namespace Bizsol_ESMS_API.Service
 
             }
         }
-
         public async Task<IEnumerable<dynamic>> ShowLocationMasterByCode(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, int code)
         {
             using (IDbConnection conn = new
@@ -96,6 +93,7 @@ namespace Bizsol_ESMS_API.Service
             using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
                 DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", Model.Mode.Trim());
                 parameters.Add("p_ItemMaster_Code", Model.Code);
                 parameters.Add("p_LocationName", Model.LocationName);
                 parameters.Add("p_UserMaster_Code", UserMaster_Code);
@@ -105,6 +103,20 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+        public async Task<dynamic> GetItemLocationMaster_Code(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails,int Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "GETLOCATION");
+                parameters.Add("p_ItemMaster_Code",Code);
+                parameters.Add("p_LocationName","" );
+                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("p_IsCheckExists", "");
+                var result = await conn.QueryAsync("USP_CreateLocationFromItemMaster", parameters, commandType: CommandType.StoredProcedure);
 
+                return result;
+            }
+        }
     }
 }

@@ -340,7 +340,8 @@ namespace Bizsol_ESMS_API.Service
                 var json = new JavaScriptSerializer().Serialize(TATReport.JsonData);
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("p_Mode", "SAVE");
-                parameters.Add("p_TATDate", TATReport.TATDate);
+                parameters.Add("p_Month", TATReport.Month.Trim());
+                parameters.Add("p_Year", TATReport.Year.Trim());
                 parameters.Add("p_IsCheck", TATReport.IsCheck);
                 parameters.Add("p_UserMaster_Code", TATReport.UserMaster_Code);
                 parameters.Add("p_jsonData", json);
@@ -356,7 +357,8 @@ namespace Bizsol_ESMS_API.Service
                 var json = new JavaScriptSerializer().Serialize(TATReport.JsonData);
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("p_Mode", "GET");
-                parameters.Add("p_TATDate", TATReport.TATDate);
+                parameters.Add("p_Month", TATReport.Month);
+                parameters.Add("p_Year", TATReport.Year);
                 parameters.Add("p_IsCheck", TATReport.IsCheck);
                 parameters.Add("p_UserMaster_Code", TATReport.UserMaster_Code);
                 parameters.Add("p_jsonData", json);
@@ -365,7 +367,7 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-        public async Task<IEnumerable<dynamic>> GetTATReportList(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,string TATDate,string Type)
+        public async Task<IEnumerable<dynamic>> GetTATReportList(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,string Month, string Year, string Type)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
@@ -376,7 +378,8 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_VehicleNo", "");
                 parameters.Add("p_Redispatch", "");
                 parameters.Add("p_Remark", "");
-                parameters.Add("p_TATDate", TATDate);
+                parameters.Add("p_Month", Month.Trim());
+                parameters.Add("p_Year",Year.Trim());
                 parameters.Add("p_UserMaster_Code",0);
                 var result = await conn.QueryAsync<dynamic>("USP_GetTATReport", parameters, commandType: CommandType.StoredProcedure);
 
@@ -395,9 +398,22 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_VehicleNo", TATMaster.VehicleNo.Trim());
                 parameters.Add("p_Redispatch", TATMaster.Redispatch);
                 parameters.Add("p_Remark", TATMaster.Remark.Trim());
-                parameters.Add("p_TATDate","");
+                parameters.Add("p_Month","");
+                parameters.Add("p_Year","");
                 parameters.Add("p_UserMaster_Code", TATMaster.UserMaster_Code);
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_GetTATReport", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<IEnumerable<dynamic>> ShowItemDetailsOnScan(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblScanSalesReturn SalesReturn)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Code", SalesReturn.Code);
+                parameters.Add("p_ScanNo", SalesReturn.ScanNo);
+
+                var result = await conn.QueryAsync<dynamic>("USP_GetItemDetailsOnScan", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
         }

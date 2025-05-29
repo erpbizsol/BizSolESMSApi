@@ -894,14 +894,14 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
         [HttpGet]
         [Route("GetTATReportList")]
-        public async Task<IActionResult> GetTATReportList(string TATDate,string Type)
+        public async Task<IActionResult> GetTATReportList(string Month, string Year, string Type)
         {
             try
             {
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _Order.GetTATReportList(_bizsolESMSConnectionDetails,TATDate, Type);
+                    var result = await _Order.GetTATReportList(_bizsolESMSConnectionDetails, Month,Year, Type);
                     return Ok(result);
                 }
                 else
@@ -938,5 +938,30 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
 
         #endregion TATReport
+        #region ItemLocator
+
+        [HttpPost]
+        [Route("ShowItemDetailsOnScan")]
+        public async Task<IActionResult> ShowItemDetailsOnScan([FromBody] tblScanSalesReturn SalesReturn)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.ShowItemDetailsOnScan(_bizsolESMSConnectionDetails, SalesReturn);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        #endregion ItemLocator
     }
 }
