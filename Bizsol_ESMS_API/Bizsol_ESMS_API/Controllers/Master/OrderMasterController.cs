@@ -491,6 +491,29 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpPost]
+        [Route("UpdateBoxNo")]
+        public async Task<IActionResult> UpdateBoxNo([FromBody] tblUpdateBoxNo UpdateBoxNo, string Mode)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.UpdateBoxNo(_bizsolESMSConnectionDetails, UpdateBoxNo, Mode);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
 
         #endregion Dispatch
 
@@ -901,7 +924,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _Order.GetTATReportList(_bizsolESMSConnectionDetails, Month,Year, Type);
+                    var result = await _Order.GetTATReportList(_bizsolESMSConnectionDetails, Month, Year, Type);
                     return Ok(result);
                 }
                 else
@@ -938,6 +961,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
 
         #endregion TATReport
+
         #region ItemLocator
 
         [HttpPost]

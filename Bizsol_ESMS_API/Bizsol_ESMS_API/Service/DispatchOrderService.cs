@@ -204,7 +204,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_packedBy", Dispatch.PackedBy);
                 var result = await conn.QueryAsync<dynamic>("USP_SaveManualDispatchOrder", parameters, commandType: CommandType.StoredProcedure);
                 return result;
-            }
+            } 
         }
         public async Task<dynamic> GetMarkasCompeteByOrderNo(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
         {
@@ -242,6 +242,18 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-
+        public async Task<dynamic> UpdateBoxNo(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblUpdateBoxNo UpdateBoxNo, string Mode)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", Mode);
+                parameters.Add("p_Code", UpdateBoxNo.Code);
+                parameters.Add("p_ScanNo", UpdateBoxNo.ScanNo);
+                parameters.Add("p_BoxNo", UpdateBoxNo.BoxNo);
+                var result = await conn.QueryAsync<dynamic>("USP_UpdateBoxNo", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
     }
 }

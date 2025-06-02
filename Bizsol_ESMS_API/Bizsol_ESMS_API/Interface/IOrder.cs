@@ -26,7 +26,7 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<dynamic> ManualStockAudit(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int Code,int UserMaster_Code);
         public abstract Task<dynamic> ImportTATReport(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblTATReport TATReport);
         public abstract Task<dynamic> ImportTATReportForTemp(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblTATReport TATReport);
-        public abstract Task<IEnumerable<dynamic>> GetTATReportList(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,string Month,string Year,string Type);
+        public abstract Task<IEnumerable<dynamic>> GetTATReportList(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string Month, string Year, string Type);
         public abstract Task<dynamic> SaveTATDetails(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblSaveTATMaster TATMaster);
         public abstract Task<IEnumerable<dynamic>> ShowItemDetailsOnScan(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblScanSalesReturn SalesReturn);
     }
