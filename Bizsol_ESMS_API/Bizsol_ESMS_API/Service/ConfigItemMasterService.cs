@@ -24,6 +24,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_SubGroupItemHeader", model.SubGroupItemHeader);
                 parameters.Add("p_LocationItemHeader", model.LocationItemHeader);
                 parameters.Add("p_ItemCode", model.ItemCode);
+                parameters.Add("p_ItemCodeHeader", model.ItemCodeHeader);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 await conn.QueryAsync(sp_name, parameters, commandType: CommandType.StoredProcedure);
@@ -48,6 +49,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_SubGroupItemHeader", null);
                 parameters.Add("p_LocationItemHeader", null);
                 parameters.Add("p_ItemCode", null);
+                parameters.Add("p_ItemCodeHeader","");
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);

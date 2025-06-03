@@ -346,6 +346,24 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+        public async Task<IEnumerable<dynamic>> GetVehicleNoList(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_Mode", "VEHICLENO");
+                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("p_jsonData", "{}");
+                parameters.Add("p_jsonData1", "{}");
+                parameters.Add("p_AccountName", 0);
+                parameters.Add("p_ItemName", "");
+                parameters.Add("p_FromDate", "");
+                parameters.Add("p_ToDate", "");
 
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
     }
 }

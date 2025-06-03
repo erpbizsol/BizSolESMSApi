@@ -9,6 +9,7 @@
             public string? SubGroupItemHeader { get; set; }
             public string? LocationItemHeader { get; set; }
             public string? ItemCode { get; set; }
+            public string? ItemCodeHeader { get; set; }
 
     }
     

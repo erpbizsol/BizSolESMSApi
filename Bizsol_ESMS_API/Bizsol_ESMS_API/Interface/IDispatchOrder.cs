@@ -17,6 +17,7 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<dynamic> ManualItemForDispatch(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblScanDispatch Dispatch,string Mode);
         public abstract Task<dynamic> GetMarkasCompeteByOrderNo(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int Code);
         public abstract Task<IEnumerable<dynamic>> GetDispatchReport(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int Code);
+        public abstract Task<dynamic> UpdateBoxNo(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblUpdateBoxNo UpdateBoxNo, string Mode);
 
     }
 }
