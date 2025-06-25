@@ -514,6 +514,51 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
 
+        [HttpPost]
+        [Route("DeleteDispatchItemQty")]
+        public async Task<ActionResult<spOutputParameter>> DeleteDispatchItemQty(int Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.DeleteDispatchItemQty(_bizsolESMSConnectionDetails, Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("SaveManualRateAndQty")]
+        public async Task<IActionResult> SaveManualRateAndQty([FromBody] tblManualRateAndQty Dispatch)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.SaveManualRateAndQty(_bizsolESMSConnectionDetails, Dispatch);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
         #endregion Dispatch
 

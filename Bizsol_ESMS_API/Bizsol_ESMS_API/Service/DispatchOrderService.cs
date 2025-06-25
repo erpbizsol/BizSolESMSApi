@@ -255,5 +255,35 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+        public async Task<dynamic> DeleteDispatchItemQty(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "DELETE");
+                parameters.Add("p_Code", Code);
+                parameters.Add("p_ScanNo", "");
+                parameters.Add("p_BoxNo", 0);
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_UpdateBoxNo", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> SaveManualRateAndQty(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblManualRateAndQty Dispatch)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_UserMaster_Code", Dispatch.UserMaster_Code);
+                parameters.Add("p_ManualQty", Dispatch.ManualQty);
+                parameters.Add("p_DispatchMaster_Code", Dispatch.DispatchMaster_Code);
+                parameters.Add("p_BoxNo", Dispatch.BoxNo);
+                parameters.Add("p_ItemCode", Dispatch.ItemCode.Trim());
+                parameters.Add("p_OrderMaster_Code", Dispatch.OrderMaster_Code);
+                parameters.Add("p_MRP", Dispatch.MRP);
+                var result = await conn.QueryAsync<dynamic>("USP_SaveManualMRPANDQTY", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+
     }
 }
