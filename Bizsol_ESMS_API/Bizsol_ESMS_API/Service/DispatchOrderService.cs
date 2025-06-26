@@ -4,7 +4,6 @@ using Dapper;
 using MySql.Data.MySqlClient;
 using Nancy.Json;
 using System.Data;
-using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
 namespace Bizsol_ESMS_API.Service
 {
@@ -281,6 +280,96 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_OrderMaster_Code", Dispatch.OrderMaster_Code);
                 parameters.Add("p_MRP", Dispatch.MRP);
                 var result = await conn.QueryAsync<dynamic>("USP_SaveManualMRPANDQTY", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetDispatchQRDetail(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("p_Code", Code);
+
+                var result = await conn.QueryAsync<dynamic>("USP_DispatchQRDetail", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetDispatchValidationDetail(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("p_Mode","LOCATE");
+                parameters.Add("p_Code",0);
+                parameters.Add("p_BoxNo", "");
+                parameters.Add("p_VehicleNo", "");
+                parameters.Add("p_InvoiceNo", "");
+                parameters.Add("p_DriverName", "");
+                parameters.Add("p_DriverContactNo", "");
+                parameters.Add("p_LorryMeter", 0);
+                parameters.Add("p_UserMaster_Code", 0);
+
+                var result = await conn.QueryAsync<dynamic>("USP_DispatchBoxValidation", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetDispatchValidationViewData(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,int Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("p_Mode", "VIEW");
+                parameters.Add("p_Code", Code);
+                parameters.Add("p_BoxNo", "");
+                parameters.Add("p_VehicleNo","");
+                parameters.Add("p_InvoiceNo","");
+                parameters.Add("p_DriverName","");
+                parameters.Add("p_DriverContactNo","");
+                parameters.Add("p_LorryMeter",0);
+                parameters.Add("p_UserMaster_Code",0);
+
+                var result = await conn.QueryAsync<dynamic>("USP_DispatchBoxValidation", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> SaveDispatchBoxValidation(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblDispatchBoxValidation DispatchBoxValidation)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "SCAN");
+                parameters.Add("p_Code", DispatchBoxValidation.Code);
+                parameters.Add("p_BoxNo", DispatchBoxValidation.BoxNo);
+                parameters.Add("p_VehicleNo", DispatchBoxValidation.VehicleNo);
+                parameters.Add("p_InvoiceNo", DispatchBoxValidation.InvoiceNo);
+                parameters.Add("p_DriverName", DispatchBoxValidation.DriverName);
+                parameters.Add("p_DriverContactNo", DispatchBoxValidation.DriverContactNo);
+                parameters.Add("p_LorryMeter", DispatchBoxValidation.LorryMeter);
+                parameters.Add("p_UserMaster_Code", DispatchBoxValidation.UserMaster_Code);
+                var result = await conn.QueryAsync<dynamic>("USP_DispatchBoxValidation", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetDispatchValidationEditData(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("p_Mode", "EDIT");
+                parameters.Add("p_Code", Code);
+                parameters.Add("p_BoxNo", "");
+                parameters.Add("p_VehicleNo", "");
+                parameters.Add("p_InvoiceNo", "");
+                parameters.Add("p_DriverName", "");
+                parameters.Add("p_DriverContactNo", "");
+                parameters.Add("p_LorryMeter", 0);
+                parameters.Add("p_UserMaster_Code", 0);
+
+                var result = await conn.QueryAsync<dynamic>("USP_DispatchBoxValidation", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
         }

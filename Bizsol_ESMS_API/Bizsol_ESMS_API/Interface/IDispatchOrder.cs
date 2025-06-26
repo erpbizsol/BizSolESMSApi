@@ -20,5 +20,11 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<dynamic> UpdateBoxNo(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblUpdateBoxNo UpdateBoxNo, string Mode);
         public abstract Task<dynamic> DeleteDispatchItemQty(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int code);
         public abstract Task<dynamic> SaveManualRateAndQty(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblManualRateAndQty Dispatch);
+        public abstract Task<IEnumerable<dynamic>> GetDispatchQRDetail(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int Code);
+        public abstract Task<IEnumerable<dynamic>> GetDispatchValidationDetail(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
+        public abstract Task<IEnumerable<dynamic>> GetDispatchValidationViewData(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int Code);
+        public abstract Task<IEnumerable<dynamic>> GetDispatchValidationEditData(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int Code);
+        public abstract Task<dynamic> SaveDispatchBoxValidation(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblDispatchBoxValidation Dispatch);
+
     }
 }
