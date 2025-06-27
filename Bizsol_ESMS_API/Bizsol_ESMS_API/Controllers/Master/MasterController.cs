@@ -31,11 +31,12 @@ namespace Bizsol_ESMS_API.Controllers.Master
         private readonly ICheckRelatedRecord _CheckRelatedRecord;
         private readonly IEmployeeMaster _EmployeeMaster;
         private readonly IReasonMaster _ReasonMaster;
+        private readonly ITATConfiguration _TATConfiguration;
          
         public MasterController(IUOM uom, IDropDown _IdropDown, ILocationMaster _IlocationMaster, ICategory _Icategory, IGroupMaster _groupMaster
         ,ISubGroupMaster _IsubGroupMaster,IBrandMaster _brandMaster, IWarehouse iWarehouse, IItemMaster iItemMaster, IConfigItemMaster configItemMaster,
         ICity iCity, IStateMaster stateMaster,IUserGroupMaster iUserGroupMaster, IDesignationMaster iDesignationMaster,
-        ICustomerType iCustomerType,ICurrentDate currentDate, IOrder Order,
+        ICustomerType iCustomerType,ICurrentDate currentDate, IOrder Order, ITATConfiguration iTATConfiguration,
         ICheckRelatedRecord checkRelatedRecord, IEmployeeMaster _IEmployeeMaster, IReasonMaster _IReasonMaster)
         {
             _IUOM = uom;
@@ -58,6 +59,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
             _CheckRelatedRecord = checkRelatedRecord;
             _EmployeeMaster = _IEmployeeMaster;
             _ReasonMaster = _IReasonMaster;
+            _TATConfiguration = iTATConfiguration;
         }
 
         #region DropDown
@@ -2006,6 +2008,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
 
         #endregion EmployeeMaster
+
         #region ReasonMaster
         [HttpGet]
         [Route("GetReasonMasterList")]
@@ -2030,6 +2033,109 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
         #endregion ReasonMaster
+
+        #region TATConfiguration
+
+        [HttpPost]
+        [Route("SaveTATConfiguration")]
+        public async Task<IActionResult> SaveTATConfiguration([FromBody] tblTATConfiguration TATConfiguration, int UserMaster_Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _TATConfiguration.SaveTATConfiguration(_bizsolESMSConnectionDetails, TATConfiguration, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ShowTATConfiguration")]
+        public async Task<IActionResult> ShowTATConfiguration()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _TATConfiguration.ShowTATConfiguration(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ShowTATConfigurationByCode")]
+        public async Task<IActionResult> ShowTATConfigurationByCode(int Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _TATConfiguration.ShowTATConfigurationByCode(_bizsolESMSConnectionDetails, Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("DeleteTATConfiguration")]
+        public async Task<ActionResult<spOutputParameter>> DeleteTATConfiguration(int Code, int UserMaster_Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _TATConfiguration.DeleteTATConfiguration(_bizsolESMSConnectionDetails, Code, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+   
+        #endregion TATConfiguration
+
     }
 }
 
