@@ -373,6 +373,21 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+        public async Task<IEnumerable<dynamic>> GetGatePassData(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,string VehicleNo,string Date)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("p_Mode", "SHOWDATA");
+                parameters.Add("p_VehicleNo", VehicleNo.Trim());
+                parameters.Add("p_Date", Date);
+                parameters.Add("p_Codes", "");
+
+                var result = await conn.QueryAsync<dynamic>("USP_PrintGatePass", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
 
     }
 }
