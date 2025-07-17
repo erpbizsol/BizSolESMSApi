@@ -299,6 +299,28 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpPost]
+        [Route("ManualBoxUnloading")]
+        public async Task<IActionResult> ManualBoxUnloading(int BoxNo,string PicklistNo,string IsManual)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _MRNMaster.ManualBoxUnloading(_bizsolESMSConnectionDetails, BoxNo,PicklistNo,IsManual);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
         #endregion BoxUnloading
 

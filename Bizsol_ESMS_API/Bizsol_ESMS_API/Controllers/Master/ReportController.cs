@@ -94,14 +94,14 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
         [HttpGet]
         [Route("GetStockAuditMaster")]
-        public async Task<IActionResult> GetStockAuditMaster(string FromDate,string ToDate)
+        public async Task<IActionResult> GetStockAuditMaster(string FromDate,string ToDate,string Mode)
         {
             try
             {
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _report.GetStockAuditMaster(_bizsolESMSConnectionDetails,FromDate,ToDate);
+                    var result = await _report.GetStockAuditMaster(_bizsolESMSConnectionDetails,FromDate,ToDate, Mode);
                     return Ok(result);
                 }
                 else

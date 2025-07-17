@@ -46,6 +46,8 @@ builder.Services.AddTransient<IEmployeeMaster,EmployeeMasterServices>();
 builder.Services.AddTransient<IReport,ReportService>();
 builder.Services.AddTransient<IReasonMaster, ReasonMasterService>();
 builder.Services.AddTransient<ITATConfiguration, TATConfigurationService>();
+builder.Services.AddTransient<IHolidayMaster, HolidayMasterService>();
+builder.Services.AddTransient<IStockAuditConfig, StockAuditConfigService>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -206,6 +206,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_MRNDate", BoxUnloading.MRNDate.Trim());
                 parameters.Add("p_IsManual", BoxUnloading.IsManual.Trim());
                 parameters.Add("p_VehicleNo", BoxUnloading.VehicleNo.Trim());
+                parameters.Add("p_UserMaster_Code", BoxUnloading.UserMaster_Code);
                 var result = await conn.QueryAsync<dynamic>("USP_UnloadingBox", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -293,6 +294,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_MRNDate","");
                 parameters.Add("p_IsManual", "");
                 parameters.Add("p_VehicleNo", ""); 
+                parameters.Add("p_UserMaster_Code",0); 
                 var result = await conn.QueryAsync<dynamic>("USP_UnloadingBox", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -362,6 +364,19 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_ToDate", "");
 
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> ManualBoxUnloading(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,int BoxNo, string PicklistNo, string IsManual)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_BoxNo", BoxNo);
+                parameters.Add("p_PicklistNo", PicklistNo.Trim());
+                parameters.Add("p_IsManual", IsManual);
+
+                var result = await conn.QueryAsync<dynamic>("USP_ManualUnloadingBox", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
         }

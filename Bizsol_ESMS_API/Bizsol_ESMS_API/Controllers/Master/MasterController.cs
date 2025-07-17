@@ -32,12 +32,14 @@ namespace Bizsol_ESMS_API.Controllers.Master
         private readonly IEmployeeMaster _EmployeeMaster;
         private readonly IReasonMaster _ReasonMaster;
         private readonly ITATConfiguration _TATConfiguration;
+        private readonly IHolidayMaster _HolidayMaster;
+        private readonly IStockAuditConfig _StockAuditConfig;
          
         public MasterController(IUOM uom, IDropDown _IdropDown, ILocationMaster _IlocationMaster, ICategory _Icategory, IGroupMaster _groupMaster
         ,ISubGroupMaster _IsubGroupMaster,IBrandMaster _brandMaster, IWarehouse iWarehouse, IItemMaster iItemMaster, IConfigItemMaster configItemMaster,
         ICity iCity, IStateMaster stateMaster,IUserGroupMaster iUserGroupMaster, IDesignationMaster iDesignationMaster,
         ICustomerType iCustomerType,ICurrentDate currentDate, IOrder Order, ITATConfiguration iTATConfiguration,
-        ICheckRelatedRecord checkRelatedRecord, IEmployeeMaster _IEmployeeMaster, IReasonMaster _IReasonMaster)
+        ICheckRelatedRecord checkRelatedRecord, IEmployeeMaster _IEmployeeMaster, IReasonMaster _IReasonMaster,IHolidayMaster _IHolidayMaster, IStockAuditConfig _IStockAuditConfig)
         {
             _IUOM = uom;
             _IDropDown = _IdropDown;
@@ -60,6 +62,8 @@ namespace Bizsol_ESMS_API.Controllers.Master
             _EmployeeMaster = _IEmployeeMaster;
             _ReasonMaster = _IReasonMaster;
             _TATConfiguration = iTATConfiguration;
+            _HolidayMaster = _IHolidayMaster;
+            _StockAuditConfig = _IStockAuditConfig;
         }
 
         #region DropDown
@@ -2038,7 +2042,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         [HttpPost]
         [Route("SaveTATConfiguration")]
-        public async Task<IActionResult> SaveTATConfiguration([FromBody] tblTATConfiguration TATConfiguration, int UserMaster_Code)
+        public async Task<IActionResult> SaveTATConfiguration([FromBody] tblTATConfiguration TATConfiguration)
         {
 
             try
@@ -2046,7 +2050,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _TATConfiguration.SaveTATConfiguration(_bizsolESMSConnectionDetails, TATConfiguration, UserMaster_Code);
+                    var result = await _TATConfiguration.SaveTATConfiguration(_bizsolESMSConnectionDetails, TATConfiguration);
                     return Ok(result);
                 }
                 else
@@ -2133,9 +2137,205 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
 
-   
+
         #endregion TATConfiguration
 
+        #region HolidayMaster
+        [HttpPost]
+        [Route("SaveHolidayMaster")]
+        public async Task<IActionResult> SaveHolidayMaster([FromBody] tblHolidayMaster HolidayMaster)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _HolidayMaster.SaveHolidayMaster(_bizsolESMSConnectionDetails, HolidayMaster);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetHolidayMasterList")]
+        public async Task<IActionResult> GetHolidayMaster()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _HolidayMaster.GetHolidayMasterList(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetHolidayMasterByCode")]
+        public async Task<IActionResult> GetHolidayMasterByCode(int Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _HolidayMaster.GetHolidayMasterByCode(_bizsolESMSConnectionDetails, Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("DeleteHolidayMaster")]
+        public async Task<ActionResult<spOutputParameter>> DeleteHolidayMaster(int Code, int UserMaster_Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _HolidayMaster.DeleteHolidayMaster(_bizsolESMSConnectionDetails, Code, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        #endregion HolidayMaster
+        #region StockAuditConfig
+        [HttpPost]
+        [Route("SaveStockAuditConfig")]
+        public async Task<IActionResult> SaveStockAuditConfig([FromBody] tblStockAuditConfig StockAuditConfig)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _StockAuditConfig.SaveStockAuditConfig(_bizsolESMSConnectionDetails, StockAuditConfig);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetStockAuditConfigList")]
+        public async Task<IActionResult> GetStockAuditConfigList()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _StockAuditConfig.GetStockAuditConfigList(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("GetStockAuditConfigByCode")]
+        public async Task<IActionResult> GetStockAuditConfigByCode(int Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _StockAuditConfig.GetStockAuditConfigByCode(_bizsolESMSConnectionDetails, Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("DeleteStockAuditConfig")]
+        public async Task<ActionResult<spOutputParameter>> DeleteStockAuditConfig(int Code, int UserMaster_Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _StockAuditConfig.DeleteStockAuditConfig(_bizsolESMSConnectionDetails, Code, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        #endregion StockAuditConfig
     }
 }
 

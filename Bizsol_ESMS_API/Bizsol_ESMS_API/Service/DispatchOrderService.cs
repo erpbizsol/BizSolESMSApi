@@ -388,6 +388,38 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+        public async Task<IEnumerable<dynamic>> GetVehicleNoForDispatch(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("p_Mode", "VEHICLENO");
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_BoxNo", "");
+                parameters.Add("p_VehicleNo", "");
+                parameters.Add("p_InvoiceNo", "");
+                parameters.Add("p_DriverName", "");
+                parameters.Add("p_DriverContactNo", "");
+                parameters.Add("p_LorryMeter", 0);
+                parameters.Add("p_UserMaster_Code", 0);
+
+                var result = await conn.QueryAsync<dynamic>("USP_DispatchBoxValidation", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetOrderPackedDetail(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,string Date)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("p_Date", Date);
+
+                var result = await conn.QueryAsync<dynamic>("USP_GetOrderPackedDetail", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
 
     }
 }

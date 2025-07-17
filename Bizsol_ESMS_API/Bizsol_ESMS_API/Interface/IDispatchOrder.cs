@@ -25,6 +25,9 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<IEnumerable<dynamic>> GetDispatchValidationViewData(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int Code);
         public abstract Task<IEnumerable<dynamic>> GetDispatchValidationEditData(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int Code);
         public abstract Task<IEnumerable<dynamic>> GetGatePassData(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string VehicleNo, string Date);
+        public abstract Task<IEnumerable<dynamic>> GetVehicleNoForDispatch(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
         public abstract Task<dynamic> SaveDispatchBoxValidation(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblDispatchBoxValidation Dispatch);
+        public abstract Task<IEnumerable<dynamic>> GetOrderPackedDetail(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,string Date);
+
     }
 }

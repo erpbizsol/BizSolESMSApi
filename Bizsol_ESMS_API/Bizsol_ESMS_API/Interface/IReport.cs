@@ -8,6 +8,6 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<IEnumerable<dynamic>> GetLocationReport(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string Templete);
         public abstract Task<IEnumerable<dynamic>> GetReportType(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string ModuleDesp);
         public abstract Task<IEnumerable<dynamic>> GetStockLedgerList(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblStockLedger StockLedger);
-        public abstract Task<IEnumerable<dynamic>> GetStockAuditMaster(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string FromDate,string ToDate);
+        public abstract Task<IEnumerable<dynamic>> GetStockAuditMaster(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string FromDate,string ToDate,string Mode);
     }
 }

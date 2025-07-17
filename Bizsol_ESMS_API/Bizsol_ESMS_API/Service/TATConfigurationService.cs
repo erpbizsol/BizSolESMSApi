@@ -51,17 +51,15 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-        public async Task<dynamic> SaveTATConfiguration(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblTATConfiguration TATConfiguration, int UserMaster_Code)
+        public async Task<dynamic> SaveTATConfiguration(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblTATConfiguration TATConfiguration)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
-
-
                 var json = new JavaScriptSerializer().Serialize(TATConfiguration);
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("p_Code", TATConfiguration.Code);
                 parameters.Add("p_Mode", "SAVE");
-                parameters.Add("p_UserMaster_Code", UserMaster_Code);
+                parameters.Add("p_UserMaster_Code", TATConfiguration.UserMaster_Code);
                 parameters.Add("p_jsonData", json);
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result;
