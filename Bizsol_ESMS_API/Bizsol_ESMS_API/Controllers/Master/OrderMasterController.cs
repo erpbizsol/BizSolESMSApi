@@ -715,14 +715,36 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
         [HttpGet]
         [Route("GetOrderPackedDetail")]
-        public async Task<IActionResult> GetOrderPackedDetail(string Date)
+        public async Task<IActionResult> GetOrderPackedDetail(string Date,string OrderStatus)
         {
             try
             {
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _DispatchOrder.GetOrderPackedDetail(_bizsolESMSConnectionDetails,Date);
+                    var result = await _DispatchOrder.GetOrderPackedDetail(_bizsolESMSConnectionDetails,Date, OrderStatus);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("GetTotalLineOfPart")]
+        public async Task<IActionResult> GetTotalLineOfPart(int OrderMaster_Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.GetTotalLineOfPart(_bizsolESMSConnectionDetails, OrderMaster_Code);
                     return Ok(result);
                 }
                 else

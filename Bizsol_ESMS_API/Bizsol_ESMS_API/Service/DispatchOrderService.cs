@@ -408,18 +408,30 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-        public async Task<IEnumerable<dynamic>> GetOrderPackedDetail(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,string Date)
+        public async Task<IEnumerable<dynamic>> GetOrderPackedDetail(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,string Date, string OrderStatus)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
                 DynamicParameters parameters = new DynamicParameters();
 
                 parameters.Add("p_Date", Date);
+                parameters.Add("p_OrderStatus", OrderStatus);
 
                 var result = await conn.QueryAsync<dynamic>("USP_GetOrderPackedDetail", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
         }
+        public async Task<dynamic> GetTotalLineOfPart(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int OrderMaster_Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
 
+                parameters.Add("p_OrderMaster_Code", OrderMaster_Code);
+
+                var result = await conn.QueryAsync<dynamic>("USP_GetLineOfPartByOrderNo", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
     }
 }

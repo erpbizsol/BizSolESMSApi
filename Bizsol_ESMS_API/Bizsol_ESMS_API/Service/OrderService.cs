@@ -376,6 +376,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Code", 0);
                 parameters.Add("p_POD", "");
                 parameters.Add("p_VehicleNo", "");
+                parameters.Add("p_DispatchedDate", "");
                 parameters.Add("p_Redispatch", "");
                 parameters.Add("p_Remark", "");
                 parameters.Add("p_Month", Month.Trim());
@@ -396,6 +397,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Code", TATMaster.Code);
                 parameters.Add("p_POD", TATMaster.POD);
                 parameters.Add("p_VehicleNo", TATMaster.VehicleNo.Trim());
+                parameters.Add("p_DispatchedDate", TATMaster.DispatchedDate.Trim());
                 parameters.Add("p_Redispatch", TATMaster.Redispatch);
                 parameters.Add("p_Remark", TATMaster.Remark.Trim());
                 parameters.Add("p_Month", "");

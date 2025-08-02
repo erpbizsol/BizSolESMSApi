@@ -32,14 +32,17 @@ namespace Bizsol_ESMS_API.Controllers.Master
         private readonly IEmployeeMaster _EmployeeMaster;
         private readonly IReasonMaster _ReasonMaster;
         private readonly ITATConfiguration _TATConfiguration;
+        private readonly IMailConfiguration _MailConfiguration;
         private readonly IHolidayMaster _HolidayMaster;
         private readonly IStockAuditConfig _StockAuditConfig;
+        private readonly IHelpDesk _IHelpdesk;
          
         public MasterController(IUOM uom, IDropDown _IdropDown, ILocationMaster _IlocationMaster, ICategory _Icategory, IGroupMaster _groupMaster
         ,ISubGroupMaster _IsubGroupMaster,IBrandMaster _brandMaster, IWarehouse iWarehouse, IItemMaster iItemMaster, IConfigItemMaster configItemMaster,
         ICity iCity, IStateMaster stateMaster,IUserGroupMaster iUserGroupMaster, IDesignationMaster iDesignationMaster,
         ICustomerType iCustomerType,ICurrentDate currentDate, IOrder Order, ITATConfiguration iTATConfiguration,
-        ICheckRelatedRecord checkRelatedRecord, IEmployeeMaster _IEmployeeMaster, IReasonMaster _IReasonMaster,IHolidayMaster _IHolidayMaster, IStockAuditConfig _IStockAuditConfig)
+        ICheckRelatedRecord checkRelatedRecord, IEmployeeMaster _IEmployeeMaster, IReasonMaster _IReasonMaster,IHolidayMaster _IHolidayMaster, 
+        IStockAuditConfig _IStockAuditConfig,IMailConfiguration _mailConfiguration, IHelpDesk _HelpDesk)
         {
             _IUOM = uom;
             _IDropDown = _IdropDown;
@@ -62,8 +65,10 @@ namespace Bizsol_ESMS_API.Controllers.Master
             _EmployeeMaster = _IEmployeeMaster;
             _ReasonMaster = _IReasonMaster;
             _TATConfiguration = iTATConfiguration;
+            _MailConfiguration = _mailConfiguration;
             _HolidayMaster = _IHolidayMaster;
             _StockAuditConfig = _IStockAuditConfig;
+            _IHelpdesk = _HelpDesk;
         }
 
         #region DropDown
@@ -2238,6 +2243,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
         #endregion HolidayMaster
+
         #region StockAuditConfig
         [HttpPost]
         [Route("SaveStockAuditConfig")]
@@ -2336,6 +2342,231 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
         #endregion StockAuditConfig
+
+        #region MailConfiguration
+
+        [HttpPost]
+        [Route("SaveMailConfiguration")]
+        public async Task<IActionResult> SaveMailConfiguration([FromBody] tblMailConfiguration MailConfiguration)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _MailConfiguration.SaveMailConfiguration(_bizsolESMSConnectionDetails, MailConfiguration);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ShowMailConfiguration")]
+        public async Task<IActionResult> ShowMailConfiguration()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _MailConfiguration.ShowMailConfiguration(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ShowMailConfigurationByCode")]
+        public async Task<IActionResult> ShowMailConfigurationByCode(int Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _MailConfiguration.ShowMailConfigurationByCode(_bizsolESMSConnectionDetails, Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("DeleteMailConfiguration")]
+        public async Task<ActionResult<spOutputParameter>> DeleteMailConfiguration(int Code, int UserMaster_Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _MailConfiguration.DeleteMailConfiguration(_bizsolESMSConnectionDetails, Code, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        #endregion MailConfiguration
+
+        #region Helpdesk
+
+        [HttpPost]
+        [Route("SaveHelpdesk")]
+        public async Task<IActionResult> SaveHelpdesk([FromBody] tblHelpdesk Helpdesk)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IHelpdesk.SaveHelpdesk(_bizsolESMSConnectionDetails, Helpdesk);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ShowHelpdesk")]
+        public async Task<IActionResult> ShowHelpdesk()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IHelpdesk.ShowHelpdesk(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ShowHelpdeskByCode")]
+        public async Task<IActionResult> ShowHelpdeskByCode(int Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IHelpdesk.ShowHelpdeskByCode(_bizsolESMSConnectionDetails, Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("DeleteHelpdesk")]
+        public async Task<ActionResult<spOutputParameter>> DeleteHelpdesk(int Code, int UserMaster_Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IHelpdesk.DeleteHelpdesk(_bizsolESMSConnectionDetails, Code, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("CompleteTicket")]
+        public async Task<ActionResult<spOutputParameter>> CompleteTicket(int Code, int UserMaster_Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IHelpdesk.CompleteTicket(_bizsolESMSConnectionDetails, Code, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        #endregion Helpdesk
     }
 }
 
