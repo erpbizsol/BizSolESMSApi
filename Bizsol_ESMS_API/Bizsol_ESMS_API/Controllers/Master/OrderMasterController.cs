@@ -736,6 +736,50 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
         [HttpGet]
+        [Route("GetPackedOrderNoList")]
+        public async Task<IActionResult> GetPackedOrderNoList()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.GetPackedOrderNoList(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("GetOrderDetailsDataByCodes")]
+        public async Task<IActionResult> GetOrderDetailsDataByCodes(string Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.GetOrderDetailsDataByCodes(_bizsolESMSConnectionDetails,Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
         [Route("GetTotalLineOfPart")]
         public async Task<IActionResult> GetTotalLineOfPart(int OrderMaster_Code)
         {
@@ -745,6 +789,28 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
                     var result = await _DispatchOrder.GetTotalLineOfPart(_bizsolESMSConnectionDetails, OrderMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("SaveManualDispatchBoxValidation")]
+        public async Task<IActionResult> SaveManualDispatchBoxValidation([FromBody] tblDispatchBoxValidation Dispatch)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.SaveManualDispatchBoxValidation(_bizsolESMSConnectionDetails, Dispatch);
                     return Ok(result);
                 }
                 else
