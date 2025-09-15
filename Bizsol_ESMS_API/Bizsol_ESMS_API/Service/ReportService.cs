@@ -73,5 +73,66 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+        public async Task<VM_UPIID_Details> GetUPIIDReport(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails,string UPI_ID)
+        {
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                var objMaster = new VM_UPIID_Details();
+
+                var parameters = new Dictionary<string, object>
+                {
+                    { "p_UPI_ID", UPI_ID }
+                };
+
+                var TY_STRUCTUREArry = CommonFunctions.DataTableArrayExecuteSqlQueryWithParameter(
+                    _bizsolESMSConnectionDetails.DefultMysqlTemp,
+                    "USP_GetUPIIDDetails",
+                    parameters,
+                    CommandType.StoredProcedure);
+
+                if (TY_STRUCTUREArry.Count > 0)
+                {
+                    objMaster.DispatchMaster = CommonFunctions.DatatableToDynamicList(TY_STRUCTUREArry[0]);
+                    objMaster.SalesReturn = CommonFunctions.DatatableToDynamicList(TY_STRUCTUREArry[1]);
+                    objMaster.MRNMaster = CommonFunctions.DatatableToDynamicList(TY_STRUCTUREArry[2]);
+                }
+                return objMaster;
+            }
+        }
+        public async Task<IEnumerable<dynamic>> SaveGoldenCruiserQRDetails(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, tblGoldenCruiserQRDetails GoldenCruiserQRDetails)
+        {
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "INSERT");
+                parameters.Add("p_ScanNo", GoldenCruiserQRDetails.ScanNo);
+                var result = await conn.QueryAsync<dynamic>("USP_GoldenCruiserQRDetails", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetGoldenCruiserQRDetails(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails)
+        {
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode","LOCATE");
+                parameters.Add("p_ScanNo", "");
+                var result = await conn.QueryAsync<dynamic>("USP_GoldenCruiserQRDetails", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<IEnumerable<dynamic>> ResetGoldenCruiserQRDetails(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails)
+        {
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "RESET");
+                parameters.Add("p_ScanNo", "");
+                var result = await conn.QueryAsync<dynamic>("USP_GoldenCruiserQRDetails", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+
     }
 }

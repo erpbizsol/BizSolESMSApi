@@ -47,6 +47,29 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         }
         [HttpGet]
+        [Route("GetUPIIDReport")]
+        public async Task<IActionResult> GetUPIIDReport(string UPI_ID)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _report.GetUPIIDReport(_bizsolESMSConnectionDetails, UPI_ID);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+
+        }
+        [HttpGet]
         [Route("GetReportType")]
         public async Task<IActionResult> GetReportType(string ModuleDesp)
         {
@@ -102,6 +125,75 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
                     var result = await _report.GetStockAuditMaster(_bizsolESMSConnectionDetails,FromDate,ToDate, Mode);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+
+        }
+        [HttpPost]
+        [Route("SaveGoldenCruiserQRDetails")]
+        public async Task<IActionResult> SaveGoldenCruiserQRDetails([FromBody] tblGoldenCruiserQRDetails GoldenCruiserQRDetails)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _report.SaveGoldenCruiserQRDetails(_bizsolESMSConnectionDetails, GoldenCruiserQRDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+
+        }
+        [HttpGet]
+        [Route("GetGoldenCruiserQRDetails")]
+        public async Task<IActionResult> GetGoldenCruiserQRDetails()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _report.GetGoldenCruiserQRDetails(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+
+        }
+        [HttpGet]
+        [Route("ResetGoldenCruiserQRDetails")]
+        public async Task<IActionResult> ResetGoldenCruiserQRDetails()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _report.ResetGoldenCruiserQRDetails(_bizsolESMSConnectionDetails);
                     return Ok(result);
                 }
                 else
