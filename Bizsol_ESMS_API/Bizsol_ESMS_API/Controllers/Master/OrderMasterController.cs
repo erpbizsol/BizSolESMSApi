@@ -2,6 +2,7 @@
 using Bizsol_ESMS_API.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Graph.Models.IdentityGovernance;
+using static Bizsol_ESMS_API.Service.DispatchOrderService;
 
 namespace Bizsol_ESMS_API.Controllers.Master
 {
@@ -174,6 +175,138 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
                     var result = await _Order.ImportOrderForTemp(_bizsolESMSConnectionDetails, ImportOrder);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("SaveManualSalesReturn")]
+        public async Task<IActionResult> SaveManualSalesReturn([FromBody] tblManualSalesReturn ManualSalesReturn)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.SaveManualSalesReturn(_bizsolESMSConnectionDetails, ManualSalesReturn);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("GetSalesData")]
+        public async Task<IActionResult> GetSalesData(int p_Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.GetSalesData(_bizsolESMSConnectionDetails, p_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("GetSalesDispatchData")]
+        public async Task<IActionResult> GetSalesDispatchData(int Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.GetSalesDispatchData(_bizsolESMSConnectionDetails, Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("UpdateSalesUPIID")]
+        public async Task<IActionResult> UpdateSalesUPIID(string UPIID)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.UpdateSalesUPIID(_bizsolESMSConnectionDetails, UPIID);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("UpdateSalesUPIIDAll")]
+        public async Task<IActionResult> UpdateSalesUPIIDAll(int Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.UpdateSalesUPIIDAll(_bizsolESMSConnectionDetails, Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("StartDispatchOrderNo")]
+        public async Task<IActionResult> StartDispatchOrderNo(int ScanBy,int OrderMasterCode, int ClientMasterCode)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.StartDispatchOrderNo(_bizsolESMSConnectionDetails, ScanBy, OrderMasterCode, ClientMasterCode);
                     return Ok(result);
                 }
                 else
@@ -715,14 +848,14 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
         [HttpGet]
         [Route("GetOrderPackedDetail")]
-        public async Task<IActionResult> GetOrderPackedDetail(string Date,string OrderStatus)
+        public async Task<IActionResult> GetOrderPackedDetail(string Date,string ToDate,string OrderStatus)
         {
             try
             {
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _DispatchOrder.GetOrderPackedDetail(_bizsolESMSConnectionDetails,Date, OrderStatus);
+                    var result = await _DispatchOrder.GetOrderPackedDetail(_bizsolESMSConnectionDetails,Date, ToDate, OrderStatus);
                     return Ok(result);
                 }
                 else
@@ -823,7 +956,31 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpPost]
+        [Route("UpdateDispatchMRPByItemAsync")]
+        public async Task<IActionResult> UpdateDispatchMRPByItemAsync([FromBody] UpdateDispatchMrpRequest request, int UserMaster_Code)
+        {
 
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.UpdateDispatchMRPByItemAsync(_bizsolESMSConnectionDetails, request, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
         #endregion Dispatch
 
         #region ItemOpeningBalance
@@ -1106,6 +1263,8 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+
+
         #endregion SalesReturn
 
         #region StockAudit
@@ -1296,5 +1455,6 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
         #endregion ItemLocator
+
     }
 }

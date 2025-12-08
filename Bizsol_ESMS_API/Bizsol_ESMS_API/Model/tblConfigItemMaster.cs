@@ -10,6 +10,7 @@
             public string? LocationItemHeader { get; set; }
             public string? ItemCode { get; set; }
             public string? ItemCodeHeader { get; set; }
+            public string? MRPNo { get; set; }
 
     }
     

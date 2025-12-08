@@ -5,6 +5,8 @@ using Microsoft.Graph.Models.IdentityGovernance;
 using MySql.Data.MySqlClient;
 using Nancy.Json;
 using System.Data;
+using System.Reflection.Emit;
+using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
 namespace Bizsol_ESMS_API.Service
 {
@@ -416,6 +418,79 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_ScanNo", SalesReturn.ScanNo);
 
                 var result = await conn.QueryAsync<dynamic>("USP_GetItemDetailsOnScan", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> SaveManualSalesReturn(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblManualSalesReturn model)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "SCAN");
+                parameters.Add("p_SalesreturnMaster_Code", model.Code);
+                parameters.Add("p_AccountMasterCode", model.ClientMasterCode);
+                parameters.Add("p_ScanNo", model.ScanNo);
+                parameters.Add("p_UserMaster_Code", model.UserMaster_Code);
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_SaveScanSalesreturn", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetSalesData(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,int p_Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("p_Code", p_Code);
+                var result = await conn.QueryAsync<dynamic>("USP_GetSalesReturnDatabyOrderNo", parameters, commandType: CommandType.StoredProcedure);
+
+                return result.ToList();
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetSalesDispatchData(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("p_Code", Code);
+                var result = await conn.QueryAsync<dynamic>("USP_GetSalesDispatchData", parameters, commandType: CommandType.StoredProcedure);
+
+                return result.ToList();
+            }
+        }
+        public async Task<dynamic> UpdateSalesUPIID(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, string UPIID)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_UPIID", UPIID);
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_UpdateSalesUPIID", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> UpdateSalesUPIIDAll(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Code", Code);
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_UpdateSalesUPIIDAll", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> StartDispatchOrderNo(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int ScanBy, int OrderMasterCode, int ClientMasterCode)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                //parameters.Add("p_UPIID",UPIID);
+                parameters.Add("p_AccountMaster_Code", ClientMasterCode);
+                parameters.Add("p_OrderMaster_Code", OrderMasterCode);
+                parameters.Add("p_ReasonMaster_Code", 1);
+                parameters.Add("p_EntryType", "IMPORT");
+                parameters.Add("p_CreatedBy", ScanBy);
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_InsertSalesReturnFromDispatch", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
         }

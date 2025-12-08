@@ -26,6 +26,21 @@ namespace Bizsol_ESMS_API.Service
                 return result.ToList();
             }
         }
+        public async Task<IEnumerable<dynamic>> ShowAccountMasterV(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("p_Mode", "LOCATE1");
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_jsonData", "{}");
+                parameters.Add("p_jsonData1", "{}");
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+
+                return result.ToList();
+            }
+        }
         public async Task<VM_AccountMasterForShow> ShowAccountMasterByCode(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
         {
             VM_AccountMasterForShow vM_AccountMaster =new VM_AccountMasterForShow();

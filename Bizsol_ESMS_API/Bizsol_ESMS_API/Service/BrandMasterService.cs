@@ -13,12 +13,14 @@ namespace Bizsol_ESMS_API.Service
         {
             using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
-
-
+                   
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "INSERT");
                 parameters.Add("p_Code", model.Code);
                 parameters.Add("p_BrandName", model.BrandName);
+                parameters.Add("p_PicklistNo", model.PicklistNo);
+                parameters.Add("p_BarcodeType", model.BarcodeType);
+                parameters.Add("p_ImportFormat", model.ImportFormat);
                 parameters.Add("p_UserMaster_Code", UserMaster_Code);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
@@ -41,6 +43,9 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("Operation", "DELETE");
                 parameters.Add("p_Code", code);
                 parameters.Add("p_BrandName", null);
+                parameters.Add("p_PicklistNo",null);
+                parameters.Add("p_BarcodeType", null);
+                parameters.Add("p_ImportFormat", 0);
                 parameters.Add("p_UserMaster_Code", UserMaster_Code);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
@@ -63,6 +68,9 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("Operation", "SHOW");
                 parameters.Add("p_Code", null);
                 parameters.Add("p_BrandName", null);
+                parameters.Add("p_PicklistNo", null);
+                parameters.Add("p_BarcodeType", null);
+                parameters.Add("p_ImportFormat",0);
                 parameters.Add("p_UserMaster_Code", 0);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
@@ -82,6 +90,9 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("Operation", "SHOW_BY_CODE");
                 parameters.Add("p_Code", code);
                 parameters.Add("p_BrandName", null);
+                parameters.Add("p_PicklistNo", null);
+                parameters.Add("p_BarcodeType",null);
+                parameters.Add("p_ImportFormat",0);
                 parameters.Add("p_UserMaster_Code", 0);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);

@@ -22,6 +22,7 @@ namespace Bizsol_ESMS_API.Model
         public int QtyInBox { get; set; } = 0;
         public string BatchApplicable { get; set; }
         public string MaintainExpiry { get; set; } 
-        public string IsActive { get; set; } 
+        public string IsActive { get; set; }
+        public double MRPNo { get; set; } = 0;
     }
 }

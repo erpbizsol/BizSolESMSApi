@@ -21,6 +21,12 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<IEnumerable<dynamic>> GetUserNameList(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
         public abstract Task<IEnumerable<dynamic>> GetDesignationList(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
         public abstract Task<IEnumerable<dynamic>> GetReportType(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
+        public abstract Task<IEnumerable<dynamic>> GetImportFormat(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
+        public abstract Task<IEnumerable<dynamic>> GetBrandType(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,string BrandName);
+        public abstract Task<IEnumerable<dynamic>> GetBrandList(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
+        public abstract Task<IEnumerable<dynamic>> GetClientWiseOrderNo(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int ClientMaster_Code);
+        public abstract Task<IEnumerable<dynamic>> VendorWiseBrandList(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int VendorMaster_Code);
+        public abstract Task<IEnumerable<dynamic>> GetVendorWiseOrderNo(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int VendorMaster_Code);
 
     }
 }

@@ -84,6 +84,17 @@ namespace Bizsol_ESMS_API.Service
                 return result.ToList();
             }
         }
+        public async Task<IEnumerable<dynamic>> GetItemDetails(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,int BrandMaster_Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_BrandMaster_Code", BrandMaster_Code);
+                var result = await conn.QueryAsync<dynamic>("USP_BrandWiseItem", parameters, commandType: CommandType.StoredProcedure);
+
+                return result.ToList();
+            }
+        }
     }
 }
 

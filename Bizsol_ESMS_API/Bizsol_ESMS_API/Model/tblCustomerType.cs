@@ -10,6 +10,7 @@
         public string IsClient { get; set; }
         public string IsVendor { get; set; }
         public string ClientType { get; set; }
+        public string? BrandMaster_Code { get; set; }
     }
 }
 

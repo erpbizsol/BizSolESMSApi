@@ -115,6 +115,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_ItemName", "");
                 parameters.Add("p_FromDate", "");
                 parameters.Add("p_ToDate", "");
+                parameters.Add("p_BrandName", "");
 
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result;
@@ -134,7 +135,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_ItemName", "");
                 parameters.Add("p_FromDate", "");
                 parameters.Add("p_ToDate", "");
-
+                parameters.Add("p_BrandName", "");
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -154,7 +155,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_ItemName", ItemName.Trim());
                 parameters.Add("p_FromDate", "");
                 parameters.Add("p_ToDate", "");
-
+                parameters.Add("p_BrandName", "");
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
 
                 return result;
@@ -375,8 +376,17 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_BoxNo", BoxNo);
                 parameters.Add("p_PicklistNo", PicklistNo.Trim());
                 parameters.Add("p_IsManual", IsManual);
-
                 var result = await conn.QueryAsync<dynamic>("USP_ManualUnloadingBox", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> GetGenerateQR(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Code", Code);
+                var result = await conn.QueryAsync<dynamic>("USP_GenerateQR", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
         }

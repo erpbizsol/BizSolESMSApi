@@ -1,6 +1,7 @@
 ﻿using Bizsol_ESMS_API.Interface;
 using Bizsol_ESMS_API.Model;
 using Dapper;
+using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using System.Data;
 
@@ -217,5 +218,85 @@ namespace Bizsol_ESMS_API.Service
 
             }
         }
+        public async Task<IEnumerable<dynamic>> GetImportFormat(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails)
+        {
+
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("Operation", "Import");
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+        
+        public async Task<IEnumerable<dynamic>> GetBrandType(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, string BrandName)
+        {
+
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_BrandName", BrandName);
+                var result = await conn.QueryAsync<dynamic>("USP_GetBrandTypeByName", parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetBrandList(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails)
+        {
+
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("Operation", "Brand");
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+        public async Task<IEnumerable<dynamic>>GetClientWiseOrderNo(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, int ClientMaster_Code)
+        {
+
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_ClientMaster_Code", ClientMaster_Code);
+                var result = await conn.QueryAsync<dynamic>("USP_ClientWiseOrderNo", parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+        public async Task<IEnumerable<dynamic>> VendorWiseBrandList(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, int VendorMaster_Code)
+        {
+
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_VendorMaster_Code", VendorMaster_Code);
+                var result = await conn.QueryAsync<dynamic>("USP_VendorWiseBrand", parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetVendorWiseOrderNo(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, int VendorMaster_Code)
+        {
+
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Code", VendorMaster_Code);
+                var result = await conn.QueryAsync<dynamic>("USP_GetVendorWiseOrderNo", parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+
+            }
+        }
+
     }
 }

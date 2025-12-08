@@ -29,5 +29,12 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<IEnumerable<dynamic>> GetTATReportList(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string Month, string Year, string Type);
         public abstract Task<dynamic> SaveTATDetails(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblSaveTATMaster TATMaster);
         public abstract Task<IEnumerable<dynamic>> ShowItemDetailsOnScan(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblScanSalesReturn SalesReturn);
+        public abstract Task<dynamic> SaveManualSalesReturn(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblManualSalesReturn ManualSalesReturn);
+        public abstract Task<IEnumerable<dynamic>> GetSalesData(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int p_Code);
+        public abstract Task<IEnumerable<dynamic>> GetSalesDispatchData(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int Code);
+        public abstract Task<dynamic> UpdateSalesUPIID(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string UPIID);
+        public abstract Task<dynamic> UpdateSalesUPIIDAll(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int Code);
+        public abstract Task<dynamic> StartDispatchOrderNo(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int ScanBy, int OrderMasterCode, int ClientMasterCode);
+
     }
 }
