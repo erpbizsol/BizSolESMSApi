@@ -36,13 +36,14 @@ namespace Bizsol_ESMS_API.Controllers.Master
         private readonly IHolidayMaster _HolidayMaster;
         private readonly IStockAuditConfig _StockAuditConfig;
         private readonly IHelpDesk _IHelpdesk;
+        private readonly ILogin _ILogin;
          
         public MasterController(IUOM uom, IDropDown _IdropDown, ILocationMaster _IlocationMaster, ICategory _Icategory, IGroupMaster _groupMaster
         ,ISubGroupMaster _IsubGroupMaster,IBrandMaster _brandMaster, IWarehouse iWarehouse, IItemMaster iItemMaster, IConfigItemMaster configItemMaster,
         ICity iCity, IStateMaster stateMaster,IUserGroupMaster iUserGroupMaster, IDesignationMaster iDesignationMaster,
         ICustomerType iCustomerType,ICurrentDate currentDate, IOrder Order, ITATConfiguration iTATConfiguration,
         ICheckRelatedRecord checkRelatedRecord, IEmployeeMaster _IEmployeeMaster, IReasonMaster _IReasonMaster,IHolidayMaster _IHolidayMaster, 
-        IStockAuditConfig _IStockAuditConfig,IMailConfiguration _mailConfiguration, IHelpDesk _HelpDesk)
+        IStockAuditConfig _IStockAuditConfig,IMailConfiguration _mailConfiguration, IHelpDesk _HelpDesk, ILogin login)
         {
             _IUOM = uom;
             _IDropDown = _IdropDown;
@@ -69,6 +70,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
             _HolidayMaster = _IHolidayMaster;
             _StockAuditConfig = _IStockAuditConfig;
             _IHelpdesk = _HelpDesk;
+            _ILogin = login;
         }
 
         #region DropDown
@@ -1664,6 +1666,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+        
 
         #region ItemConfig
         [HttpPost]
@@ -2746,6 +2749,94 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
 
         #endregion Helpdesk
+        [HttpGet]
+        [Route("GetIsActiveDetails")]
+        public async Task<IActionResult> GetIsActiveDetails(int UserMaster_Code,string IPAddress)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _ILogin.GetIsActiveDetails(_bizsolESMSConnectionDetails, UserMaster_Code, IPAddress);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("GetCountIsActiveUser")]
+        public async Task<IActionResult> GetCountIsActiveUser()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _ILogin.GetCountIsActiveUser(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("UpdateIsActiveUser")]
+        public async Task<IActionResult> UpdateIsActiveUser(int UserMaster_Code,string IsActive,string IPAddress)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _ILogin.UpdateIsActiveUser(_bizsolESMSConnectionDetails, UserMaster_Code, IsActive, IPAddress);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("GetFixParameter")]
+        public async Task<IActionResult> GetFixParameter()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _ILogin.GetFixParameter(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }
 

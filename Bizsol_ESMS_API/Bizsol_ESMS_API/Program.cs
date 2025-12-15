@@ -50,6 +50,7 @@ builder.Services.AddTransient<IMailConfiguration, MailConfigurationService>();
 builder.Services.AddTransient<IHolidayMaster, HolidayMasterService>();
 builder.Services.AddTransient<IStockAuditConfig, StockAuditConfigService>();
 builder.Services.AddTransient<IHelpDesk, HelpdeskService>();
+builder.Services.AddTransient<ILogin, LoginService>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
