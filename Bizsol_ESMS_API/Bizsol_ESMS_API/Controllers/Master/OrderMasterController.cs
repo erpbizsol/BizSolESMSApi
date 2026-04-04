@@ -1456,5 +1456,52 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
         #endregion ItemLocator
 
+        #region OrderConformation
+
+        [HttpGet]
+        [Route("GetOrderConformationList")]
+        public async Task<IActionResult> GetOrderConformationList(string FromDate,string ToDate)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.GetOrderConformationList(_bizsolESMSConnectionDetails, FromDate,ToDate);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("ValidateOrderConformation")]
+        public async Task<IActionResult> ValidateOrderConformation(int Code, int OTP, int UserMaster_Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.ValidateOrderConformation(_bizsolESMSConnectionDetails, Code, OTP,UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        #endregion ItemLocator
     }
 }

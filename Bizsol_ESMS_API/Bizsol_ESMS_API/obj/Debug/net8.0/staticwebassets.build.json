@@ -1,11 +1,1 @@
-{
-  "Version": 1,
-  "Hash": "bxZOycB5mWk9Eo8YyzQE8QiB5SMuw5CYzf1/7WnuEyA=",
-  "Source": "Bizsol_ESMS_API",
-  "BasePath": "_content/Bizsol_ESMS_API",
-  "Mode": "Default",
-  "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
-}
+{"Version":1,"Hash":"UovEYSfAWIdV7j1nglnLlGo4wX8Eie/421ZTfqv7Dzg=","Source":"Bizsol_ESMS_API","BasePath":"_content/Bizsol_ESMS_API","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}

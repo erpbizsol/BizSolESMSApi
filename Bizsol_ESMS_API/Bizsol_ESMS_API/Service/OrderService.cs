@@ -494,6 +494,30 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-
+        public async Task<dynamic> GetOrderConformationList(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, string FromDate, string ToDate)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "Locate");
+                parameters.Add("p_FromDate", FromDate);
+                parameters.Add("p_ToDate", ToDate);
+                var result = await conn.QueryAsync<dynamic>("USP_OrderConformation", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> ValidateOrderConformation(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code, int OTP,int UserMaster_Code )
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "Validate");
+                parameters.Add("p_Code", Code);
+                parameters.Add("p_OTP", OTP);
+                parameters.Add("p_UserMaster_Code",UserMaster_Code);
+                var result = await conn.QueryAsync<dynamic>("USP_SendOTPForDispatchValidation", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
     }
 }
