@@ -8,5 +8,6 @@
         public string? OrderNo { get; set; }
         public string? Remark { get; set; }
         public int UserMaster_Code { get; set; }
+        public int WarehouseMaster_Code { get; set; }
     }
 }

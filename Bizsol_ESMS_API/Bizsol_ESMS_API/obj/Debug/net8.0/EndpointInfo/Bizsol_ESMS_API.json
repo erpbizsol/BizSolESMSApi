@@ -3410,6 +3410,18 @@
         }
       }
     },
+    "/api/MRNMaster/ValidateMRNExcelFormat": {
+      "get": {
+        "tags": [
+          "MRNMaster"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/MRNMaster/BoxUnloading": {
       "post": {
         "tags": [
@@ -3673,6 +3685,90 @@
       }
     },
     "/api/MRNMaster/GetVehicleNoList": {
+      "get": {
+        "tags": [
+          "MRNMaster"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MRNMaster/GetBoxValidateDetailWithoutBox": {
+      "post": {
+        "tags": [
+          "MRNMaster"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblBoxValidation"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblBoxValidation"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblBoxValidation"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblBoxValidation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MRNMaster/SaveScanBoxValidateDetailWithoutBox": {
+      "post": {
+        "tags": [
+          "MRNMaster"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblBoxValidation"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblBoxValidation"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblBoxValidation"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblBoxValidation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MRNMaster/GetMRNDetailForValidateWithoutBox": {
       "get": {
         "tags": [
           "MRNMaster"
@@ -6748,6 +6844,10 @@
             "type": "string",
             "nullable": true
           },
+          "brandName": {
+            "type": "string",
+            "nullable": true
+          },
           "vehicleNo": {
             "type": "string",
             "nullable": true
@@ -6809,6 +6909,10 @@
             "nullable": true
           },
           "userMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "warehouseMaster_Code": {
             "type": "integer",
             "format": "int32"
           }
@@ -7143,6 +7247,10 @@
           "remark": {
             "type": "string",
             "nullable": true
+          },
+          "warehouseMaster_Code": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -7681,6 +7789,10 @@
           "userMaster_Code": {
             "type": "integer",
             "format": "int32"
+          },
+          "warehouseMaster_Codes": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

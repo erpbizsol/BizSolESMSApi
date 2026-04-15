@@ -2071,6 +2071,22 @@
   },
   {
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MRNMasterController",
+    "Method": "GetBoxValidateDetailWithoutBox",
+    "RelativePath": "api/MRNMaster/GetBoxValidateDetailWithoutBox",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "BoxValidation",
+        "Type": "Bizsol_ESMS_API.Model.tblBoxValidation",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MRNMasterController",
     "Method": "GetExportBoxUnloading",
     "RelativePath": "api/MRNMaster/GetExportBoxUnloading",
     "HttpMethod": "GET",
@@ -2115,6 +2131,16 @@
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MRNMasterController",
     "Method": "GetMRNDetailForValidate",
     "RelativePath": "api/MRNMaster/GetMRNDetailForValidate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MRNMasterController",
+    "Method": "GetMRNDetailForValidateWithoutBox",
+    "RelativePath": "api/MRNMaster/GetMRNDetailForValidateWithoutBox",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -2323,6 +2349,22 @@
   },
   {
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MRNMasterController",
+    "Method": "SaveScanBoxValidateDetailWithoutBox",
+    "RelativePath": "api/MRNMaster/SaveScanBoxValidateDetailWithoutBox",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "BoxValidation",
+        "Type": "Bizsol_ESMS_API.Model.tblBoxValidation",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MRNMasterController",
     "Method": "ShowMRNMasterByCode",
     "RelativePath": "api/MRNMaster/ShowMRNMasterByCode",
     "HttpMethod": "GET",
@@ -2346,6 +2388,16 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MRNMasterController",
+    "Method": "ValidateMRNExcelFormat",
+    "RelativePath": "api/MRNMaster/ValidateMRNExcelFormat",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",

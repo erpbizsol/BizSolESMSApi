@@ -30,5 +30,6 @@ namespace Bizsol_ESMS_API.Model
         public string IsBizSolUser { get; set; } = "N";
         public string EmailId { get; set; } = "";
         public int UserMaster_Code { get; set; }
+        public string? WarehouseMaster_Codes { get; set; } = "";
     }   
 }

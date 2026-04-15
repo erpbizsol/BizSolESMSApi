@@ -272,6 +272,29 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+        
+        [HttpGet]
+        [Route("ValidateMRNExcelFormat")]
+        public async Task<ActionResult> ValidateMRNExcelFormat()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _MRNMaster.ValidateMRNExcelFormat(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
 
         #endregion MRNMaster
 
@@ -502,6 +525,73 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpPost]
+        [Route("GetBoxValidateDetailWithoutBox")]
+        public async Task<IActionResult> GetBoxValidateDetailWithoutBox([FromBody] tblBoxValidation BoxValidation)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _MRNMaster.GetBoxValidateDetailWithoutBox(_bizsolESMSConnectionDetails, BoxValidation);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("SaveScanBoxValidateDetailWithoutBox")]
+        public async Task<IActionResult> SaveScanBoxValidateDetailWithoutBox([FromBody] tblBoxValidation BoxValidation)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _MRNMaster.SaveScanBoxValidateDetailWithoutBox(_bizsolESMSConnectionDetails, BoxValidation);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("GetMRNDetailForValidateWithoutBox")]
+        public async Task<IActionResult> GetMRNDetailForValidateWithoutBox()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _MRNMaster.GetMRNDetailForValidateWithoutBox(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         #endregion BoxValidation
     }
 }

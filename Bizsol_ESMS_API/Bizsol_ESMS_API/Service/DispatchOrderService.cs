@@ -138,7 +138,7 @@ namespace Bizsol_ESMS_API.Service
 
                 parameters.Add("p_Mode", Mode.Trim());
                 parameters.Add("p_Code", 0);
-                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("p_UserMaster_Code", bizsolESMSConnectionDetails.UserMaster_Code);
                 parameters.Add("p_jsonData", "{}");
                 parameters.Add("p_jsonData1", "{}");
                 parameters.Add("p_AccountName", "");
@@ -309,7 +309,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_DriverName", "");
                 parameters.Add("p_DriverContactNo", "");
                 parameters.Add("p_LorryMeter", 0);
-                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("p_UserMaster_Code", bizsolESMSConnectionDetails.UserMaster_Code);
 
                 var result = await conn.QueryAsync<dynamic>("USP_DispatchBoxValidation", parameters, commandType: CommandType.StoredProcedure);
                 return result;
@@ -417,6 +417,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Date", Date);
                 parameters.Add("p_ToDate", ToDate);
                 parameters.Add("p_OrderStatus", OrderStatus);
+                parameters.Add("p_UserMaster_Code", bizsolESMSConnectionDetails.UserMaster_Code);
 
                 var result = await conn.QueryAsync<dynamic>("USP_GetOrderPackedDetail", parameters, commandType: CommandType.StoredProcedure);
                 return result;

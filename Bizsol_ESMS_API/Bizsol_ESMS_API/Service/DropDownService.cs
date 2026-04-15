@@ -18,6 +18,7 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetGroup");
+                parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -31,6 +32,7 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetUOM");
+                parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -44,6 +46,7 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetCategory");
+                parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -57,6 +60,7 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetSubGroupItem");
+                parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -70,6 +74,7 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetBrand");
+                parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -83,6 +88,7 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetItemLocation");
+                parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -96,6 +102,7 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetCountryLocation");
+                parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -109,6 +116,7 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetStateData");
+                parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -122,6 +130,7 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetCityData");
+                parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -134,10 +143,9 @@ namespace Bizsol_ESMS_API.Service
             {
 
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("Operation", "GetWherehouse");
-                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                parameters.Add("p_UserMaster_Code", _bizsolESMSConnectionDetails.UserMaster_Code);
+                var result = await conn.QueryAsync<dynamic>("USP_GetWarehouseMasterDropDown", parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
-
             }
         }
         public async Task<IEnumerable<dynamic>> GetAccountIsVendorDropDown(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails)
@@ -148,6 +156,7 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetAccountIsVendor");
+                parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -161,6 +170,7 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetAccountIsClient");
+                parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -174,6 +184,7 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetOrderNo");
+                parameters.Add("p_UserMaster_Code", _bizsolESMSConnectionDetails.UserMaster_Code);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -187,6 +198,7 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "GetUser");
+                parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -200,6 +212,7 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "Designation");
+                parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -213,6 +226,7 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "ReportType");
+                parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -226,6 +240,7 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "Import");
+                parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -240,6 +255,7 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("p_BrandName", BrandName);
+                parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>("USP_GetBrandTypeByName", parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 
@@ -253,6 +269,7 @@ namespace Bizsol_ESMS_API.Service
 
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("Operation", "Brand");
+                parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
 

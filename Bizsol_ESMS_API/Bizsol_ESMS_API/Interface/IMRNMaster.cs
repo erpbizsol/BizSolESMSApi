@@ -25,7 +25,9 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<IEnumerable<dynamic>> GetVehicleNoList(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
         public abstract Task<dynamic> ManualBoxUnloading(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int BoxNo, string PicklistNo, string IsManual);
         public abstract Task<dynamic> GetGenerateQR(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int Code);
-
-
+        public abstract Task<dynamic> ValidateMRNExcelFormat(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
+        public abstract Task<dynamic> GetBoxValidateDetailWithoutBox(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblBoxValidation model);
+        public abstract Task<dynamic> SaveScanBoxValidateDetailWithoutBox(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblBoxValidation model);
+        public abstract Task<dynamic> GetMRNDetailForValidateWithoutBox(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
     }
 }

@@ -9,7 +9,7 @@ namespace Bizsol_ESMS_API.Model
         //public string? ERPDMSDBConStr { get; set; }
         //public string? ERPDB_Name { get; set; }
         //public string? ERPMainDB_Name { get; set; }
-        //public string? ERPDMSDB_Name { get; set; }
+        public int UserMaster_Code { get; set; }
         public string? AuthToken { get; set; } = "";
     }
 }

@@ -22,7 +22,7 @@ namespace Bizsol_ESMS_API.Service
 
                 parameters.Add("p_Mode", "LOCATE");
                 parameters.Add("p_Code", 0);
-                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("p_UserMaster_Code", bizsolESMSConnectionDetails.UserMaster_Code);
                 parameters.Add("p_jsonData", "{}");
                 parameters.Add("p_jsonData1", "{}");
                 parameters.Add("p_AccountName", "");
@@ -121,6 +121,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_OrderNo", ImportOrder.OrderNo);
                 parameters.Add("p_Remark", ImportOrder.Remark);
                 parameters.Add("p_UserMaster_Code", ImportOrder.UserMaster_Code);
+                parameters.Add("p_WarehouseMaster_Code", ImportOrder.WarehouseMaster_Code);
                 parameters.Add("p_jsonData", json);
 
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>("UDF_ImportOrder", parameters, commandType: CommandType.StoredProcedure);
@@ -140,6 +141,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_OrderNo", ImportOrder.OrderNo);
                 parameters.Add("p_Remark", ImportOrder.Remark);
                 parameters.Add("p_UserMaster_Code", ImportOrder.UserMaster_Code);
+                parameters.Add("p_WarehouseMaster_Code", ImportOrder.WarehouseMaster_Code);
                 parameters.Add("p_jsonData", json);
 
                 var result = await conn.QueryAsync<dynamic>("UDF_ImportOrder", parameters, commandType: CommandType.StoredProcedure);
