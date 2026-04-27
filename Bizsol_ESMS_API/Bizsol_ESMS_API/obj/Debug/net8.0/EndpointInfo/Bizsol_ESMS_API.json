@@ -5741,6 +5741,27 @@
         }
       }
     },
+    "/api/OrderMaster/ValidateOrderExcelFormat": {
+      "get": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "ClientType",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Report/GetLocationReport": {
       "get": {
         "tags": [
@@ -6481,6 +6502,10 @@
           "isManual": {
             "type": "string",
             "nullable": true
+          },
+          "mfdDate": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -6849,6 +6874,10 @@
             "nullable": true
           },
           "vehicleNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "mrnDate": {
             "type": "string",
             "nullable": true
           },

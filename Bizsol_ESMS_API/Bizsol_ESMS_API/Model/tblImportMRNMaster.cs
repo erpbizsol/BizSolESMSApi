@@ -7,6 +7,7 @@
         public string? WarehouseName { get; set; }
         public string? BrandName { get; set; }
         public string? VehicleNo { get; set; }
+        public string? MRNDate { get; set; } = "";
         public int UserMaster_Code { get; set; }
     }
 }

@@ -521,5 +521,15 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+        public async Task<dynamic> ValidateOrderExcelFormat(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,string ClientType)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_ClientType", ClientType);
+                var result = await conn.QueryAsync<dynamic>("USP_ValidateOrderExcelFormat", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
     }
 }

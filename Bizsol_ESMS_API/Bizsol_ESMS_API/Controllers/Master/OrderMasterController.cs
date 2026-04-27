@@ -1503,5 +1503,27 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
         #endregion ItemLocator
+        [HttpGet]
+        [Route("ValidateOrderExcelFormat")]
+        public async Task<ActionResult> ValidateOrderExcelFormat(string ClientType)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.ValidateOrderExcelFormat(_bizsolESMSConnectionDetails, ClientType);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

@@ -174,6 +174,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_BrandName", ImportMRNMaster.BrandName);
                 parameters.Add("p_VehicleNo", ImportMRNMaster.VehicleNo);
                 parameters.Add("p_UserMaster_Code", ImportMRNMaster.UserMaster_Code);
+                parameters.Add("p_MRNDate", ImportMRNMaster.MRNDate);
                 parameters.Add("p_jsonData", json);
 
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>("InsertPicklistFromJSON", parameters, commandType: CommandType.StoredProcedure);
@@ -193,6 +194,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_BrandName", ImportMRNMaster.BrandName);
                 parameters.Add("p_VehicleNo", ImportMRNMaster.VehicleNo);
                 parameters.Add("p_UserMaster_Code", ImportMRNMaster.UserMaster_Code);
+                parameters.Add("p_MRNDate", ImportMRNMaster.MRNDate);
                 parameters.Add("p_jsonData", json);
 
                 var result = await conn.QueryAsync<dynamic>("InsertPicklistFromJSON", parameters, commandType: CommandType.StoredProcedure);
@@ -247,8 +249,9 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_ManualQty", BoxValidation.ManualQty);
                 parameters.Add("p_PickListNo", BoxValidation.PickListNo.Trim());
                 parameters.Add("p_IsManual", BoxValidation.IsManual.Trim());
+                parameters.Add("p_MFDDate", BoxValidation.MFDDate.Trim());
                 parameters.Add("p_UserMaster_Code", 0);
-                var result = await conn.QueryAsync<dynamic>("USP_BoxValidation", parameters, commandType: CommandType.StoredProcedure);
+                var result = await conn.QueryAsync<dynamic>("USP_BoxValidationWithoutBox", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
         }
@@ -419,7 +422,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_ManualQty", 0);
                 parameters.Add("p_PickListNo", BoxValidation.PickListNo.Trim());
                 parameters.Add("p_IsManual", BoxValidation.IsManual.Trim());
-
+                parameters.Add("p_MFDDate","");
                 var result = await conn.QueryAsync<dynamic>("USP_BoxValidationWithoutBox", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -438,6 +441,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_ManualQty", BoxValidation.ManualQty);
                 parameters.Add("p_PickListNo", BoxValidation.PickListNo.Trim());
                 parameters.Add("p_IsManual", BoxValidation.IsManual.Trim());
+                parameters.Add("p_MFDDate", "");
                 var result = await conn.QueryAsync<dynamic>("USP_BoxValidationWithoutBox", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -457,6 +461,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_PickListNo", "");
                 parameters.Add("p_IsManual", "");
                 parameters.Add("p_UserMaster_Code", bizsolESMSConnectionDetails.UserMaster_Code);
+                parameters.Add("p_MFDDate", "");
                 var result = await conn.QueryAsync<dynamic>("USP_BoxValidationWithoutBox", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }

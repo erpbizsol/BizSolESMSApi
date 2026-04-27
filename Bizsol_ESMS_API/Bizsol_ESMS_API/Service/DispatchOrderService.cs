@@ -151,21 +151,23 @@ namespace Bizsol_ESMS_API.Service
         }
         public async Task<VM_OrderMasterForShow> GetOrderDetailsForDispatch(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code, string Mode, int DispatchMaster_Code)
         {
-
             VM_OrderMasterForShow vM_OrderMaster = new VM_OrderMasterForShow();
-            var parameters = new Dictionary<string, object>
+
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
-                { "@p_Mode", Mode.Trim()},
-                { "@p_DispatchMaster_Code", DispatchMaster_Code},
-                { "@p_Code", Code }
-            };
-            var dataTables = await Task.Run(() => CommonFunctions.DataTableArrayExecuteSqlQueryWithParameter(bizsolESMSConnectionDetails.DefultMysqlTemp,
-                    "call USP_ModeWiseDispatch(@p_Mode,@p_DispatchMaster_Code,@p_Code)",
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", Mode.Trim());
+                parameters.Add("p_DispatchMaster_Code", DispatchMaster_Code);
+                parameters.Add("p_Code", Code);
+
+                using var multi = await conn.QueryMultipleAsync(
+                    "call USP_ModeWiseDispatch(@p_Mode, @p_DispatchMaster_Code, @p_Code)",
                     parameters,
-                    CommandType.Text
-                ));
-            vM_OrderMaster.OrderMaster = CommonFunctions.DatatableToDynamicList(dataTables[0]);
-            vM_OrderMaster.OrderDetial = CommonFunctions.DatatableToDynamicList(dataTables[1]);
+                    commandType: CommandType.Text);
+
+                vM_OrderMaster.OrderMaster = (await multi.ReadAsync<dynamic>()).ToList();
+                vM_OrderMaster.OrderDetial = (await multi.ReadAsync<dynamic>()).ToList();
+            }
             return vM_OrderMaster;
         }
         public async Task<dynamic> ScanItemForDispatch(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblScanDispatch Dispatch, string Mode)

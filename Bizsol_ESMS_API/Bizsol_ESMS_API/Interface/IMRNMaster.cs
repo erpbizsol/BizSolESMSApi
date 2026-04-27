@@ -29,5 +29,7 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<dynamic> GetBoxValidateDetailWithoutBox(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblBoxValidation model);
         public abstract Task<dynamic> SaveScanBoxValidateDetailWithoutBox(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblBoxValidation model);
         public abstract Task<dynamic> GetMRNDetailForValidateWithoutBox(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
+        
+
     }
 }

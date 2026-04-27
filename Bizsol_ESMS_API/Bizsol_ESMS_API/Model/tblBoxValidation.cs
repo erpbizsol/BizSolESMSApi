@@ -10,5 +10,6 @@
         public int ReceivedQty { get; set; }
         public string PickListNo { get; set; } = "";
         public string IsManual { get; set; } = "";
+        public string? MFDDate { get; set; } = "";
     }
 }
