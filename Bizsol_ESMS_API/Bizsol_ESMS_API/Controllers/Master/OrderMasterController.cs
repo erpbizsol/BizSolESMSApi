@@ -2,6 +2,7 @@
 using Bizsol_ESMS_API.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Graph.Models.IdentityGovernance;
+using Org.BouncyCastle.Asn1;
 using static Bizsol_ESMS_API.Service.DispatchOrderService;
 
 namespace Bizsol_ESMS_API.Controllers.Master
@@ -13,12 +14,14 @@ namespace Bizsol_ESMS_API.Controllers.Master
         private readonly IOrder _Order;
         private readonly IDispatchOrder _DispatchOrder;
         private readonly IItemOpeningBalance _ItemOpeningBalance;
+        private readonly IPaymentEntry _PaymentEntry;
 
-        public OrderMasterController(IOrder Order,IDispatchOrder DispatchOrder, IItemOpeningBalance itemOpeningBalance)
+        public OrderMasterController(IOrder Order,IDispatchOrder DispatchOrder, IItemOpeningBalance itemOpeningBalance, IPaymentEntry paymentEntry)
         {
             _DispatchOrder = DispatchOrder;
             _Order = Order;
             _ItemOpeningBalance = itemOpeningBalance;
+            _PaymentEntry = paymentEntry;
         }
 
         #region OrderMaster
@@ -1502,7 +1505,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
-        #endregion ItemLocator
+        
         [HttpGet]
         [Route("ValidateOrderExcelFormat")]
         public async Task<ActionResult> ValidateOrderExcelFormat(string ClientType)
@@ -1525,5 +1528,76 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+        
+        [HttpGet]
+        [Route("GetPendingDataForInvoice")]
+        public async Task<ActionResult> GetPendingDataForInvoice(string FromDate,string ToDate,int ClientMaster_Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.GetPendingDataForInvoice(_bizsolESMSConnectionDetails, FromDate, ToDate, ClientMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("InvoiceMasterSaveData")]
+        public async Task<IActionResult> InvoiceMasterSaveData([FromBody] tblInvoiceMasterSave model, int UserMaster_Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.InvoiceMasterSaveData(_bizsolESMSConnectionDetails, model, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("GetInvoiceGenerateData")]
+        public async Task<ActionResult> GetInvoiceGenerateData(int DispatchMaster_Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.GetInvoiceGenerateData(_bizsolESMSConnectionDetails, DispatchMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        #endregion OrderConformation
+        
     }
 }

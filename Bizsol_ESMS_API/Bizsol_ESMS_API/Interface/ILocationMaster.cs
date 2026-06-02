@@ -10,5 +10,7 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<dynamic> CreateLocationFromItemMaster(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblLocationMaster model, int UserMaster_Code, string IsCheckExists);
         public abstract Task<dynamic> GetItemLocationMaster_Code(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int Code);
         public abstract Task<spOutputParameter> DeleteLocationMaster(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int code, int UserMaster_Code);
+        public abstract Task<dynamic> ImportLocation(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblImportLocation ImportLocation);
+        public abstract Task<dynamic> ImportLocationForTemp(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblImportLocation ImportLocation);
     }
 }

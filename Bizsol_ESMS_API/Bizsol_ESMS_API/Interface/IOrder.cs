@@ -38,5 +38,8 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<dynamic> GetOrderConformationList(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,string FromDate,string ToDate);
         public abstract Task<dynamic> ValidateOrderConformation(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int Code,int OTP,int UserMaster_Code);
         public abstract Task<dynamic> ValidateOrderExcelFormat(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string ClientType);
+        public abstract Task<dynamic> GetPendingDataForInvoice(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string FromDate, string ToDate, int ClientMaster_Code);
+        public abstract Task<VM_InvoiceGenerateData> GetInvoiceGenerateData(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int DispatchMaster_Code);
+        public abstract Task<dynamic> InvoiceMasterSaveData(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblInvoiceMasterSave model, int UserMaster_Code);
     }
 }

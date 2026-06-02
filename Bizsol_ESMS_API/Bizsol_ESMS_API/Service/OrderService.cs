@@ -531,5 +531,57 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+        public async Task<dynamic> GetPendingDataForInvoice(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, string FromDate, string ToDate, int ClientMaster_Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "Locate");
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_UserMaster_Code", bizsolESMSConnectionDetails.UserMaster_Code);
+                parameters.Add("p_jsonData", "{}");
+                parameters.Add("p_FromDate", FromDate);
+                parameters.Add("p_ToDate", ToDate);
+                parameters.Add("p_ClientMaster_Code", ClientMaster_Code);
+                var result = await conn.QueryAsync<dynamic>("USP_Invoicegenerate", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> InvoiceMasterSaveData(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblInvoiceMasterSave model, int UserMaster_Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                var serializer = new JavaScriptSerializer();
+                string jsonHeader = serializer.Serialize(model.JsonHeader ?? new Dictionary<string, object>());
+                string jsonLines = serializer.Serialize(model.JsonLines ?? new List<Dictionary<string, object>>());
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("P_Code", model.Code);
+                parameters.Add("P_UserMaster_Code", UserMaster_Code);
+                parameters.Add("p_jsonHeader", jsonHeader);
+                parameters.Add("p_jsonLines", jsonLines);
+
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_InvoiceMasterSaveData", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<VM_InvoiceGenerateData> GetInvoiceGenerateData(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int DispatchMaster_Code)
+        {
+            VM_InvoiceGenerateData vmInvoiceGenerateData = new VM_InvoiceGenerateData();
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_DispatchMaster_Code", DispatchMaster_Code);
+
+                using var multi = await conn.QueryMultipleAsync(
+                    "call USP_GetInvoiceGenerateData(@p_DispatchMaster_Code)",
+                    parameters,
+                    commandType: CommandType.Text);
+
+                vmInvoiceGenerateData.InvoiceHeader = (await multi.ReadAsync<dynamic>()).ToList();
+                vmInvoiceGenerateData.InvoiceLines = (await multi.ReadAsync<dynamic>()).ToList();
+            }
+            return vmInvoiceGenerateData;
+        }
     }
 }

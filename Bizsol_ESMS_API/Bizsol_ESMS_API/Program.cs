@@ -20,6 +20,7 @@ JsonConvert.DefaultSettings = () => new JsonSerializerSettings
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
 builder.Services.AddTransient<IUOM, UOMService>();
+builder.Services.AddTransient<IHSNMaster, HSNMasterService>();
 builder.Services.AddTransient<IDropDown, DropDownService>();
 builder.Services.AddTransient<ILocationMaster, LocationMasterService>();
 builder.Services.AddTransient<IGroupMaster, GroupMasterService>();
@@ -51,6 +52,7 @@ builder.Services.AddTransient<IHolidayMaster, HolidayMasterService>();
 builder.Services.AddTransient<IStockAuditConfig, StockAuditConfigService>();
 builder.Services.AddTransient<IHelpDesk, HelpdeskService>();
 builder.Services.AddTransient<ILogin, LoginService>();
+builder.Services.AddTransient<IPaymentEntry, PaymentEntryService>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -543,6 +543,133 @@
         }
       }
     },
+    "/api/Master/InsertHSNMaster": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "UserMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblHSNMaster"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblHSNMaster"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblHSNMaster"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblHSNMaster"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/ShowHSNMaster": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/ShowHSNMasterByCode": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteHSNMaster": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "UserMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/spOutputParameter"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/spOutputParameter"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/spOutputParameter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Master/InsertLocationMaster": {
       "post": {
         "tags": [
@@ -738,6 +865,78 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/ImportLocationMaster": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblImportLocation"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblImportLocation"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblImportLocation"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblImportLocation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/ImportLocationMasterForTemp": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblImportLocation"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblImportLocation"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblImportLocation"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblImportLocation"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -5762,6 +5961,494 @@
         }
       }
     },
+    "/api/OrderMaster/GetPendingDataForInvoice": {
+      "get": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "FromDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ToDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ClientMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderMaster/InvoiceMasterSaveData": {
+      "post": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "UserMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblInvoiceMasterSave"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblInvoiceMasterSave"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblInvoiceMasterSave"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblInvoiceMasterSave"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderMaster/GetInvoiceGenerateData": {
+      "get": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "DispatchMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/PaymentEntry/SavePaymentEntry": {
+      "post": {
+        "tags": [
+          "PaymentEntry"
+        ],
+        "parameters": [
+          {
+            "name": "UserMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_BillMaster"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_BillMaster"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_BillMaster"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_BillMaster"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/PaymentEntry/GetPaymentMasterlist": {
+      "get": {
+        "tags": [
+          "PaymentEntry"
+        ],
+        "parameters": [
+          {
+            "name": "FromDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ToDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "AccountMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "PaymentMode",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/PaymentEntry/ShowPaymentEntryByCode": {
+      "get": {
+        "tags": [
+          "PaymentEntry"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_BillMasterList"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_BillMasterList"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_BillMasterList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/PaymentEntry/DeletePaymentEntry": {
+      "post": {
+        "tags": [
+          "PaymentEntry"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "UserMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/PaymentEntry/GetInvoiceDetailsByAccountMaster": {
+      "get": {
+        "tags": [
+          "PaymentEntry"
+        ],
+        "parameters": [
+          {
+            "name": "AccountMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/PaymentEntry/GetPendingInvoiceReport": {
+      "get": {
+        "tags": [
+          "PaymentEntry"
+        ],
+        "parameters": [
+          {
+            "name": "AsonDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "AccountMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/PaymentEntry/SavePaymentEntryAdjustment": {
+      "post": {
+        "tags": [
+          "PaymentEntry"
+        ],
+        "parameters": [
+          {
+            "name": "UserMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_BillMaster"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_BillMaster"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_BillMaster"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_BillMaster"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/PaymentEntry/GetPaymentAdjustmentMasterlist": {
+      "get": {
+        "tags": [
+          "PaymentEntry"
+        ],
+        "parameters": [
+          {
+            "name": "FromDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ToDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "AccountMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "PaymentMode",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/PaymentEntry/ShowPaymentEntryAdjustmentByCode": {
+      "get": {
+        "tags": [
+          "PaymentEntry"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_BillMasterList"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_BillMasterList"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_BillMasterList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/PaymentEntry/DeletePaymentEntryAdjustment": {
+      "post": {
+        "tags": [
+          "PaymentEntry"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "UserMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/PaymentEntry/GetPaymentModeList": {
+      "get": {
+        "tags": [
+          "PaymentEntry"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Report/GetLocationReport": {
       "get": {
         "tags": [
@@ -6273,6 +6960,42 @@
         },
         "additionalProperties": false
       },
+      "VM_BillMaster": {
+        "type": "object",
+        "properties": {
+          "billMaster": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/tblBillMaster"
+            },
+            "nullable": true
+          },
+          "billAdjustmentDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/tblBillAdjustmentDetails"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VM_BillMasterList": {
+        "type": "object",
+        "properties": {
+          "billMaster": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "billAdjustmentDetails": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "VM_MRNMaster": {
         "type": "object",
         "properties": {
@@ -6436,6 +7159,70 @@
             "nullable": true
           },
           "isDefault": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "tblBillAdjustmentDetails": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "billMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "invoiceMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paymentAmount": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "tblBillMaster": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "entryNo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "entryDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "accountMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "paymentMode": {
+            "type": "string",
+            "nullable": true
+          },
+          "refno": {
+            "type": "string",
+            "nullable": true
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "advanceAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "narration": {
             "type": "string",
             "nullable": true
           }
@@ -6806,6 +7593,25 @@
         },
         "additionalProperties": false
       },
+      "tblHSNMaster": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hsnCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "gstRate": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "tblHelpdesk": {
         "type": "object",
         "properties": {
@@ -6846,6 +7652,32 @@
           "userMaster_Code": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "tblImportLocation": {
+        "type": "object",
+        "properties": {
+          "jsonData": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": { }
+            },
+            "nullable": true
+          },
+          "warehouseMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "insertNewItem": {
+            "type": "string",
+            "nullable": true
+          },
+          "insertNewLocation": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -6944,6 +7776,29 @@
           "warehouseMaster_Code": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "tblInvoiceMasterSave": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "jsonHeader": {
+            "type": "object",
+            "additionalProperties": { },
+            "nullable": true
+          },
+          "jsonLines": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": { }
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -7060,6 +7915,14 @@
             "format": "int32"
           },
           "locationName": {
+            "type": "string",
+            "nullable": true
+          },
+          "location": {
+            "type": "string",
+            "nullable": true
+          },
+          "locationGroup": {
             "type": "string",
             "nullable": true
           },

@@ -12,6 +12,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
     public class MasterController : ControllerBase
     {
         private readonly IUOM _IUOM;
+        private readonly IHSNMaster _IHSNMaster;
         private readonly IDropDown _IDropDown;
         private readonly ILocationMaster _ILocationMaster;
         private readonly ICategory _ICategory;
@@ -38,7 +39,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
         private readonly IHelpDesk _IHelpdesk;
         private readonly ILogin _ILogin;
          
-        public MasterController(IUOM uom, IDropDown _IdropDown, ILocationMaster _IlocationMaster, ICategory _Icategory, IGroupMaster _groupMaster
+        public MasterController(IUOM uom, IHSNMaster hsnMaster, IDropDown _IdropDown, ILocationMaster _IlocationMaster, ICategory _Icategory, IGroupMaster _groupMaster
         ,ISubGroupMaster _IsubGroupMaster,IBrandMaster _brandMaster, IWarehouse iWarehouse, IItemMaster iItemMaster, IConfigItemMaster configItemMaster,
         ICity iCity, IStateMaster stateMaster,IUserGroupMaster iUserGroupMaster, IDesignationMaster iDesignationMaster,
         ICustomerType iCustomerType,ICurrentDate currentDate, IOrder Order, ITATConfiguration iTATConfiguration,
@@ -46,6 +47,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
         IStockAuditConfig _IStockAuditConfig,IMailConfiguration _mailConfiguration, IHelpDesk _HelpDesk, ILogin login)
         {
             _IUOM = uom;
+            _IHSNMaster = hsnMaster;
             _IDropDown = _IdropDown;
             _ILocationMaster = _IlocationMaster;
             _ICategory = _Icategory;
@@ -673,6 +675,102 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         #endregion IUOM
 
+        #region IHSNMaster
+
+        [HttpPost]
+        [Route("InsertHSNMaster")]
+        public async Task<IActionResult> InsertHSNMaster([FromBody] tblHSNMaster model, int UserMaster_Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IHSNMaster.InsertHSN(_bizsolESMSConnectionDetails, model, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ShowHSNMaster")]
+        public async Task<IActionResult> ShowHSN()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IHSNMaster.ShowHSN(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ShowHSNMasterByCode")]
+        public async Task<IActionResult> ShowHSNMasterByCode(int Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IHSNMaster.ShowHSNMasterByCode(_bizsolESMSConnectionDetails, Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("DeleteHSNMaster")]
+        public async Task<ActionResult<spOutputParameter>> DeleteHSN(int Code, int UserMaster_Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IHSNMaster.DeleteHSN(_bizsolESMSConnectionDetails, Code, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        #endregion IHSNMaster
+
         #region LocationMaster
         [HttpPost]
         [Route("InsertLocationMaster")]
@@ -806,6 +904,56 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
                     var result = await _ILocationMaster.GetItemLocationMaster_Code(_bizsolESMSConnectionDetails,Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("ImportLocationMaster")]
+        public async Task<IActionResult> ImportLocation([FromBody] tblImportLocation ImportLocation)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _ILocationMaster.ImportLocation(_bizsolESMSConnectionDetails, ImportLocation);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("ImportLocationMasterForTemp")]
+        public async Task<IActionResult> ImportLocationMasterForTemp([FromBody] tblImportLocation ImportLocation)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _ILocationMaster.ImportLocationForTemp(_bizsolESMSConnectionDetails, ImportLocation);
                     return Ok(result);
                 }
                 else
