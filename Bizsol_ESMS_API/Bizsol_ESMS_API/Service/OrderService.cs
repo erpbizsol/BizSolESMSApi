@@ -91,20 +91,15 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-        public async Task<IEnumerable<dynamic>> ClientWiseRate(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, string ClientName, string ItemName)
+        public async Task<IEnumerable<dynamic>> ClientWiseRate(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, string ClientName, int ItemMaster_Code)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
                 DynamicParameters parameters = new DynamicParameters();
-
-                parameters.Add("p_Mode", "VenderWiseRate");
-                parameters.Add("p_Code", 0);
-                parameters.Add("p_UserMaster_Code", 0);
-                parameters.Add("p_jsonData", "{}");
-                parameters.Add("p_jsonData1", "{}");
+;
                 parameters.Add("p_AccountName", ClientName);
-                parameters.Add("p_ItemName", ItemName);
-                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                parameters.Add("p_ItemMaster_Code", ItemMaster_Code);
+                var result = await conn.QueryAsync<dynamic>("USP_GetItemReate", parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
             }
         }
@@ -186,6 +181,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_ReasonMaster_Code", SalesReturn.ReasonMaster_Code);
                 parameters.Add("p_OrderNo", SalesReturn.OrderNo);
                 parameters.Add("p_UserMaster_Code", SalesReturn.UserMaster_Code);
+                parameters.Add("p_WarehouseMaster_Code", SalesReturn.WarehouseMaster_Code);
                 parameters.Add("p_jsonData", json);
 
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>("UDF_ImportSalesReturn", parameters, commandType: CommandType.StoredProcedure);
@@ -204,6 +200,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_ReasonMaster_Code", SalesReturn.ReasonMaster_Code);
                 parameters.Add("p_OrderNo", SalesReturn.OrderNo);
                 parameters.Add("p_UserMaster_Code", SalesReturn.UserMaster_Code);
+                parameters.Add("p_WarehouseMaster_Code", SalesReturn.WarehouseMaster_Code);
                 parameters.Add("p_jsonData", json);
 
                 var result = await conn.QueryAsync<dynamic>("UDF_ImportSalesReturn", parameters, commandType: CommandType.StoredProcedure);
@@ -218,7 +215,7 @@ namespace Bizsol_ESMS_API.Service
 
                 parameters.Add("p_Code", 0);
                 parameters.Add("p_Mode", "LOCATE");
-                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("p_UserMaster_Code", bizsolESMSConnectionDetails.UserMaster_Code);
                 parameters.Add("p_ReasonMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>("USP_SalesReturnMaster", parameters, commandType: CommandType.StoredProcedure);
 
@@ -249,7 +246,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Code", SalesReturn.Code);
                 parameters.Add("p_ScanNo", SalesReturn.ScanNo);
 
-                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_SaveScanSalesReturn", parameters, commandType: CommandType.StoredProcedure);
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_SaveScanSalesReturnMaster", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
         }
@@ -582,6 +579,51 @@ namespace Bizsol_ESMS_API.Service
                 vmInvoiceGenerateData.InvoiceLines = (await multi.ReadAsync<dynamic>()).ToList();
             }
             return vmInvoiceGenerateData;
+        }
+        public async Task<VM_DailyStockReport> GetDailyStockReport(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, string FromDate, string ToDate)
+        {
+            VM_DailyStockReport vmDailyStockReport = new VM_DailyStockReport();
+            var parameters = new Dictionary<string, object>
+            {
+                { "@p_Mode", "" },
+                { "@p_FromDate", FromDate },
+                { "@p_ToDate", ToDate }
+            };
+
+            var dataTables = await Task.Run(() => CommonFunctions.DataTableArrayExecuteSqlQueryWithParameter(
+                bizsolESMSConnectionDetails.DefultMysqlTemp,
+                "call USP_ShowDashboardData(@p_Mode,@p_FromDate,@p_ToDate)",
+                parameters,
+                CommandType.Text
+            ));
+
+            vmDailyStockReport.DailyOrderReport = CommonFunctions.DatatableToDynamicList(dataTables[0]);
+            vmDailyStockReport.LossOrderReport = CommonFunctions.DatatableToDynamicList(dataTables[1]);
+            vmDailyStockReport.DeadStock = CommonFunctions.DatatableToDynamicList(dataTables[2]);
+            vmDailyStockReport.MonthWiseSale = CommonFunctions.DatatableToDynamicList(dataTables[3]);
+            vmDailyStockReport.AverageTrunAround = CommonFunctions.DatatableToDynamicList(dataTables[4]);
+            vmDailyStockReport.TopCustomers = CommonFunctions.DatatableToDynamicList(dataTables[5]);
+            vmDailyStockReport.Employee = CommonFunctions.DatatableToDynamicList(dataTables[6]);
+            vmDailyStockReport.SaleLossOrder = CommonFunctions.DatatableToDynamicList(dataTables[7]);
+            vmDailyStockReport.SaleReturn = CommonFunctions.DatatableToDynamicList(dataTables[8]);
+            vmDailyStockReport.TatConfig = CommonFunctions.DatatableToDynamicList(dataTables[9]);
+            vmDailyStockReport.TatMaster = CommonFunctions.DatatableToDynamicList(dataTables[10]);
+            vmDailyStockReport.StockSummary = CommonFunctions.DatatableToDynamicList(dataTables[11]);
+            vmDailyStockReport.Top10MinimumOrderParty = CommonFunctions.DatatableToDynamicList(dataTables[12]);
+            vmDailyStockReport.Top10MaximumOrderParty = CommonFunctions.DatatableToDynamicList(dataTables[13]);
+            vmDailyStockReport.ReorderLevelData = CommonFunctions.DatatableToDynamicList(dataTables[14]);
+            return vmDailyStockReport;
+        }
+        public async Task<IEnumerable<dynamic>> GetScanAndBillData(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "Locate");
+                parameters.Add("p_Code", 0);
+                var result = await conn.QueryAsync<dynamic>("USP_ScanAndBillOrder", parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+            }
         }
     }
 }

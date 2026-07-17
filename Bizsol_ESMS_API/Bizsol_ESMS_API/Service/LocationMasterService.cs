@@ -22,6 +22,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_LocationName", Model.LocationName);
                 parameters.Add("p_Location", Model.Location);
                 parameters.Add("p_LocationGroup", Model.LocationGroup);
+                parameters.Add("p_WarehouseMaster_Code", Model.WarehouseMaster_Code);
                 parameters.Add("p_Mode", Model.Mode);
                 parameters.Add("p_UserMaster_Code", UserMaster_Code);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
@@ -45,6 +46,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_LocationName", null);
                 parameters.Add("p_Location", null);
                 parameters.Add("p_LocationGroup", null);
+                parameters.Add("p_WarehouseMaster_Code",0);
                 parameters.Add("p_Mode", null);
                 parameters.Add("p_UserMaster_Code", UserMaster_Code);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
@@ -69,8 +71,9 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_LocationName", null);
                 parameters.Add("p_Location", null);
                 parameters.Add("p_LocationGroup", null);
+                parameters.Add("p_WarehouseMaster_Code", 0);
                 parameters.Add("p_Mode", null);
-                parameters.Add("p_UserMaster_Code", 0);
+                parameters.Add("p_UserMaster_Code", _bizsolESMSConnectionDetails.UserMaster_Code);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
                 parameters.Add("O_Status", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
 
@@ -91,6 +94,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_LocationName", null);
                 parameters.Add("p_Location", null);
                 parameters.Add("p_LocationGroup", null);
+                parameters.Add("p_WarehouseMaster_Code", 0);
                 parameters.Add("p_Mode", null);
                 parameters.Add("p_UserMaster_Code", 0);
                 parameters.Add("O_Message", dbType: DbType.String, direction: ParameterDirection.Output, size: 255);
@@ -110,6 +114,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_ItemMaster_Code", Model.Code);
                 parameters.Add("p_LocationName", Model.LocationName);
                 parameters.Add("p_UserMaster_Code", UserMaster_Code);
+                parameters.Add("p_WarehouseMaster_Code", Model.WarehouseMaster_Code);
                 parameters.Add("p_IsCheckExists", IsCheckExists.Trim());
                 var result = await conn.QueryAsync("USP_CreateLocationFromItemMaster", parameters, commandType: CommandType.StoredProcedure);
 
@@ -126,6 +131,8 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_LocationName","" );
                 parameters.Add("p_UserMaster_Code", 0);
                 parameters.Add("p_IsCheckExists", "");
+                parameters.Add("p_WarehouseMaster_Code", 0);
+
                 var result = await conn.QueryAsync("USP_CreateLocationFromItemMaster", parameters, commandType: CommandType.StoredProcedure);
 
                 return result;
@@ -148,7 +155,6 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-
         public async Task<dynamic> ImportLocationForTemp(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblImportLocation importLocation)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))

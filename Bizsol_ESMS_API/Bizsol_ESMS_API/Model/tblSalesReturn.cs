@@ -7,5 +7,6 @@
         public int ReasonMaster_Code { get; set; }
         public string? OrderNo { get; set; }
         public int UserMaster_Code { get; set; }
+        public int WarehouseMaster_Code { get; set; }
     }
 }

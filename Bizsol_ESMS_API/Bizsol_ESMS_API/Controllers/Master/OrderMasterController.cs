@@ -125,14 +125,14 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         [HttpGet]
         [Route("ClientWiseRate")]
-        public async Task<IActionResult> ClientWiseRate(string ClientName, string ItemName)
+        public async Task<IActionResult> ClientWiseRate(string? ClientName="", int ItemMaster_Code=0)
         {
             try
             {
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _Order.ClientWiseRate(_bizsolESMSConnectionDetails, ClientName, ItemName);
+                    var result = await _Order.ClientWiseRate(_bizsolESMSConnectionDetails, ClientName, ItemMaster_Code);
                     return Ok(result);
                 }
                 else
@@ -1598,6 +1598,60 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
 
         #endregion OrderConformation
-        
+
+        #region StockReport
+
+        [HttpGet]
+        [Route("GetDailyStockReport")]
+        public async Task<ActionResult<VM_DailyStockReport>> GetDailyStockReport(string FromDate, string ToDate)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.GetDailyStockReport(_bizsolESMSConnectionDetails, FromDate, ToDate);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        #endregion StockReport
+
+        #region GetScanAndBillData
+
+        [HttpGet]
+        [Route("GetScanAndBillData")]
+        public async Task<IActionResult> GetScanAndBillData()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.GetScanAndBillData(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        #endregion GetScanAndBillData
+
     }
 }

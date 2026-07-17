@@ -133,6 +133,29 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-
+        public async Task<IEnumerable<dynamic>> GetInvoicePaymentReport(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, string FromDate, string ToDate, string PaymentStatus)
+        {
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("FromDate", FromDate);
+                parameters.Add("ToDate", ToDate);
+                parameters.Add("PaymentStatus", PaymentStatus);
+                var result = await conn.QueryAsync<dynamic>("USP_InvoicePaymentReport", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetSaleLossReport(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, string FromDate, string ToDate, string CancelStatus)
+        {
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_FromDate", FromDate);
+                parameters.Add("p_ToDate", ToDate);
+                parameters.Add("p_CancelStatus", CancelStatus);
+                var result = await conn.QueryAsync<dynamic>("USP_SaleLossReport", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
     }
 }

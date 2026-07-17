@@ -13,15 +13,22 @@ namespace Bizsol_ESMS_API.Service
 
             using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
-
                 DynamicParameters parameters = new DynamicParameters();
-
-                string Query = "Select code ,Desp From ReasonMaster";
-                var result = await conn.QueryAsync<dynamic>(Query, parameters, commandType: CommandType.Text);
+                parameters.Add("p_ForUse", "SaleReturn");
+                var result = await conn.QueryAsync<dynamic>("USP_GetReasonMasterByForUse", parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
-
             }
         }
+        public async Task<IEnumerable<dynamic>> GetReasonMasterByForUse(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails,string ForUse)
+        {
 
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_ForUse", ForUse);
+                var result = await conn.QueryAsync<dynamic>("USP_GetReasonMasterByForUse", parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+            }
+        }
     }
 }

@@ -27,6 +27,8 @@ namespace Bizsol_ESMS_API.Controllers.Master
         private readonly ICity _ICity;
         private readonly IStateMaster _StateMaster;
         private readonly ICustomerType _ICustomerType;
+        private readonly IClientTypeMaster _IClientTypeMaster;
+        private readonly IBankMaster _IBankMaster;
         private readonly ICurrentDate _CurrentDate;
         private readonly IOrder _Order; 
         private readonly ICheckRelatedRecord _CheckRelatedRecord;
@@ -38,13 +40,14 @@ namespace Bizsol_ESMS_API.Controllers.Master
         private readonly IStockAuditConfig _StockAuditConfig;
         private readonly IHelpDesk _IHelpdesk;
         private readonly ILogin _ILogin;
+        private readonly ICompanyMaster _CompanyMaster;
          
         public MasterController(IUOM uom, IHSNMaster hsnMaster, IDropDown _IdropDown, ILocationMaster _IlocationMaster, ICategory _Icategory, IGroupMaster _groupMaster
         ,ISubGroupMaster _IsubGroupMaster,IBrandMaster _brandMaster, IWarehouse iWarehouse, IItemMaster iItemMaster, IConfigItemMaster configItemMaster,
         ICity iCity, IStateMaster stateMaster,IUserGroupMaster iUserGroupMaster, IDesignationMaster iDesignationMaster,
-        ICustomerType iCustomerType,ICurrentDate currentDate, IOrder Order, ITATConfiguration iTATConfiguration,
+        ICustomerType iCustomerType, IClientTypeMaster iClientTypeMaster, IBankMaster iBankMaster, ICurrentDate currentDate, IOrder Order, ITATConfiguration iTATConfiguration,
         ICheckRelatedRecord checkRelatedRecord, IEmployeeMaster _IEmployeeMaster, IReasonMaster _IReasonMaster,IHolidayMaster _IHolidayMaster, 
-        IStockAuditConfig _IStockAuditConfig,IMailConfiguration _mailConfiguration, IHelpDesk _HelpDesk, ILogin login)
+        IStockAuditConfig _IStockAuditConfig,IMailConfiguration _mailConfiguration, IHelpDesk _HelpDesk, ILogin login, ICompanyMaster companyMaster)
         {
             _IUOM = uom;
             _IHSNMaster = hsnMaster;
@@ -62,6 +65,8 @@ namespace Bizsol_ESMS_API.Controllers.Master
             _ICity = iCity;
             _StateMaster = stateMaster;
             _ICustomerType = iCustomerType;
+            _IClientTypeMaster = iClientTypeMaster;
+            _IBankMaster = iBankMaster;
             _CurrentDate = currentDate;
             _Order = Order;
             _CheckRelatedRecord = checkRelatedRecord;
@@ -73,6 +78,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
             _StockAuditConfig = _IStockAuditConfig;
             _IHelpdesk = _HelpDesk;
             _ILogin = login;
+            _CompanyMaster = companyMaster;
         }
 
         #region DropDown
@@ -2070,6 +2076,194 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         #endregion StateMaster
 
+        #region ClientTypeMaster
+        [HttpPost]
+        [Route("InsertClientTypeMaster")]
+        public async Task<IActionResult> InsertClientTypeMaster([FromBody] tblClientTypeMaster model, int UserMaster_Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IClientTypeMaster.InsertClientTypeMaster(_bizsolESMSConnectionDetails, model, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ShowClientTypeMaster")]
+        public async Task<IActionResult> ShowClientTypeMaster()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IClientTypeMaster.ShowClientTypeMaster(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ShowClientTypeMasterByCode")]
+        public async Task<IActionResult> ShowClientTypeMasterByCode(int Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IClientTypeMaster.ShowClientTypeMasterByCode(_bizsolESMSConnectionDetails, Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("DeleteClientTypeMaster")]
+        public async Task<ActionResult<spOutputParameter>> DeleteClientTypeMaster(int Code, int UserMaster_Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IClientTypeMaster.DeleteClientTypeMaster(_bizsolESMSConnectionDetails, Code, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        #endregion ClientTypeMaster
+
+        #region BankMaster
+        [HttpPost]
+        [Route("InsertBankMaster")]
+        public async Task<IActionResult> InsertBankMaster([FromBody] tblBankMaster model, int UserMaster_Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IBankMaster.InsertBankMaster(_bizsolESMSConnectionDetails, model, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ShowBankMaster")]
+        public async Task<IActionResult> ShowBankMaster()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IBankMaster.ShowBankMaster(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ShowBankMasterByCode")]
+        public async Task<IActionResult> ShowBankMasterByCode(int Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IBankMaster.ShowBankMasterByCode(_bizsolESMSConnectionDetails, Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("DeleteBankMaster")]
+        public async Task<ActionResult<spOutputParameter>> DeleteBankMaster(int Code, int UserMaster_Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IBankMaster.DeleteBankMaster(_bizsolESMSConnectionDetails, Code, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        #endregion BankMaster
+
         #region AccountMaster
 
         [HttpPost]
@@ -2371,6 +2565,28 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpGet]
+        [Route("GetReasonMasterByForUse")]
+        public async Task<IActionResult> GetReasonMasterByForUse(string ForUse)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _ReasonMaster.GetReasonMasterByForUse(_bizsolESMSConnectionDetails, ForUse);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
         #endregion ReasonMaster
 
         #region TATConfiguration
@@ -2573,6 +2789,55 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
         #endregion HolidayMaster
+
+        #region CompanyMaster
+        [HttpPost]
+        [Route("InsertCompanyMaster")]
+        public async Task<IActionResult> SaveCompanyMaster([FromBody] tblCompanyMaster companyMaster)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _CompanyMaster.SaveCompanyMaster(_bizsolESMSConnectionDetails, companyMaster);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("ShowCompanyMaster")]
+        public async Task<IActionResult> GetCompanyMasterList()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _CompanyMaster.GetCompanyMasterList(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        
+        #endregion CompanyMaster
 
         #region StockAuditConfig
         [HttpPost]

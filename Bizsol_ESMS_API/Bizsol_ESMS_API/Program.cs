@@ -36,8 +36,11 @@ builder.Services.AddTransient<IConfigItemMaster, ConfigItemMasterService>();
 builder.Services.AddTransient<ICity, CityMasterService>();
 builder.Services.AddTransient<IStateMaster,StateMasterServices>();
 builder.Services.AddTransient<ICustomerType,CustomerTypeService>();
+builder.Services.AddTransient<IClientTypeMaster, ClientTypeMasterService>();
+builder.Services.AddTransient<IBankMaster, BankMasterService>();
 builder.Services.AddTransient<ICurrentDate,CurrentDateService>();
 builder.Services.AddTransient<IOrder,OrderService>();
+builder.Services.AddTransient<IOrderCancellation, OrderCancellationService>();
 builder.Services.AddTransient<IMRNMaster,MRNMasterService>();
 builder.Services.AddTransient<IDispatchOrder,DispatchOrderService>();
 builder.Services.AddTransient<IItemOpeningBalance, ItemOpeningBalanceService>();
@@ -53,6 +56,8 @@ builder.Services.AddTransient<IStockAuditConfig, StockAuditConfigService>();
 builder.Services.AddTransient<IHelpDesk, HelpdeskService>();
 builder.Services.AddTransient<ILogin, LoginService>();
 builder.Services.AddTransient<IPaymentEntry, PaymentEntryService>();
+builder.Services.AddTransient<ICompanyMaster, CompanyMasterService>();
+builder.Services.AddTransient<IScanToBill, ScanToBillService>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

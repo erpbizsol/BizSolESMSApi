@@ -17,12 +17,19 @@ namespace Bizsol_ESMS_API.Model
         public string BrandName { get; set; } = "";
         public int ReorderLevel { get; set; } = 0;
         public int ReorderQty { get; set; } = 0;
-        public string LocationName { get; set; }
+        public string? LocationMaster_Codes { get; set; }
+        public List<ItemWarehouseLocationDetail>? ItemWarehouseLocationDetails { get; set; }
         public string BoxPacking { get; set; } = "N";
         public int QtyInBox { get; set; } = 0;
-        public string BatchApplicable { get; set; }
-        public string MaintainExpiry { get; set; } 
-        public string IsActive { get; set; }
-        public double MRPNo { get; set; } = 0;
+        public string? BatchApplicable { get; set; }
+        public string? MaintainExpiry { get; set; } 
+        public string? IsActive { get; set; }
+        public double? MRPNo { get; set; } = 0;
+    }
+
+    public class ItemWarehouseLocationDetail
+    {
+        public int WarehouseMaster_Code { get; set; }
+        public int LocationMaster_Code { get; set; }
     }
 }

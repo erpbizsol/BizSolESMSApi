@@ -496,6 +496,8 @@ namespace Bizsol_ESMS_API.Service
             public int DispatchMaster_Code { get; init; }
             public string ItemCode { get; init; } = string.Empty;
             public double Mrp { get; init; }
+            public double NewMRP { get; init; }
+            public double OldMRP { get; init; }
             public int UserMaster_Code { get; init; }
         }
         public  async Task<dynamic> UpdateDispatchMRPByItemAsync( BizsolESMSConnectionDetails bizsolESMSConnectionDetails,UpdateDispatchMrpRequest request, int UserMaster_Code)
@@ -506,6 +508,8 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_DispatchMaster_Code", request.DispatchMaster_Code);
                 parameters.Add("p_ItemCode", request.ItemCode);
                 parameters.Add("p_Mrp", request.Mrp);
+                parameters.Add("p_NewMRP", request.NewMRP);
+                parameters.Add("p_OldMRP", request.OldMRP);
                 parameters.Add("p_UserMaster_Code", request.UserMaster_Code);
                 var result = await conn.QueryAsync<dynamic>("USP_UpdateDispatchMRPByItem",parameters, commandType: CommandType.StoredProcedure);
                 return result;

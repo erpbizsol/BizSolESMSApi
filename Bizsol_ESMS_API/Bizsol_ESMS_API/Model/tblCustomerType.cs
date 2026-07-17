@@ -11,6 +11,7 @@
         public string IsVendor { get; set; }
         public string ClientType { get; set; }
         public string? BrandMaster_Code { get; set; }
+        public int? CreditDays { get; set; } = 0;
     }
 }
 
