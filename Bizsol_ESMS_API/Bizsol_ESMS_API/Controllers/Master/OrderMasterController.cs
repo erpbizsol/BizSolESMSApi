@@ -302,14 +302,14 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
         [HttpPost]
         [Route("StartDispatchOrderNo")]
-        public async Task<IActionResult> StartDispatchOrderNo(int ScanBy,int OrderMasterCode, int ClientMasterCode)
+        public async Task<IActionResult> StartDispatchOrderNo(int ScanBy, int OrderMasterCode, int ClientMasterCode, string UPIIds = null, int WarehouseMaster_Code = 0, int ReasonMaster_Code = 0)
         {
             try
             {
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _Order.StartDispatchOrderNo(_bizsolESMSConnectionDetails, ScanBy, OrderMasterCode, ClientMasterCode);
+                    var result = await _Order.StartDispatchOrderNo(_bizsolESMSConnectionDetails, ScanBy, OrderMasterCode, ClientMasterCode, UPIIds, WarehouseMaster_Code, ReasonMaster_Code);
                     return Ok(result);
                 }
                 else
@@ -568,6 +568,29 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
                     var result = await _DispatchOrder.GetMarkasCompeteByOrderNo(_bizsolESMSConnectionDetails, Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("GetMarkasPickingCompeteByOrderNo")]
+        public async Task<ActionResult<spOutputParameter>> GetMarkasPickingCompeteByOrderNo(int Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.GetMarkasPickingCompeteByOrderNo(_bizsolESMSConnectionDetails, Code);
                     return Ok(result);
                 }
                 else

@@ -4929,6 +4929,31 @@
               "type": "integer",
               "format": "int32"
             }
+          },
+          {
+            "name": "UPIIds",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "WarehouseMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "ReasonMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
           }
         ],
         "responses": {
@@ -5290,6 +5315,45 @@
       }
     },
     "/api/OrderMaster/GetMarkasCompeteByOrderNo": {
+      "post": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/spOutputParameter"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/spOutputParameter"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/spOutputParameter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/OrderMaster/GetMarkasPickingCompeteByOrderNo": {
       "post": {
         "tags": [
           "OrderMaster"
@@ -7531,6 +7595,161 @@
         }
       }
     },
+    "/api/TicketMaster/Create": {
+      "post": {
+        "tags": [
+          "TicketMaster"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "CompanyCode": {
+                    "type": "string"
+                  },
+                  "TicketType": {
+                    "type": "string"
+                  },
+                  "TicketNo": {
+                    "type": "string"
+                  },
+                  "Priority": {
+                    "type": "string"
+                  },
+                  "ProjectClient": {
+                    "type": "string"
+                  },
+                  "LogDate": {
+                    "type": "string"
+                  },
+                  "Module": {
+                    "type": "string"
+                  },
+                  "RaisedBy": {
+                    "type": "string"
+                  },
+                  "ContactNo": {
+                    "type": "string"
+                  },
+                  "ContactEMail": {
+                    "type": "string"
+                  },
+                  "Source": {
+                    "type": "string"
+                  },
+                  "Description": {
+                    "type": "string"
+                  },
+                  "CreateTicketBy": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "TestedBy": {
+                    "type": "string"
+                  },
+                  "UserModuleMaster_Code": {
+                    "type": "string"
+                  },
+                  "Files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "CompanyCode": {
+                  "style": "form"
+                },
+                "TicketType": {
+                  "style": "form"
+                },
+                "TicketNo": {
+                  "style": "form"
+                },
+                "Priority": {
+                  "style": "form"
+                },
+                "ProjectClient": {
+                  "style": "form"
+                },
+                "LogDate": {
+                  "style": "form"
+                },
+                "Module": {
+                  "style": "form"
+                },
+                "RaisedBy": {
+                  "style": "form"
+                },
+                "ContactNo": {
+                  "style": "form"
+                },
+                "ContactEMail": {
+                  "style": "form"
+                },
+                "Source": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "CreateTicketBy": {
+                  "style": "form"
+                },
+                "TestedBy": {
+                  "style": "form"
+                },
+                "UserModuleMaster_Code": {
+                  "style": "form"
+                },
+                "Files": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/TicketMaster/AttechedFileChecks": {
+      "get": {
+        "tags": [
+          "TicketMaster"
+        ],
+        "parameters": [
+          {
+            "name": "CompanyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "TicketNo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/UserMaster/GetUserMasterList": {
       "get": {
         "tags": [
@@ -8813,6 +9032,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "ticketNo": {
+            "type": "string",
+            "nullable": true
+          },
           "description": {
             "type": "string",
             "nullable": true
@@ -9305,6 +9528,14 @@
             "nullable": true
           },
           "userMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "warehouseMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "reasonMaster_Code": {
             "type": "integer",
             "format": "int32"
           }

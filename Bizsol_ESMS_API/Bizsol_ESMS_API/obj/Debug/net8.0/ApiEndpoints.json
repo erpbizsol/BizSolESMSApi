@@ -3269,6 +3269,32 @@
   },
   {
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
+    "Method": "GetMarkasPickingCompeteByOrderNo",
+    "RelativePath": "api/OrderMaster/GetMarkasPickingCompeteByOrderNo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Bizsol_ESMS_API.Model.spOutputParameter",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
     "Method": "GetOrderConformationList",
     "RelativePath": "api/OrderMaster/GetOrderConformationList",
     "HttpMethod": "GET",
@@ -4009,6 +4035,21 @@
         "Name": "ClientMasterCode",
         "Type": "System.Int32",
         "IsRequired": false
+      },
+      {
+        "Name": "UPIIds",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "WarehouseMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "ReasonMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -4675,6 +4716,118 @@
         "Name": "Dispatch",
         "Type": "Bizsol_ESMS_API.Model.tblManualRateAndQty",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.TicketMasterController",
+    "Method": "AttechedFileChecks",
+    "RelativePath": "api/TicketMaster/AttechedFileChecks",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CompanyCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "TicketNo",
+        "Type": "System.Int64",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.TicketMasterController",
+    "Method": "CreateTicket",
+    "RelativePath": "api/TicketMaster/Create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "CompanyCode",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "TicketType",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "TicketNo",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Priority",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ProjectClient",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "LogDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Module",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "RaisedBy",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContactNo",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ContactEMail",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Source",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Description",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CreateTicketBy",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "TestedBy",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "UserModuleMaster_Code",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Files",
+        "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

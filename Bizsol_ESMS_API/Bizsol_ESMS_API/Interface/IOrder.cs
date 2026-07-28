@@ -34,7 +34,7 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<IEnumerable<dynamic>> GetSalesDispatchData(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int Code);
         public abstract Task<dynamic> UpdateSalesUPIID(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string UPIID);
         public abstract Task<dynamic> UpdateSalesUPIIDAll(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int Code);
-        public abstract Task<dynamic> StartDispatchOrderNo(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int ScanBy, int OrderMasterCode, int ClientMasterCode);
+        public abstract Task<dynamic> StartDispatchOrderNo(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int ScanBy, int OrderMasterCode, int ClientMasterCode, string UPIIds = null, int WarehouseMaster_Code = 0, int ReasonMaster_Code = 0);
         public abstract Task<dynamic> GetOrderConformationList(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,string FromDate,string ToDate);
         public abstract Task<dynamic> ValidateOrderConformation(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int Code,int OTP,int UserMaster_Code);
         public abstract Task<dynamic> ValidateOrderExcelFormat(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string ClientType);

@@ -430,6 +430,8 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_AccountMasterCode", model.ClientMasterCode);
                 parameters.Add("p_ScanNo", model.ScanNo);
                 parameters.Add("p_UserMaster_Code", model.UserMaster_Code);
+                parameters.Add("p_WarehouseMaster_Code", model.WarehouseMaster_Code);
+                parameters.Add("p_ReasonMaster_Code", model.ReasonMaster_Code);
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_SaveScanSalesreturn", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -478,17 +480,18 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-        public async Task<dynamic> StartDispatchOrderNo(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int ScanBy, int OrderMasterCode, int ClientMasterCode)
+        public async Task<dynamic> StartDispatchOrderNo(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int ScanBy, int OrderMasterCode, int ClientMasterCode, string UPIIds = null, int WarehouseMaster_Code = 0, int ReasonMaster_Code = 0)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
                 DynamicParameters parameters = new DynamicParameters();
-                //parameters.Add("p_UPIID",UPIID);
                 parameters.Add("p_AccountMaster_Code", ClientMasterCode);
                 parameters.Add("p_OrderMaster_Code", OrderMasterCode);
-                parameters.Add("p_ReasonMaster_Code", 1);
+                parameters.Add("p_ReasonMaster_Code", ReasonMaster_Code);
                 parameters.Add("p_EntryType", "IMPORT");
                 parameters.Add("p_CreatedBy", ScanBy);
+                parameters.Add("p_UPI_IDs", string.IsNullOrWhiteSpace(UPIIds) ? null : UPIIds.Trim());
+                parameters.Add("p_WarehouseMaster_Code", WarehouseMaster_Code);
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_InsertSalesReturnFromDispatch", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }

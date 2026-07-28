@@ -58,6 +58,7 @@ builder.Services.AddTransient<ILogin, LoginService>();
 builder.Services.AddTransient<IPaymentEntry, PaymentEntryService>();
 builder.Services.AddTransient<ICompanyMaster, CompanyMasterService>();
 builder.Services.AddTransient<IScanToBill, ScanToBillService>();
+builder.Services.AddTransient<ITicketMaster, TicketMasterService>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
