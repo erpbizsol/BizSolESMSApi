@@ -1,5 +1,5 @@
 -- Bank Master: table + stored procedure
--- Run this script on your ESMS MySQL database before using Bank Master.
+-- Run ALTER_BankMaster_IsShowInPSR.sql first if column does not exist.
 
 CREATE TABLE IF NOT EXISTS `bankmaster` (
   `Code` INT NOT NULL AUTO_INCREMENT,
@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS `bankmaster` (
   `Branch` VARCHAR(100) NOT NULL DEFAULT '',
   `Type` VARCHAR(20) NOT NULL DEFAULT '',
   `DefaultCheck` CHAR(1) NOT NULL DEFAULT 'N',
+  `IsShowInPSR` CHAR(1) NOT NULL DEFAULT 'N',
   `IsActive` CHAR(1) NOT NULL DEFAULT 'Y',
   `CreatedBy` INT NULL DEFAULT 0,
   `CreatedOn` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
@@ -17,11 +18,13 @@ CREATE TABLE IF NOT EXISTS `bankmaster` (
   PRIMARY KEY (`Code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+USE `webiz_demo`;
 DROP PROCEDURE IF EXISTS `USP_BankMaster`;
 
 DELIMITER $$
 
-CREATE PROCEDURE `USP_BankMaster`(
+USE `webiz_demo`$$
+CREATE DEFINER=`sa`@`%` PROCEDURE `USP_BankMaster`(
     IN p_Mode VARCHAR(20),
     IN p_Code INT,
     IN p_BankName VARCHAR(100),
@@ -30,6 +33,7 @@ CREATE PROCEDURE `USP_BankMaster`(
     IN p_Branch VARCHAR(100),
     IN p_Type VARCHAR(20),
     IN p_DefaultCheck CHAR(1),
+    IN p_IsShowInPSR CHAR(1),
     IN p_UserMaster_Code INT
 )
 BEGIN
@@ -49,11 +53,8 @@ BEGIN
             SELECT 'Please select Type.' AS Msg, 'N' AS Status, 0 AS Code;
         ELSE
             IF p_Code > 0 THEN
-                SELECT COUNT(1) INTO v_ExistingCount
-                FROM bankmaster
-                WHERE AccountNo = p_AccountNo
-                  AND Code != p_Code
-                  AND IsActive = 'Y';
+                SELECT COUNT(1) INTO v_ExistingCount FROM bankmaster WHERE AccountNo = p_AccountNo AND Code != p_Code
+                AND IsActive = 'Y';
 
                 IF v_ExistingCount > 0 THEN
                     SELECT 'Account No already exists.' AS Msg, 'N' AS Status, p_Code AS Code;
@@ -69,6 +70,7 @@ BEGIN
                         Branch = p_Branch,
                         Type = p_Type,
                         DefaultCheck = IFNULL(p_DefaultCheck, 'N'),
+                        IsShowInPSR = IFNULL(p_IsShowInPSR, 'N'),
                         ModifiedBy = p_UserMaster_Code,
                         ModifiedOn = NOW()
                     WHERE Code = p_Code;
@@ -76,10 +78,8 @@ BEGIN
                     SELECT 'Record updated successfully.' AS Msg, 'Y' AS Status, p_Code AS Code;
                 END IF;
             ELSE
-                SELECT COUNT(1) INTO v_ExistingCount
-                FROM bankmaster
-                WHERE AccountNo = p_AccountNo
-                  AND IsActive = 'Y';
+                SELECT COUNT(1) INTO v_ExistingCount FROM bankmaster WHERE AccountNo = p_AccountNo
+                AND IsActive = 'Y';
 
                 IF v_ExistingCount > 0 THEN
                     SELECT 'Account No already exists.' AS Msg, 'N' AS Status, 0 AS Code;
@@ -89,9 +89,9 @@ BEGIN
                     END IF;
 
                     INSERT INTO bankmaster
-                        (BankName, AccountNo, IFSCCode, Branch, Type, DefaultCheck, IsActive, CreatedBy, CreatedOn)
+                        (BankName, AccountNo, IFSCCode, Branch, Type, DefaultCheck, IsShowInPSR, IsActive, CreatedBy, CreatedOn)
                     VALUES
-                        (p_BankName, p_AccountNo, p_IFSCCode, p_Branch, p_Type, IFNULL(p_DefaultCheck, 'N'), 'Y', p_UserMaster_Code, NOW());
+                        (p_BankName, p_AccountNo, p_IFSCCode, p_Branch, p_Type, IFNULL(p_DefaultCheck, 'N'), IFNULL(p_IsShowInPSR, 'N'), 'Y', p_UserMaster_Code, NOW());
 
                     SET v_NewCode = LAST_INSERT_ID();
                     SELECT 'Record saved successfully.' AS Msg, 'Y' AS Status, v_NewCode AS Code;
@@ -100,26 +100,22 @@ BEGIN
         END IF;
 
     ELSEIF p_Mode = 'DELETE' THEN
-        UPDATE bankmaster
-        SET IsActive = 'N',
-            ModifiedBy = p_UserMaster_Code,
-            ModifiedOn = NOW()
-        WHERE Code = p_Code;
-
+        DELETE FROM bankmaster WHERE Code = p_Code;
         SELECT 'Record deleted successfully.' AS Msg, 'Y' AS Status, p_Code AS Code;
 
     ELSEIF p_Mode = 'LOCATE' THEN
         SELECT
+            ROW_NUMBER() OVER (ORDER BY Code Desc) AS `S.No`,
             Code,
             BankName AS `Bank Name`,
             AccountNo AS `Account No`,
             IFSCCode AS `IFSC Code`,
             Branch,
             Type,
-            CASE WHEN DefaultCheck = 'Y' THEN 'Yes' ELSE 'No' END AS `Default Check`
+            CASE WHEN DefaultCheck = 'Y' THEN 'Yes' ELSE 'No' END AS `Default Check`,
+            CASE WHEN IsShowInPSR = 'Y' THEN 'Yes' ELSE 'No' END AS `Is Show In PSR`
         FROM bankmaster
-        WHERE IsActive = 'Y'
-        ORDER BY Code DESC;
+        WHERE IsActive = 'Y';
 
     ELSEIF p_Mode = 'GETBYCODE' THEN
         SELECT
@@ -129,7 +125,8 @@ BEGIN
             IFSCCode,
             Branch,
             Type,
-            DefaultCheck
+            DefaultCheck,
+            IsShowInPSR
         FROM bankmaster
         WHERE Code = p_Code
           AND IsActive = 'Y';

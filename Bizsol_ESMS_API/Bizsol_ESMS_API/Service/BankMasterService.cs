@@ -23,6 +23,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Branch", model.Branch);
                 parameters.Add("p_Type", model.Type);
                 parameters.Add("p_DefaultCheck", model.DefaultCheck);
+                parameters.Add("p_IsShowInPSR", model.IsShowInPSR);
                 parameters.Add("p_UserMaster_Code", UserMaster_Code);
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
 
@@ -48,6 +49,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Branch", "");
                 parameters.Add("p_Type", "");
                 parameters.Add("p_DefaultCheck", "N");
+                parameters.Add("p_IsShowInPSR", "N");
                 parameters.Add("p_UserMaster_Code", UserMaster_Code);
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
 
@@ -73,6 +75,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Branch", "");
                 parameters.Add("p_Type", "");
                 parameters.Add("p_DefaultCheck", "N");
+                parameters.Add("p_IsShowInPSR", "N");
                 parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();
@@ -92,6 +95,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Branch", "");
                 parameters.Add("p_Type", "");
                 parameters.Add("p_DefaultCheck", "N");
+                parameters.Add("p_IsShowInPSR", "N");
                 parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
                 return result.ToList();

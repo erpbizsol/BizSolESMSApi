@@ -9,5 +9,6 @@ namespace Bizsol_ESMS_API.Model
         public string? Branch { get; set; } = "";
         public string? Type { get; set; } = "";
         public string DefaultCheck { get; set; } = "N";
+        public string IsShowInPSR { get; set; } = "N";
     }
 }

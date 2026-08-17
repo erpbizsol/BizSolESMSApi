@@ -133,7 +133,7 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-        public async Task<IEnumerable<dynamic>> GetInvoicePaymentReport(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, string FromDate, string ToDate, string PaymentStatus)
+        public async Task<IEnumerable<dynamic>> GetInvoicePaymentReport(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, string FromDate, string ToDate, string PaymentStatus, int AccountMaster_Code)
         {
             using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
@@ -141,6 +141,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("FromDate", FromDate);
                 parameters.Add("ToDate", ToDate);
                 parameters.Add("PaymentStatus", PaymentStatus);
+                parameters.Add("p_AccountMaster_Code", AccountMaster_Code);
                 var result = await conn.QueryAsync<dynamic>("USP_InvoicePaymentReport", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }

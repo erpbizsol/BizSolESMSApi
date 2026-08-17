@@ -3394,6 +3394,32 @@
   },
   {
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
+    "Method": "GetOrderPickingPrint",
+    "RelativePath": "api/OrderMaster/GetOrderPickingPrint",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "OrderMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Bizsol_ESMS_API.Model.VM_OrderPickingPrint",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
     "Method": "GetPackedOrderNoList",
     "RelativePath": "api/OrderMaster/GetPackedOrderNoList",
     "HttpMethod": "GET",
@@ -4468,6 +4494,11 @@
         "Name": "PaymentStatus",
         "Type": "System.String",
         "IsRequired": false
+      },
+      {
+        "Name": "AccountMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -4821,6 +4852,46 @@
       },
       {
         "Name": "UserModuleMaster_Code",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Assigned",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "AssignedText",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "CommittedDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "EstimatedTime",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "WorkType",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "WorkTypeText",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Employee_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "EmployeeName",
         "Type": "System.String",
         "IsRequired": false
       },

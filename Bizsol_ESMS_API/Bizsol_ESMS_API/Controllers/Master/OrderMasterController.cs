@@ -99,6 +99,29 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
 
+        [HttpGet]
+        [Route("GetOrderPickingPrint")]
+        public async Task<ActionResult<VM_OrderPickingPrint>> GetOrderPickingPrint(int OrderMaster_Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.GetOrderPickingPrint(_bizsolESMSConnectionDetails, OrderMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         [HttpPost]
         [Route("DeleteOrderMaster")]
         public async Task<ActionResult<spOutputParameter>> DeleteOrderMaster(int Code,int UserMaster_Code)

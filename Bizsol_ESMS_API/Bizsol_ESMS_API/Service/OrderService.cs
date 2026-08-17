@@ -628,5 +628,23 @@ namespace Bizsol_ESMS_API.Service
                 return result.ToList();
             }
         }
+        public async Task<VM_OrderPickingPrint> GetOrderPickingPrint(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int OrderMaster_Code)
+        {
+            VM_OrderPickingPrint vmOrderPickingPrint = new VM_OrderPickingPrint();
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_OrderMaster_Code", OrderMaster_Code);
+
+                using var multi = await conn.QueryMultipleAsync(
+                    "call USP_GetOrderPickingPrint(@p_OrderMaster_Code)",
+                    parameters,
+                    commandType: CommandType.Text);
+
+                vmOrderPickingPrint.OrderHeader = (await multi.ReadAsync<dynamic>()).ToList();
+                vmOrderPickingPrint.OrderDetails = (await multi.ReadAsync<dynamic>()).ToList();
+            }
+            return vmOrderPickingPrint;
+        }
     }
 }

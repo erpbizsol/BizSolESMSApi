@@ -209,14 +209,14 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
         [HttpGet]
         [Route("GetInvoicePaymentReport")]
-        public async Task<IActionResult> GetInvoicePaymentReport(string FromDate, string ToDate, string PaymentStatus = "All")
+        public async Task<IActionResult> GetInvoicePaymentReport(string FromDate, string ToDate, string PaymentStatus = "All", int AccountMaster_Code = 0)
         {
             try
             {
                 var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
                 if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
                 {
-                    var result = await _report.GetInvoicePaymentReport(_bizsolESMSConnectionDetails, FromDate, ToDate, PaymentStatus);
+                    var result = await _report.GetInvoicePaymentReport(_bizsolESMSConnectionDetails, FromDate, ToDate, PaymentStatus, AccountMaster_Code);
                     return Ok(result);
                 }
                 else

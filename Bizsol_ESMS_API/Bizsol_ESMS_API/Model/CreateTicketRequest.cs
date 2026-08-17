@@ -17,5 +17,13 @@ namespace Bizsol_ESMS_API.Model
         public int CreateTicketBy { get; set; }
         public string? TestedBy { get; set; }
         public string? UserModuleMaster_Code { get; set; }
+        public int Assigned { get; set; }
+        public string? AssignedText { get; set; }
+        public string? CommittedDate { get; set; }
+        public string? EstimatedTime { get; set; }
+        public int WorkType { get; set; }
+        public string? WorkTypeText { get; set; }
+        public int Employee_Code { get; set; }
+        public string? EmployeeName { get; set; }
     }
 }

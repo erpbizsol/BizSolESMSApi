@@ -8,5 +8,7 @@ namespace Bizsol_ESMS_API.Model
         public string? TicketNo { get; set; }
         public bool EmailSent { get; set; }
         public int AttachmentCount { get; set; }
+        public bool Assigned { get; set; }
+        public bool AssignEmailSent { get; set; }
     }
 }

@@ -4627,6 +4627,45 @@
         }
       }
     },
+    "/api/OrderMaster/GetOrderPickingPrint": {
+      "get": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "OrderMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_OrderPickingPrint"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_OrderPickingPrint"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_OrderPickingPrint"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/OrderMaster/DeleteOrderMaster": {
       "post": {
         "tags": [
@@ -7345,6 +7384,15 @@
               "type": "string",
               "default": "All"
             }
+          },
+          {
+            "name": "AccountMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
           }
         ],
         "responses": {
@@ -7652,6 +7700,33 @@
                   "UserModuleMaster_Code": {
                     "type": "string"
                   },
+                  "Assigned": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AssignedText": {
+                    "type": "string"
+                  },
+                  "CommittedDate": {
+                    "type": "string"
+                  },
+                  "EstimatedTime": {
+                    "type": "string"
+                  },
+                  "WorkType": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "WorkTypeText": {
+                    "type": "string"
+                  },
+                  "Employee_Code": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "EmployeeName": {
+                    "type": "string"
+                  },
                   "Files": {
                     "type": "array",
                     "items": {
@@ -7705,6 +7780,30 @@
                   "style": "form"
                 },
                 "UserModuleMaster_Code": {
+                  "style": "form"
+                },
+                "Assigned": {
+                  "style": "form"
+                },
+                "AssignedText": {
+                  "style": "form"
+                },
+                "CommittedDate": {
+                  "style": "form"
+                },
+                "EstimatedTime": {
+                  "style": "form"
+                },
+                "WorkType": {
+                  "style": "form"
+                },
+                "WorkTypeText": {
+                  "style": "form"
+                },
+                "Employee_Code": {
+                  "style": "form"
+                },
+                "EmployeeName": {
                   "style": "form"
                 },
                 "Files": {
@@ -8308,6 +8407,22 @@
         },
         "additionalProperties": false
       },
+      "VM_OrderPickingPrint": {
+        "type": "object",
+        "properties": {
+          "orderHeader": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "orderDetails": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "VM_SaveDispatchOrder": {
         "type": "object",
         "properties": {
@@ -8479,6 +8594,10 @@
             "nullable": true
           },
           "defaultCheck": {
+            "type": "string",
+            "nullable": true
+          },
+          "isShowInPSR": {
             "type": "string",
             "nullable": true
           }
