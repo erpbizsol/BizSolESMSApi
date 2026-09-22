@@ -158,5 +158,16 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+        public async Task<IEnumerable<dynamic>> GetMRNRateComparisonReport(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, string FromDate, string ToDate)
+        {
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_FromDate", FromDate);
+                parameters.Add("p_ToDate", ToDate);
+                var result = await conn.QueryAsync<dynamic>("USP_MRNRateComparisonReports", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
     }
 }

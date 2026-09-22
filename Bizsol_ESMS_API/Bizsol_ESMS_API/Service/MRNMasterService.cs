@@ -173,6 +173,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_WarehouseName", ImportMRNMaster.WarehouseName);
                 parameters.Add("p_BrandName", ImportMRNMaster.BrandName);
                 parameters.Add("p_VehicleNo", ImportMRNMaster.VehicleNo);
+                parameters.Add("p_BillNo", ImportMRNMaster.BillNo);
                 parameters.Add("p_UserMaster_Code", ImportMRNMaster.UserMaster_Code);
                 parameters.Add("p_MRNDate", ImportMRNMaster.MRNDate);
                 parameters.Add("p_jsonData", json);
@@ -193,6 +194,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_WarehouseName", ImportMRNMaster.WarehouseName);
                 parameters.Add("p_BrandName", ImportMRNMaster.BrandName);
                 parameters.Add("p_VehicleNo", ImportMRNMaster.VehicleNo);
+                parameters.Add("p_BillNo", ImportMRNMaster.BillNo);
                 parameters.Add("p_UserMaster_Code", ImportMRNMaster.UserMaster_Code);
                 parameters.Add("p_MRNDate", ImportMRNMaster.MRNDate);
                 parameters.Add("p_jsonData", json);

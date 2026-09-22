@@ -764,6 +764,50 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
         [HttpGet]
+        [Route("GetDispatchPdfAmountDetail")]
+        public async Task<IActionResult> GetDispatchPdfAmountDetail(int DispatchMaster_Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.GetDispatchPdfAmountDetail(_bizsolESMSConnectionDetails, DispatchMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("SaveDispatchPdfAmountDetail")]
+        public async Task<IActionResult> SaveDispatchPdfAmountDetail([FromBody] tblDispatchPdfAmount Amount)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.SaveDispatchPdfAmountDetail(_bizsolESMSConnectionDetails, Amount);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
         [Route("GetDispatchValidationDetail")]
         public async Task<IActionResult> GetDispatchValidationDetail()
         {
@@ -1030,6 +1074,126 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 return StatusCode(500, ex.Message);
             }
         }
+        [HttpPost]
+        [Route("GetUpiDetailsByItemCode")]
+        public async Task<IActionResult> GetUpiDetailsByItemCode(int DispatchMaster_Code, string ItemCode)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.GetUpiDetailsByItemCode(_bizsolESMSConnectionDetails, DispatchMaster_Code, ItemCode);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("CheckMailSend")]
+        public async Task<IActionResult> CheckMailSend(int DispatchMaster_Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.CheckMailSend(_bizsolESMSConnectionDetails, DispatchMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("UpdateMailSend")]
+        public async Task<IActionResult> UpdateMailSend(int DispatchMaster_Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.UpdateMailSend(_bizsolESMSConnectionDetails, DispatchMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("CheckOrderPacked")]
+        public async Task<IActionResult> CheckOrderPacked(int DispatchMaster_Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.CheckOrderPacked(_bizsolESMSConnectionDetails, DispatchMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("DeleteDispatchUpiDetail")]
+        public async Task<IActionResult> DeleteDispatchUpiDetail(int Code)
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _DispatchOrder.DeleteDispatchUpiDetail(_bizsolESMSConnectionDetails, Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         #endregion Dispatch
 
         #region ItemOpeningBalance

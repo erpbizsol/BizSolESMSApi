@@ -532,5 +532,104 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+        public async Task<dynamic> GetUpiDetailsByItemCode(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int DispatchMaster_Code, string ItemCode)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "GET");
+                parameters.Add("p_Code",0);
+                parameters.Add("p_DispatchMaster_Code", DispatchMaster_Code);
+                parameters.Add("p_ItemCode", ItemCode.Trim());
+                var result = await conn.QueryAsync<dynamic>("USP_UpiDetailsByItemCode", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> DeleteDispatchUpiDetail(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "DELETE");
+                parameters.Add("p_Code", Code);
+                parameters.Add("p_DispatchMaster_Code", 0);
+                parameters.Add("p_ItemCode", "");
+                var result = await conn.QueryAsync<dynamic>("USP_UpiDetailsByItemCode", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> CheckMailSend(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int DispatchMaster_Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "GET");
+                parameters.Add("p_Code", DispatchMaster_Code);
+                parameters.Add("p_UserMasterCode", 0);
+                var result = await conn.QueryAsync<dynamic>("USP_DispatchMaster_MailSend", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> UpdateMailSend(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int DispatchMaster_Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "UPDATE");
+                parameters.Add("p_Code", DispatchMaster_Code);
+                parameters.Add("p_UserMasterCode", bizsolESMSConnectionDetails.UserMaster_Code);
+                var result = await conn.QueryAsync<dynamic>("USP_DispatchMaster_MailSend", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> CheckOrderPacked(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int DispatchMaster_Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "CHECK");
+                parameters.Add("p_Code", DispatchMaster_Code);
+                parameters.Add("p_UserMasterCode", 0);
+                var result = await conn.QueryAsync<dynamic>("USP_DispatchMaster_MailSend", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<IEnumerable<dynamic>> GetDispatchPdfAmountDetail(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int DispatchMaster_Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "GET");
+                parameters.Add("p_DispatchMaster_Code", DispatchMaster_Code);
+                parameters.Add("p_Total", 0);
+                parameters.Add("p_AddType", "");
+                parameters.Add("p_AddValue", 0);
+                parameters.Add("p_LessType", "");
+                parameters.Add("p_LessValue", 0);
+                parameters.Add("p_NetAmount", 0);
+                parameters.Add("p_IsManual", "N");
+                var result = await conn.QueryAsync<dynamic>("USP_DispatchPdfAmountDetail", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+        public async Task<dynamic> SaveDispatchPdfAmountDetail(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, tblDispatchPdfAmount Amount)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                var isManual = string.Equals((Amount.IsManual ?? "N").Trim(), "Y", StringComparison.OrdinalIgnoreCase);
+                parameters.Add("p_Mode", "SAVE");
+                parameters.Add("p_DispatchMaster_Code", Amount.DispatchMaster_Code);
+                parameters.Add("p_Total", Amount.Total);
+                parameters.Add("p_AddType", string.IsNullOrWhiteSpace(Amount.AddType) ? "%" : Amount.AddType.Trim());
+                parameters.Add("p_AddValue", isManual ? 0 : Amount.AddValue);
+                parameters.Add("p_LessType", string.IsNullOrWhiteSpace(Amount.LessType) ? "%" : Amount.LessType.Trim());
+                parameters.Add("p_LessValue", isManual ? 0 : Amount.LessValue);
+                parameters.Add("p_NetAmount", Amount.NetAmount);
+                parameters.Add("p_IsManual", isManual ? "Y" : "N");
+                var result = await conn.QueryAsync<dynamic>("USP_DispatchPdfAmountDetail", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
     }
 }

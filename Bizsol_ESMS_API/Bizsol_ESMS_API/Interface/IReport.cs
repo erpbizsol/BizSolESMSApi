@@ -15,5 +15,6 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<IEnumerable<dynamic>> ResetGoldenCruiserQRDetails(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
         public abstract Task<IEnumerable<dynamic>> GetInvoicePaymentReport(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string FromDate, string ToDate, string PaymentStatus, int AccountMaster_Code);
         public abstract Task<IEnumerable<dynamic>> GetSaleLossReport(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string FromDate, string ToDate, string CancelStatus);
+        public abstract Task<IEnumerable<dynamic>> GetMRNRateComparisonReport(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string FromDate, string ToDate);
     }
 }

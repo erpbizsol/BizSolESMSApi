@@ -35,5 +35,12 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<IEnumerable<dynamic>> GetOrderDetailsDataByCodes(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,string Codes);
         public abstract Task<dynamic> SaveManualDispatchBoxValidation(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblDispatchBoxValidation Dispatch);
         public abstract Task<dynamic> UpdateDispatchMRPByItemAsync(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,UpdateDispatchMrpRequest request , int UserMaster_Code);
+        public abstract Task<dynamic> GetUpiDetailsByItemCode(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int DispatchMaster_Code, string ItemCode);
+        public abstract Task<dynamic> DeleteDispatchUpiDetail(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int Code);
+        public abstract Task<dynamic> CheckMailSend(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int DispatchMaster_Code);
+        public abstract Task<dynamic> UpdateMailSend(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int DispatchMaster_Code);
+        public abstract Task<dynamic> CheckOrderPacked(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int DispatchMaster_Code);
+        public abstract Task<IEnumerable<dynamic>> GetDispatchPdfAmountDetail(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int DispatchMaster_Code);
+        public abstract Task<dynamic> SaveDispatchPdfAmountDetail(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, tblDispatchPdfAmount Amount);
     }
 }

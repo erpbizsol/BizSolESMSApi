@@ -615,6 +615,7 @@ namespace Bizsol_ESMS_API.Service
             vmDailyStockReport.Top10MinimumOrderParty = CommonFunctions.DatatableToDynamicList(dataTables[12]);
             vmDailyStockReport.Top10MaximumOrderParty = CommonFunctions.DatatableToDynamicList(dataTables[13]);
             vmDailyStockReport.ReorderLevelData = CommonFunctions.DatatableToDynamicList(dataTables[14]);
+            vmDailyStockReport.UserWeeklyReport = CommonFunctions.DatatableToDynamicList(dataTables[15]);
             return vmDailyStockReport;
         }
         public async Task<IEnumerable<dynamic>> GetScanAndBillData(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
