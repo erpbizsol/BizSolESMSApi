@@ -41,13 +41,14 @@ namespace Bizsol_ESMS_API.Controllers.Master
         private readonly IHelpDesk _IHelpdesk;
         private readonly ILogin _ILogin;
         private readonly ICompanyMaster _CompanyMaster;
+        private readonly IFixParameter _IFixParameter;
          
         public MasterController(IUOM uom, IHSNMaster hsnMaster, IDropDown _IdropDown, ILocationMaster _IlocationMaster, ICategory _Icategory, IGroupMaster _groupMaster
         ,ISubGroupMaster _IsubGroupMaster,IBrandMaster _brandMaster, IWarehouse iWarehouse, IItemMaster iItemMaster, IConfigItemMaster configItemMaster,
         ICity iCity, IStateMaster stateMaster,IUserGroupMaster iUserGroupMaster, IDesignationMaster iDesignationMaster,
         ICustomerType iCustomerType, IClientTypeMaster iClientTypeMaster, IBankMaster iBankMaster, ICurrentDate currentDate, IOrder Order, ITATConfiguration iTATConfiguration,
         ICheckRelatedRecord checkRelatedRecord, IEmployeeMaster _IEmployeeMaster, IReasonMaster _IReasonMaster,IHolidayMaster _IHolidayMaster, 
-        IStockAuditConfig _IStockAuditConfig,IMailConfiguration _mailConfiguration, IHelpDesk _HelpDesk, ILogin login, ICompanyMaster companyMaster)
+        IStockAuditConfig _IStockAuditConfig,IMailConfiguration _mailConfiguration, IHelpDesk _HelpDesk, ILogin login, ICompanyMaster companyMaster, IFixParameter fixParameter)
         {
             _IUOM = uom;
             _IHSNMaster = hsnMaster;
@@ -79,6 +80,7 @@ namespace Bizsol_ESMS_API.Controllers.Master
             _IHelpdesk = _HelpDesk;
             _ILogin = login;
             _CompanyMaster = companyMaster;
+            _IFixParameter = fixParameter;
         }
 
         #region DropDown
@@ -3244,6 +3246,49 @@ namespace Bizsol_ESMS_API.Controllers.Master
                 {
                     return StatusCode(500, "Error To Fetch Connection String");
                 }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("VerifyFixParameterConfigAccess")]
+        public async Task<IActionResult> VerifyFixParameterConfigAccess(int UserMaster_Code, string? Password)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IFixParameter.VerifyFixParameterConfigAccess(_bizsolESMSConnectionDetails, UserMaster_Code, Password);
+                    return Ok(result);
+                }
+
+                return StatusCode(500, "Error To Fetch Connection String");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("SaveFixParameter")]
+        public async Task<IActionResult> SaveFixParameter([FromBody] Dictionary<string, object?> model, int UserMaster_Code, string Password)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var jsonData = System.Text.Json.JsonSerializer.Serialize(model);
+                    var result = await _IFixParameter.SaveFixParameter(_bizsolESMSConnectionDetails, UserMaster_Code, Password, jsonData);
+                    return Ok(result);
+                }
+
+                return StatusCode(500, "Error To Fetch Connection String");
             }
             catch (Exception ex)
             {
