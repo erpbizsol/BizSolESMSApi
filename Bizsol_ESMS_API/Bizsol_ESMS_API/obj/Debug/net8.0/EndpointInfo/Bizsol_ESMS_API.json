@@ -3572,6 +3572,92 @@
         }
       }
     },
+    "/api/Master/VerifyFixParameterConfigAccess": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "UserMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Password",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/SaveFixParameter": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "UserMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Password",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": { }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": { }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": { }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": { }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/MRNMaster/SaveMRNMaster": {
       "post": {
         "tags": [
@@ -5617,6 +5703,64 @@
         }
       }
     },
+    "/api/OrderMaster/GetDispatchPdfAmountDetail": {
+      "get": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "DispatchMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderMaster/SaveDispatchPdfAmountDetail": {
+      "post": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblDispatchPdfAmount"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblDispatchPdfAmount"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblDispatchPdfAmount"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblDispatchPdfAmount"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/OrderMaster/GetDispatchValidationDetail": {
       "get": {
         "tags": [
@@ -5914,6 +6058,123 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderMaster/GetUpiDetailsByItemCode": {
+      "post": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "DispatchMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ItemCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderMaster/CheckMailSend": {
+      "get": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "DispatchMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderMaster/UpdateMailSend": {
+      "get": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "DispatchMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderMaster/CheckOrderPacked": {
+      "get": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "DispatchMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderMaster/DeleteDispatchUpiDetail": {
+      "get": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -7438,6 +7699,363 @@
         }
       }
     },
+    "/api/Report/GetMRNRateComparisonReport": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "FromDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ToDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Report/GetDispatchOrderRateComparisonReport": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "FromDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ToDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "AccountMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/RetailerReplacementIn/ShowRetailerReplacementIn": {
+      "get": {
+        "tags": [
+          "RetailerReplacementIn"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/RetailerReplacementIn/ShowRetailerReplacementInByCode": {
+      "get": {
+        "tags": [
+          "RetailerReplacementIn"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_RetailerReplacementInList"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_RetailerReplacementInList"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_RetailerReplacementInList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/RetailerReplacementIn/SaveRetailerReplacementIn": {
+      "post": {
+        "tags": [
+          "RetailerReplacementIn"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_RetailerReplacementIn"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_RetailerReplacementIn"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_RetailerReplacementIn"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_RetailerReplacementIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/RetailerReplacementIn/DeleteRetailerReplacementIn": {
+      "post": {
+        "tags": [
+          "RetailerReplacementIn"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/RetailerReplacementIn/GetBrandMasterListForReplacement": {
+      "get": {
+        "tags": [
+          "RetailerReplacementIn"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/RetailerReplacementOut/ShowRetailerReplacementOut": {
+      "get": {
+        "tags": [
+          "RetailerReplacementOut"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/RetailerReplacementOut/ShowRetailerReplacementOutByCode": {
+      "get": {
+        "tags": [
+          "RetailerReplacementOut"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_RetailerReplacementOutList"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_RetailerReplacementOutList"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_RetailerReplacementOutList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/RetailerReplacementOut/ShowDataByEntryNo": {
+      "get": {
+        "tags": [
+          "RetailerReplacementOut"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_RetailerReplacementOutList"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_RetailerReplacementOutList"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_RetailerReplacementOutList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/RetailerReplacementOut/GetEntryNoList": {
+      "get": {
+        "tags": [
+          "RetailerReplacementOut"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/RetailerReplacementOut/GetBrandMasterListForReplacement": {
+      "get": {
+        "tags": [
+          "RetailerReplacementOut"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/RetailerReplacementOut/SaveRetailerReplacementOut": {
+      "post": {
+        "tags": [
+          "RetailerReplacementOut"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_RetailerReplacementOut"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_RetailerReplacementOut"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_RetailerReplacementOut"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_RetailerReplacementOut"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/RetailerReplacementOut/DeleteRetailerReplacementOut": {
+      "post": {
+        "tags": [
+          "RetailerReplacementOut"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/ScanToBill/SaveItemScanToBill": {
       "post": {
         "tags": [
@@ -8104,6 +8722,287 @@
           }
         }
       }
+    },
+    "/api/VendorReplacementIn/ShowVendorReplacementIn": {
+      "get": {
+        "tags": [
+          "VendorReplacementIn"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/VendorReplacementIn/ShowVendorReplacementInByCode": {
+      "get": {
+        "tags": [
+          "VendorReplacementIn"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_VendorReplacementInList"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_VendorReplacementInList"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_VendorReplacementInList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/VendorReplacementIn/ShowDataByEntryNo": {
+      "get": {
+        "tags": [
+          "VendorReplacementIn"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_VendorReplacementInList"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_VendorReplacementInList"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_VendorReplacementInList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/VendorReplacementIn/GetEntryNoList": {
+      "get": {
+        "tags": [
+          "VendorReplacementIn"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/VendorReplacementIn/SaveVendorReplacementIn": {
+      "post": {
+        "tags": [
+          "VendorReplacementIn"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_VendorReplacementIn"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_VendorReplacementIn"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_VendorReplacementIn"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_VendorReplacementIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/VendorReplacementIn/DeleteVendorReplacementIn": {
+      "post": {
+        "tags": [
+          "VendorReplacementIn"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/VendorReplacementOut/ShowVendorReplacementOut": {
+      "get": {
+        "tags": [
+          "VendorReplacementOut"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/VendorReplacementOut/ShowVendorReplacementOutByCode": {
+      "get": {
+        "tags": [
+          "VendorReplacementOut"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_VendorReplacementOutList"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_VendorReplacementOutList"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_VendorReplacementOutList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/VendorReplacementOut/SaveVendorReplacementOut": {
+      "post": {
+        "tags": [
+          "VendorReplacementOut"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_VendorReplacementOut"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_VendorReplacementOut"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_VendorReplacementOut"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_VendorReplacementOut"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/VendorReplacementOut/DeleteVendorReplacementOut": {
+      "post": {
+        "tags": [
+          "VendorReplacementOut"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/VendorReplacementOut/GetBrandMasterListForReplacement": {
+      "get": {
+        "tags": [
+          "VendorReplacementOut"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -8315,6 +9214,11 @@
             "type": "array",
             "items": { },
             "nullable": true
+          },
+          "userWeeklyReport": {
+            "type": "array",
+            "items": { },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -8423,6 +9327,78 @@
         },
         "additionalProperties": false
       },
+      "VM_RetailerReplacementIn": {
+        "type": "object",
+        "properties": {
+          "retailerReplacementIn": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/tblRetailerReplacementIn"
+            },
+            "nullable": true
+          },
+          "retailerReplacementInDetail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/tblRetailerReplacementInDetail"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VM_RetailerReplacementInList": {
+        "type": "object",
+        "properties": {
+          "retailerReplacementIn": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "retailerReplacementInDetail": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VM_RetailerReplacementOut": {
+        "type": "object",
+        "properties": {
+          "retailerReplacementOut": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/tblRetailerReplacementOut"
+            },
+            "nullable": true
+          },
+          "retailerReplacementOutDetail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/tblRetailerReplacementOutDetail"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VM_RetailerReplacementOutList": {
+        "type": "object",
+        "properties": {
+          "retailerReplacementOut": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "retailerReplacementOutDetail": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "VM_SaveDispatchOrder": {
         "type": "object",
         "properties": {
@@ -8438,6 +9414,78 @@
             "items": {
               "$ref": "#/components/schemas/tblDispatchOrderDetail"
             },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VM_VendorReplacementIn": {
+        "type": "object",
+        "properties": {
+          "vendorReplacementIn": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/tblVendorReplacementIn"
+            },
+            "nullable": true
+          },
+          "vendorReplacementInDetail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/tblVendorReplacementInDetail"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VM_VendorReplacementInList": {
+        "type": "object",
+        "properties": {
+          "vendorReplacementIn": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "vendorReplacementInDetail": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VM_VendorReplacementOut": {
+        "type": "object",
+        "properties": {
+          "vendorReplacementOut": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/tblVendorReplacementOut"
+            },
+            "nullable": true
+          },
+          "vendorReplacementOutDetail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/tblVendorReplacementOutDetail"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VM_VendorReplacementOutList": {
+        "type": "object",
+        "properties": {
+          "vendorReplacementOut": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "vendorReplacementOutDetail": {
+            "type": "array",
+            "items": { },
             "nullable": true
           }
         },
@@ -8748,6 +9796,10 @@
             "nullable": true
           },
           "picklistNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "isReplacement": {
             "type": "string",
             "nullable": true
           },
@@ -9071,6 +10123,44 @@
         },
         "additionalProperties": false
       },
+      "tblDispatchPdfAmount": {
+        "type": "object",
+        "properties": {
+          "dispatchMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "number",
+            "format": "double"
+          },
+          "addType": {
+            "type": "string",
+            "nullable": true
+          },
+          "addValue": {
+            "type": "number",
+            "format": "double"
+          },
+          "lessType": {
+            "type": "string",
+            "nullable": true
+          },
+          "lessValue": {
+            "type": "number",
+            "format": "double"
+          },
+          "netAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "isManual": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "tblEmployeeMaster": {
         "type": "object",
         "properties": {
@@ -9238,6 +10328,10 @@
             "nullable": true
           },
           "vehicleNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "billNo": {
             "type": "string",
             "nullable": true
           },
@@ -9790,6 +10884,98 @@
         },
         "additionalProperties": false
       },
+      "tblRetailerReplacementIn": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "entryNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "entryDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "accountMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "brandMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "remark": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "tblRetailerReplacementInDetail": {
+        "type": "object",
+        "properties": {
+          "qty": {
+            "type": "number",
+            "format": "double"
+          },
+          "itemMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "tblRetailerReplacementOut": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "entryNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "entryDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "accountMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "brandMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "retailerReplacementIn_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "remark": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "tblRetailerReplacementOutDetail": {
+        "type": "object",
+        "properties": {
+          "qty": {
+            "type": "number",
+            "format": "double"
+          },
+          "itemMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "tblSalesReturn": {
         "type": "object",
         "properties": {
@@ -10326,6 +11512,98 @@
           "option": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "tblVendorReplacementIn": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "entryNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "entryDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "accountMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "brandMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "vendorReplacementOut_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "remark": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "tblVendorReplacementInDetail": {
+        "type": "object",
+        "properties": {
+          "qty": {
+            "type": "number",
+            "format": "double"
+          },
+          "itemMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "tblVendorReplacementOut": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "entryNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "entryDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "accountMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "brandMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "remark": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "tblVendorReplacementOutDetail": {
+        "type": "object",
+        "properties": {
+          "qty": {
+            "type": "number",
+            "format": "double"
+          },
+          "itemMaster_Code": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

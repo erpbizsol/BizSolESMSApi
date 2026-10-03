@@ -2210,6 +2210,260 @@
         }
       }
     },
+    "/api/Master/InsertClientTypeMaster": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "UserMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblClientTypeMaster"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblClientTypeMaster"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblClientTypeMaster"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblClientTypeMaster"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/ShowClientTypeMaster": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/ShowClientTypeMasterByCode": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteClientTypeMaster": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "UserMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/spOutputParameter"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/spOutputParameter"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/spOutputParameter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Master/InsertBankMaster": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "UserMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblBankMaster"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblBankMaster"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblBankMaster"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblBankMaster"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/ShowBankMaster": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/ShowBankMasterByCode": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/DeleteBankMaster": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "UserMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/spOutputParameter"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/spOutputParameter"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/spOutputParameter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Master/InsertAccountMaster": {
       "post": {
         "tags": [
@@ -2528,6 +2782,27 @@
         }
       }
     },
+    "/api/Master/GetReasonMasterByForUse": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "ForUse",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Master/SaveTATConfiguration": {
       "post": {
         "tags": [
@@ -2758,6 +3033,54 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/Master/InsertCompanyMaster": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblCompanyMaster"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblCompanyMaster"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblCompanyMaster"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblCompanyMaster"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/ShowCompanyMaster": {
+      "get": {
+        "tags": [
+          "Master"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -3242,6 +3565,92 @@
         "tags": [
           "Master"
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/VerifyFixParameterConfigAccess": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "UserMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Password",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Master/SaveFixParameter": {
+      "post": {
+        "tags": [
+          "Master"
+        ],
+        "parameters": [
+          {
+            "name": "UserMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Password",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": { }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": { }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": { }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": { }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -3979,6 +4388,234 @@
         }
       }
     },
+    "/api/OrderCancellation/GetOrderCancellationList": {
+      "get": {
+        "tags": [
+          "OrderCancellation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderCancellation/GetOrderCancellationLines": {
+      "get": {
+        "tags": [
+          "OrderCancellation"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderCancellation/GetOrderCancellationHeader": {
+      "get": {
+        "tags": [
+          "OrderCancellation"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderCancellation/GetOrderCancellationItems": {
+      "get": {
+        "tags": [
+          "OrderCancellation"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderCancellation/GetOrderCancellationDetail": {
+      "get": {
+        "tags": [
+          "OrderCancellation"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_OrderCancellationDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_OrderCancellationDetail"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_OrderCancellationDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/OrderCancellation/GetOrderCancellationDispatch": {
+      "get": {
+        "tags": [
+          "OrderCancellation"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderCancellation/SaveOrderCancellation": {
+      "post": {
+        "tags": [
+          "OrderCancellation"
+        ],
+        "parameters": [
+          {
+            "name": "UserMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblOrderCancellationSave"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblOrderCancellationSave"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblOrderCancellationSave"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblOrderCancellationSave"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderCancellation/GetReOpenOrderList": {
+      "get": {
+        "tags": [
+          "OrderCancellation"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderCancellation/ReOpenOrderCancellation": {
+      "post": {
+        "tags": [
+          "OrderCancellation"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "UserMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/OrderMaster/InsertOrderMaster": {
       "post": {
         "tags": [
@@ -4076,6 +4713,45 @@
         }
       }
     },
+    "/api/OrderMaster/GetOrderPickingPrint": {
+      "get": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "OrderMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_OrderPickingPrint"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_OrderPickingPrint"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_OrderPickingPrint"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/OrderMaster/DeleteOrderMaster": {
       "post": {
         "tags": [
@@ -4133,14 +4809,17 @@
             "name": "ClientName",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "default": ""
             }
           },
           {
-            "name": "ItemName",
+            "name": "ItemMaster_Code",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int32",
+              "default": 0
             }
           }
         ],
@@ -4374,6 +5053,31 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "UPIIds",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "WarehouseMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "ReasonMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
             }
           }
         ],
@@ -4774,6 +5478,45 @@
         }
       }
     },
+    "/api/OrderMaster/GetMarkasPickingCompeteByOrderNo": {
+      "post": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/spOutputParameter"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/spOutputParameter"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/spOutputParameter"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/OrderMaster/GetEmployeeList": {
       "get": {
         "tags": [
@@ -4953,6 +5696,64 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderMaster/GetDispatchPdfAmountDetail": {
+      "get": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "DispatchMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderMaster/SaveDispatchPdfAmountDetail": {
+      "post": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblDispatchPdfAmount"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblDispatchPdfAmount"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblDispatchPdfAmount"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblDispatchPdfAmount"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -5257,6 +6058,123 @@
             }
           }
         },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderMaster/GetUpiDetailsByItemCode": {
+      "post": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "DispatchMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ItemCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderMaster/CheckMailSend": {
+      "get": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "DispatchMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderMaster/UpdateMailSend": {
+      "get": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "DispatchMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderMaster/CheckOrderPacked": {
+      "get": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "DispatchMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/OrderMaster/DeleteDispatchUpiDetail": {
+      "get": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -6065,6 +6983,63 @@
         }
       }
     },
+    "/api/OrderMaster/GetDailyStockReport": {
+      "get": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "parameters": [
+          {
+            "name": "FromDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ToDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_DailyStockReport"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_DailyStockReport"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_DailyStockReport"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/OrderMaster/GetScanAndBillData": {
+      "get": {
+        "tags": [
+          "OrderMaster"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/PaymentEntry/SavePaymentEntry": {
       "post": {
         "tags": [
@@ -6277,6 +7252,178 @@
         }
       }
     },
+    "/api/PaymentEntry/SavePaymentEntryAdjustment": {
+      "post": {
+        "tags": [
+          "PaymentEntry"
+        ],
+        "parameters": [
+          {
+            "name": "UserMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_BillMaster"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_BillMaster"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_BillMaster"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_BillMaster"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/PaymentEntry/GetPaymentAdjustmentMasterlist": {
+      "get": {
+        "tags": [
+          "PaymentEntry"
+        ],
+        "parameters": [
+          {
+            "name": "FromDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ToDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "AccountMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "PaymentMode",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": ""
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/PaymentEntry/ShowPaymentEntryAdjustmentByCode": {
+      "get": {
+        "tags": [
+          "PaymentEntry"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_BillMasterList"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_BillMasterList"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_BillMasterList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/PaymentEntry/DeletePaymentEntryAdjustment": {
+      "post": {
+        "tags": [
+          "PaymentEntry"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "UserMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/PaymentEntry/GetPaymentModeList": {
+      "get": {
+        "tags": [
+          "PaymentEntry"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Report/GetLocationReport": {
       "get": {
         "tags": [
@@ -6463,6 +7610,562 @@
       "get": {
         "tags": [
           "Report"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Report/GetInvoicePaymentReport": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "FromDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ToDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "PaymentStatus",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "All"
+            }
+          },
+          {
+            "name": "AccountMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Report/GetSaleLossReport": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "FromDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ToDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "CancelStatus",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "default": "All"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Report/GetMRNRateComparisonReport": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "FromDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ToDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Report/GetDispatchOrderRateComparisonReport": {
+      "get": {
+        "tags": [
+          "Report"
+        ],
+        "parameters": [
+          {
+            "name": "FromDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "ToDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "AccountMaster_Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ScanToBill/SaveItemScanToBill": {
+      "post": {
+        "tags": [
+          "ScanToBill"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblScanToBill"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblScanToBill"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblScanToBill"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblScanToBill"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ScanToBill/ManuaItemScanToBill": {
+      "post": {
+        "tags": [
+          "ScanToBill"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblScanDispatch"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblScanDispatch"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblScanDispatch"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblScanDispatch"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ScanToBill/GetDetailsItemScanToBill": {
+      "get": {
+        "tags": [
+          "ScanToBill"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_OrderMasterForShow"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_OrderMasterForShow"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_OrderMasterForShow"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ScanToBill/AddItemScanToBill": {
+      "post": {
+        "tags": [
+          "ScanToBill"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblAddItemScanToBill"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblAddItemScanToBill"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblAddItemScanToBill"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblAddItemScanToBill"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ScanToBill/SaveManualRateAndQtySacnToBill": {
+      "post": {
+        "tags": [
+          "ScanToBill"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblManualRateAndQty"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblManualRateAndQty"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblManualRateAndQty"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/tblManualRateAndQty"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ScanToBill/DeleteItemFormScanToBill": {
+      "get": {
+        "tags": [
+          "ScanToBill"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/TicketMaster/Create": {
+      "post": {
+        "tags": [
+          "TicketMaster"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "CompanyCode": {
+                    "type": "string"
+                  },
+                  "TicketType": {
+                    "type": "string"
+                  },
+                  "TicketNo": {
+                    "type": "string"
+                  },
+                  "Priority": {
+                    "type": "string"
+                  },
+                  "ProjectClient": {
+                    "type": "string"
+                  },
+                  "LogDate": {
+                    "type": "string"
+                  },
+                  "Module": {
+                    "type": "string"
+                  },
+                  "RaisedBy": {
+                    "type": "string"
+                  },
+                  "ContactNo": {
+                    "type": "string"
+                  },
+                  "ContactEMail": {
+                    "type": "string"
+                  },
+                  "Source": {
+                    "type": "string"
+                  },
+                  "Description": {
+                    "type": "string"
+                  },
+                  "CreateTicketBy": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "TestedBy": {
+                    "type": "string"
+                  },
+                  "UserModuleMaster_Code": {
+                    "type": "string"
+                  },
+                  "Assigned": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "AssignedText": {
+                    "type": "string"
+                  },
+                  "CommittedDate": {
+                    "type": "string"
+                  },
+                  "EstimatedTime": {
+                    "type": "string"
+                  },
+                  "WorkType": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "WorkTypeText": {
+                    "type": "string"
+                  },
+                  "Employee_Code": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "EmployeeName": {
+                    "type": "string"
+                  },
+                  "Files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "CompanyCode": {
+                  "style": "form"
+                },
+                "TicketType": {
+                  "style": "form"
+                },
+                "TicketNo": {
+                  "style": "form"
+                },
+                "Priority": {
+                  "style": "form"
+                },
+                "ProjectClient": {
+                  "style": "form"
+                },
+                "LogDate": {
+                  "style": "form"
+                },
+                "Module": {
+                  "style": "form"
+                },
+                "RaisedBy": {
+                  "style": "form"
+                },
+                "ContactNo": {
+                  "style": "form"
+                },
+                "ContactEMail": {
+                  "style": "form"
+                },
+                "Source": {
+                  "style": "form"
+                },
+                "Description": {
+                  "style": "form"
+                },
+                "CreateTicketBy": {
+                  "style": "form"
+                },
+                "TestedBy": {
+                  "style": "form"
+                },
+                "UserModuleMaster_Code": {
+                  "style": "form"
+                },
+                "Assigned": {
+                  "style": "form"
+                },
+                "AssignedText": {
+                  "style": "form"
+                },
+                "CommittedDate": {
+                  "style": "form"
+                },
+                "EstimatedTime": {
+                  "style": "form"
+                },
+                "WorkType": {
+                  "style": "form"
+                },
+                "WorkTypeText": {
+                  "style": "form"
+                },
+                "Employee_Code": {
+                  "style": "form"
+                },
+                "EmployeeName": {
+                  "style": "form"
+                },
+                "Files": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/TicketMaster/AttechedFileChecks": {
+      "get": {
+        "tags": [
+          "TicketMaster"
+        ],
+        "parameters": [
+          {
+            "name": "CompanyCode",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "TicketNo",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
         ],
         "responses": {
           "200": {
@@ -6726,10 +8429,147 @@
           }
         }
       }
+    },
+    "/api/VendorReplacementOut/ShowVendorReplacementOut": {
+      "get": {
+        "tags": [
+          "VendorReplacementOut"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/VendorReplacementOut/ShowVendorReplacementOutByCode": {
+      "get": {
+        "tags": [
+          "VendorReplacementOut"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_VendorReplacementOutList"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_VendorReplacementOutList"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VM_VendorReplacementOutList"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/VendorReplacementOut/SaveVendorReplacementOut": {
+      "post": {
+        "tags": [
+          "VendorReplacementOut"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_VendorReplacementOut"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_VendorReplacementOut"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_VendorReplacementOut"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VM_VendorReplacementOut"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/VendorReplacementOut/DeleteVendorReplacementOut": {
+      "post": {
+        "tags": [
+          "VendorReplacementOut"
+        ],
+        "parameters": [
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "ItemWarehouseLocationDetail": {
+        "type": "object",
+        "properties": {
+          "warehouseMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "locationMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "OrderCancellationDetailLine": {
+        "type": "object",
+        "properties": {
+          "orderDetailMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cancelQty": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
       "UpdateDispatchMrpRequest": {
         "type": "object",
         "properties": {
@@ -6742,6 +8582,14 @@
             "nullable": true
           },
           "mrp": {
+            "type": "number",
+            "format": "double"
+          },
+          "newMRP": {
+            "type": "number",
+            "format": "double"
+          },
+          "oldMRP": {
             "type": "number",
             "format": "double"
           },
@@ -6824,6 +8672,92 @@
         },
         "additionalProperties": false
       },
+      "VM_DailyStockReport": {
+        "type": "object",
+        "properties": {
+          "dailyOrderReport": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "lossOrderReport": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "deadStock": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "monthWiseSale": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "averageTrunAround": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "topCustomers": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "employee": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "saleLossOrder": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "saleReturn": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "tatConfig": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "tatMaster": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "stockSummary": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "top10MinimumOrderParty": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "top10MaximumOrderParty": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "reorderLevelData": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "userWeeklyReport": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "VM_MRNMaster": {
         "type": "object",
         "properties": {
@@ -6853,6 +8787,22 @@
             "nullable": true
           },
           "mrnDetails": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VM_OrderCancellationDetail": {
+        "type": "object",
+        "properties": {
+          "orderMaster": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "orderDetial": {
             "type": "array",
             "items": { },
             "nullable": true
@@ -6896,6 +8846,22 @@
         },
         "additionalProperties": false
       },
+      "VM_OrderPickingPrint": {
+        "type": "object",
+        "properties": {
+          "orderHeader": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "orderDetails": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "VM_SaveDispatchOrder": {
         "type": "object",
         "properties": {
@@ -6916,6 +8882,42 @@
         },
         "additionalProperties": false
       },
+      "VM_VendorReplacementOut": {
+        "type": "object",
+        "properties": {
+          "vendorReplacementOut": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/tblVendorReplacementOut"
+            },
+            "nullable": true
+          },
+          "vendorReplacementOutDetail": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/tblVendorReplacementOutDetail"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VM_VendorReplacementOutList": {
+        "type": "object",
+        "properties": {
+          "vendorReplacementOut": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "vendorReplacementOutDetail": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "spOutputParameter": {
         "type": "object",
         "properties": {
@@ -6930,6 +8932,52 @@
           "code": {
             "type": "integer",
             "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "tblAddItemScanToBill": {
+        "type": "object",
+        "properties": {
+          "dispatchMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "itemMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "boxNo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "manualQty": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "mrp": {
+            "type": "number",
+            "format": "double"
+          },
+          "orderNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "packedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "clientName": {
+            "type": "string",
+            "nullable": true
+          },
+          "warehouseMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isManual": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -6987,6 +9035,44 @@
             "nullable": true
           },
           "isDefault": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "tblBankMaster": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bankName": {
+            "type": "string",
+            "nullable": true
+          },
+          "accountNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "ifscCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "branch": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "defaultCheck": {
+            "type": "string",
+            "nullable": true
+          },
+          "isShowInPSR": {
             "type": "string",
             "nullable": true
           }
@@ -7140,6 +9226,10 @@
             "type": "string",
             "nullable": true
           },
+          "isReplacement": {
+            "type": "string",
+            "nullable": true
+          },
           "barcodeType": {
             "type": "string",
             "nullable": true
@@ -7181,6 +9271,90 @@
             "nullable": true
           },
           "stateName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "tblClientTypeMaster": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "clientType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "tblCompanyMaster": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "companyCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "aliasName": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine1": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "nullable": true
+          },
+          "cityName": {
+            "type": "string",
+            "nullable": true
+          },
+          "nation": {
+            "type": "string",
+            "nullable": true
+          },
+          "pin": {
+            "type": "string",
+            "nullable": true
+          },
+          "panNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "gstNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone": {
+            "type": "string",
+            "nullable": true
+          },
+          "mobileNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "msmeNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "upiId": {
             "type": "string",
             "nullable": true
           }
@@ -7266,6 +9440,11 @@
           },
           "brandMaster_Code": {
             "type": "string",
+            "nullable": true
+          },
+          "creditDays": {
+            "type": "integer",
+            "format": "int32",
             "nullable": true
           }
         },
@@ -7371,6 +9550,44 @@
         },
         "additionalProperties": false
       },
+      "tblDispatchPdfAmount": {
+        "type": "object",
+        "properties": {
+          "dispatchMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "total": {
+            "type": "number",
+            "format": "double"
+          },
+          "addType": {
+            "type": "string",
+            "nullable": true
+          },
+          "addValue": {
+            "type": "number",
+            "format": "double"
+          },
+          "lessType": {
+            "type": "string",
+            "nullable": true
+          },
+          "lessValue": {
+            "type": "number",
+            "format": "double"
+          },
+          "netAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "isManual": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "tblEmployeeMaster": {
         "type": "object",
         "properties": {
@@ -7450,6 +9667,10 @@
           "userModuleMaster_Code": {
             "type": "integer",
             "format": "int32"
+          },
+          "ticketNo": {
+            "type": "string",
+            "nullable": true
           },
           "description": {
             "type": "string",
@@ -7534,6 +9755,10 @@
             "nullable": true
           },
           "vehicleNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "billNo": {
             "type": "string",
             "nullable": true
           },
@@ -7686,8 +9911,15 @@
             "type": "integer",
             "format": "int32"
           },
-          "locationName": {
+          "locationMaster_Codes": {
             "type": "string",
+            "nullable": true
+          },
+          "itemWarehouseLocationDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ItemWarehouseLocationDetail"
+            },
             "nullable": true
           },
           "boxPacking": {
@@ -7712,7 +9944,8 @@
           },
           "mrpNo": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -7757,6 +9990,10 @@
           "mode": {
             "type": "string",
             "nullable": true
+          },
+          "warehouseMaster_Code": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -7933,6 +10170,14 @@
           "userMaster_Code": {
             "type": "integer",
             "format": "int32"
+          },
+          "warehouseMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "reasonMaster_Code": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -7971,6 +10216,31 @@
           "warehouseMaster_Code": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "tblOrderCancellationSave": {
+        "type": "object",
+        "properties": {
+          "orderMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "reasonMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "remark": {
+            "type": "string",
+            "nullable": true
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/OrderCancellationDetailLine"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -8067,6 +10337,10 @@
           "userMaster_Code": {
             "type": "integer",
             "format": "int32"
+          },
+          "warehouseMaster_Code": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -8155,6 +10429,48 @@
             "format": "int32"
           },
           "scanNo": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "tblScanToBill": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "scanNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "accountName": {
+            "type": "string",
+            "nullable": true
+          },
+          "invoiceNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "packedBy": {
+            "type": "string",
+            "nullable": true
+          },
+          "boxNo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "warehouseMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "userMaster_Code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isManual": {
             "type": "string",
             "nullable": true
           }
@@ -8531,6 +10847,58 @@
           "option": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "tblVendorReplacementOut": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "entryNo": {
+            "type": "string",
+            "nullable": true
+          },
+          "entryDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "vendorName": {
+            "type": "string",
+            "nullable": true
+          },
+          "head": {
+            "type": "string",
+            "nullable": true
+          },
+          "remark": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "tblVendorReplacementOutDetail": {
+        "type": "object",
+        "properties": {
+          "itemCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "itemName": {
+            "type": "string",
+            "nullable": true
+          },
+          "qty": {
+            "type": "number",
+            "format": "double"
+          },
+          "itemMaster_Code": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false

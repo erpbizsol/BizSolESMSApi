@@ -1607,6 +1607,32 @@
   },
   {
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MasterController",
+    "Method": "SaveFixParameter",
+    "RelativePath": "api/Master/SaveFixParameter",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "System.Collections.Generic.Dictionary\u00602[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": true
+      },
+      {
+        "Name": "UserMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MasterController",
     "Method": "SaveHelpdesk",
     "RelativePath": "api/Master/SaveHelpdesk",
     "HttpMethod": "POST",
@@ -2269,6 +2295,27 @@
   },
   {
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MasterController",
+    "Method": "VerifyFixParameterConfigAccess",
+    "RelativePath": "api/Master/VerifyFixParameterConfigAccess",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.MasterController",
     "Method": "WarehouseNameForDefault",
     "RelativePath": "api/Master/WarehouseNameForDefault",
     "HttpMethod": "GET",
@@ -2861,6 +2908,38 @@
   },
   {
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
+    "Method": "CheckMailSend",
+    "RelativePath": "api/OrderMaster/CheckMailSend",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "DispatchMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
+    "Method": "CheckOrderPacked",
+    "RelativePath": "api/OrderMaster/CheckOrderPacked",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "DispatchMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
     "Method": "ClientWiseRate",
     "RelativePath": "api/OrderMaster/ClientWiseRate",
     "HttpMethod": "GET",
@@ -2936,6 +3015,22 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
+    "Method": "DeleteDispatchUpiDetail",
+    "RelativePath": "api/OrderMaster/DeleteDispatchUpiDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
@@ -3086,6 +3181,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
+    "Method": "GetDispatchPdfAmountDetail",
+    "RelativePath": "api/OrderMaster/GetDispatchPdfAmountDetail",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "DispatchMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -3550,6 +3661,27 @@
   },
   {
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
+    "Method": "GetUpiDetailsByItemCode",
+    "RelativePath": "api/OrderMaster/GetUpiDetailsByItemCode",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "DispatchMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "ItemCode",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
     "Method": "GetVehicleNoForDispatch",
     "RelativePath": "api/OrderMaster/GetVehicleNoForDispatch",
     "HttpMethod": "GET",
@@ -3803,6 +3935,22 @@
         "Name": "UserMaster_Code",
         "Type": "System.Int32",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
+    "Method": "SaveDispatchPdfAmountDetail",
+    "RelativePath": "api/OrderMaster/SaveDispatchPdfAmountDetail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Amount",
+        "Type": "Bizsol_ESMS_API.Model.tblDispatchPdfAmount",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -4116,6 +4264,22 @@
       },
       {
         "Name": "UserMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.OrderMasterController",
+    "Method": "UpdateMailSend",
+    "RelativePath": "api/OrderMaster/UpdateMailSend",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "DispatchMaster_Code",
         "Type": "System.Int32",
         "IsRequired": false
       }
@@ -4464,6 +4628,32 @@
   },
   {
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.ReportController",
+    "Method": "GetDispatchOrderRateComparisonReport",
+    "RelativePath": "api/Report/GetDispatchOrderRateComparisonReport",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "FromDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ToDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "AccountMaster_Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.ReportController",
     "Method": "GetGoldenCruiserQRDetails",
     "RelativePath": "api/Report/GetGoldenCruiserQRDetails",
     "HttpMethod": "GET",
@@ -4513,6 +4703,27 @@
     "Parameters": [
       {
         "Name": "Templete",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.ReportController",
+    "Method": "GetMRNRateComparisonReport",
+    "RelativePath": "api/Report/GetMRNRateComparisonReport",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "FromDate",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "ToDate",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -4644,6 +4855,198 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.RetailerReplacementInController",
+    "Method": "DeleteRetailerReplacementIn",
+    "RelativePath": "api/RetailerReplacementIn/DeleteRetailerReplacementIn",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.RetailerReplacementInController",
+    "Method": "GetBrandMasterListForReplacement",
+    "RelativePath": "api/RetailerReplacementIn/GetBrandMasterListForReplacement",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.RetailerReplacementInController",
+    "Method": "SaveRetailerReplacementIn",
+    "RelativePath": "api/RetailerReplacementIn/SaveRetailerReplacementIn",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Bizsol_ESMS_API.Model.VM_RetailerReplacementIn",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.RetailerReplacementInController",
+    "Method": "ShowRetailerReplacementIn",
+    "RelativePath": "api/RetailerReplacementIn/ShowRetailerReplacementIn",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.RetailerReplacementInController",
+    "Method": "ShowRetailerReplacementInByCode",
+    "RelativePath": "api/RetailerReplacementIn/ShowRetailerReplacementInByCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Bizsol_ESMS_API.Model.VM_RetailerReplacementInList",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.RetailerReplacementOutController",
+    "Method": "DeleteRetailerReplacementOut",
+    "RelativePath": "api/RetailerReplacementOut/DeleteRetailerReplacementOut",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.RetailerReplacementOutController",
+    "Method": "GetBrandMasterListForReplacement",
+    "RelativePath": "api/RetailerReplacementOut/GetBrandMasterListForReplacement",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.RetailerReplacementOutController",
+    "Method": "GetEntryNoList",
+    "RelativePath": "api/RetailerReplacementOut/GetEntryNoList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.RetailerReplacementOutController",
+    "Method": "SaveRetailerReplacementOut",
+    "RelativePath": "api/RetailerReplacementOut/SaveRetailerReplacementOut",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Bizsol_ESMS_API.Model.VM_RetailerReplacementOut",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.RetailerReplacementOutController",
+    "Method": "ShowDataByEntryNo",
+    "RelativePath": "api/RetailerReplacementOut/ShowDataByEntryNo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Bizsol_ESMS_API.Model.VM_RetailerReplacementOutList",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.RetailerReplacementOutController",
+    "Method": "ShowRetailerReplacementOut",
+    "RelativePath": "api/RetailerReplacementOut/ShowRetailerReplacementOut",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.RetailerReplacementOutController",
+    "Method": "ShowRetailerReplacementOutByCode",
+    "RelativePath": "api/RetailerReplacementOut/ShowRetailerReplacementOutByCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Bizsol_ESMS_API.Model.VM_RetailerReplacementOutList",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "Bizsol_ESMS_API.Controllers.Master.ScanToBillController",
@@ -5059,5 +5462,187 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.VendorReplacementInController",
+    "Method": "DeleteVendorReplacementIn",
+    "RelativePath": "api/VendorReplacementIn/DeleteVendorReplacementIn",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.VendorReplacementInController",
+    "Method": "GetEntryNoList",
+    "RelativePath": "api/VendorReplacementIn/GetEntryNoList",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.VendorReplacementInController",
+    "Method": "SaveVendorReplacementIn",
+    "RelativePath": "api/VendorReplacementIn/SaveVendorReplacementIn",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Bizsol_ESMS_API.Model.VM_VendorReplacementIn",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.VendorReplacementInController",
+    "Method": "ShowDataByEntryNo",
+    "RelativePath": "api/VendorReplacementIn/ShowDataByEntryNo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Bizsol_ESMS_API.Model.VM_VendorReplacementInList",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.VendorReplacementInController",
+    "Method": "ShowVendorReplacementIn",
+    "RelativePath": "api/VendorReplacementIn/ShowVendorReplacementIn",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.VendorReplacementInController",
+    "Method": "ShowVendorReplacementInByCode",
+    "RelativePath": "api/VendorReplacementIn/ShowVendorReplacementInByCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Bizsol_ESMS_API.Model.VM_VendorReplacementInList",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.VendorReplacementOutController",
+    "Method": "DeleteVendorReplacementOut",
+    "RelativePath": "api/VendorReplacementOut/DeleteVendorReplacementOut",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.VendorReplacementOutController",
+    "Method": "GetBrandMasterListForReplacement",
+    "RelativePath": "api/VendorReplacementOut/GetBrandMasterListForReplacement",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.VendorReplacementOutController",
+    "Method": "SaveVendorReplacementOut",
+    "RelativePath": "api/VendorReplacementOut/SaveVendorReplacementOut",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "Bizsol_ESMS_API.Model.VM_VendorReplacementOut",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.VendorReplacementOutController",
+    "Method": "ShowVendorReplacementOut",
+    "RelativePath": "api/VendorReplacementOut/ShowVendorReplacementOut",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Bizsol_ESMS_API.Controllers.Master.VendorReplacementOutController",
+    "Method": "ShowVendorReplacementOutByCode",
+    "RelativePath": "api/VendorReplacementOut/ShowVendorReplacementOutByCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Code",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Bizsol_ESMS_API.Model.VM_VendorReplacementOutList",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]
