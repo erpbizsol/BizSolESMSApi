@@ -19,6 +19,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Code", model.Code);
                 parameters.Add("p_BrandName", model.BrandName);
                 parameters.Add("p_PicklistNo", model.PicklistNo);
+                parameters.Add("p_IsReplacement", model.IsReplacement);
                 parameters.Add("p_BarcodeType", model.BarcodeType);
                 parameters.Add("p_ImportFormat", model.ImportFormat);
                 parameters.Add("p_UserMaster_Code", UserMaster_Code);
@@ -44,6 +45,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Code", code);
                 parameters.Add("p_BrandName", null);
                 parameters.Add("p_PicklistNo",null);
+                parameters.Add("p_IsReplacement", null);
                 parameters.Add("p_BarcodeType", null);
                 parameters.Add("p_ImportFormat", 0);
                 parameters.Add("p_UserMaster_Code", UserMaster_Code);
@@ -69,6 +71,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Code", null);
                 parameters.Add("p_BrandName", null);
                 parameters.Add("p_PicklistNo", null);
+                parameters.Add("p_IsReplacement", null);
                 parameters.Add("p_BarcodeType", null);
                 parameters.Add("p_ImportFormat",0);
                 parameters.Add("p_UserMaster_Code", 0);
@@ -91,6 +94,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Code", code);
                 parameters.Add("p_BrandName", null);
                 parameters.Add("p_PicklistNo", null);
+                parameters.Add("p_IsReplacement", null);
                 parameters.Add("p_BarcodeType",null);
                 parameters.Add("p_ImportFormat",0);
                 parameters.Add("p_UserMaster_Code", 0);

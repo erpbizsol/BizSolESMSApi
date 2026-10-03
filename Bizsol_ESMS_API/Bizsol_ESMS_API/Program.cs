@@ -60,6 +60,10 @@ builder.Services.AddTransient<ICompanyMaster, CompanyMasterService>();
 builder.Services.AddTransient<IScanToBill, ScanToBillService>();
 builder.Services.AddTransient<ITicketMaster, TicketMasterService>();
 builder.Services.AddTransient<IFixParameter, FixParameterService>();
+builder.Services.AddTransient<IVendorReplacementOut, VendorReplacementOutService>();
+builder.Services.AddTransient<IVendorReplacementIn, VendorReplacementInService>();
+builder.Services.AddTransient<IRetailerReplacementIn, RetailerReplacementInService>();
+builder.Services.AddTransient<IRetailerReplacementOut, RetailerReplacementOutService>();
 
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -276,5 +276,28 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
 
         }
+        [HttpGet]
+        [Route("GetDispatchOrderRateComparisonReport")]
+        public async Task<IActionResult> GetDispatchOrderRateComparisonReport(string FromDate, string ToDate,int AccountMaster_Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _report.GetDispatchOrderRateComparisonReport(_bizsolESMSConnectionDetails, FromDate, ToDate, AccountMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+
+        }
     }
 }

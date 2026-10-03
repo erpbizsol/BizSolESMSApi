@@ -169,5 +169,17 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
+        public async Task<IEnumerable<dynamic>> GetDispatchOrderRateComparisonReport(BizsolESMSConnectionDetails _bizsolESMSConnectionDetails, string FromDate, string ToDate,int AccountMaster_Code)
+        {
+            using (IDbConnection conn = new MySqlConnection(_bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_FromDate", FromDate);
+                parameters.Add("p_ToDate", ToDate);
+                parameters.Add("p_AccountMaster_Code", AccountMaster_Code);
+                var result = await conn.QueryAsync<dynamic>("USP_DispatchOrderRateComparisonReport", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
     }
 }

@@ -16,5 +16,6 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<IEnumerable<dynamic>> GetInvoicePaymentReport(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string FromDate, string ToDate, string PaymentStatus, int AccountMaster_Code);
         public abstract Task<IEnumerable<dynamic>> GetSaleLossReport(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string FromDate, string ToDate, string CancelStatus);
         public abstract Task<IEnumerable<dynamic>> GetMRNRateComparisonReport(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string FromDate, string ToDate);
+        public abstract Task<IEnumerable<dynamic>> GetDispatchOrderRateComparisonReport(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string FromDate, string ToDate,int AccountMaster_Code);
     }
 }
