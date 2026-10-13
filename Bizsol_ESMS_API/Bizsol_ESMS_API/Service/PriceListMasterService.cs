@@ -94,12 +94,23 @@ namespace Bizsol_ESMS_API.Service
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
+                var masterRows = model?.PriceListMaster?.ToList() ?? new List<tblPriceListMaster>();
+                if (masterRows.Count == 0)
+                {
+                    return new { Msg = "Price list header is required.", Status = "N" };
+                }
+
+                var detailRows = model?.PriceListDetail?.ToList() ?? new List<tblPriceListDetail>();
+                var saveUserCode = userMasterCode > 0
+                    ? userMasterCode
+                    : bizsolESMSConnectionDetails.UserMaster_Code;
+
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("p_Mode", "SAVE");
-                parameters.Add("p_Code", model.PriceListMaster.First().Code);
-                parameters.Add("p_UserMaster_Code", bizsolESMSConnectionDetails.UserMaster_Code);
-                parameters.Add("p_jsonData", JsonConvert.SerializeObject(model.PriceListMaster));
-                parameters.Add("p_jsonData1", JsonConvert.SerializeObject(model.PriceListDetail));
+                parameters.Add("p_Code", masterRows[0].Code);
+                parameters.Add("p_UserMaster_Code", saveUserCode);
+                parameters.Add("p_jsonData", JsonConvert.SerializeObject(masterRows));
+                parameters.Add("p_jsonData1", JsonConvert.SerializeObject(detailRows));
                 parameters.Add("p_EffectiveDate", "");
                 return await conn.QueryFirstOrDefaultAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
             }
