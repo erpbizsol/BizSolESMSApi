@@ -109,5 +109,52 @@ namespace Bizsol_ESMS_API.Controllers.Master
             }
         }
 
+        [HttpPost]
+        [Route("SaveAppConfigConfiguration")]
+        public async Task<IActionResult> SaveAppConfigConfiguration([FromBody] tblAppConfig model)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _prefixConfiguration.SaveAppConfigConfiguration(_bizsolESMSConnectionDetails, model);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("GetAppConfigList")]
+        public async Task<IActionResult> GetAppConfigList()
+        {
+
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _prefixConfiguration.GetAppConfigList(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@
         public int Code { get; set; }
         public string? UOMName { get; set; } = "";
         public int? DigitAfterDecimal { get; set; } = 0;
+        public int? F_UOMTallyConfiguration_Code { get; set; } = 0;
         //public int CreatedBy { get; set; }
         //public int ModifiedBy { get; set; } = 0;
         //public string? Status { get; set; } = "N";
