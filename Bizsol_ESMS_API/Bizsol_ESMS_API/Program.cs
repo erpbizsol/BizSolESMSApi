@@ -65,7 +65,8 @@ builder.Services.AddTransient<IVendorReplacementIn, VendorReplacementInService>(
 builder.Services.AddTransient<IRetailerReplacementIn, RetailerReplacementInService>();
 builder.Services.AddTransient<IRetailerReplacementOut, RetailerReplacementOutService>();
 builder.Services.AddTransient<IPriceListMaster, PriceListMasterService>();
-builder.Services.AddScoped<IPdfExtractionService, PdfExtractionService>();
+builder.Services.AddTransient<IPdfExtractionService, PdfExtractionService>();
+builder.Services.AddTransient<IStockAuditmaster, StockAuditmasterService>();
 
 builder.WebHost.ConfigureKestrel(options =>
 {
