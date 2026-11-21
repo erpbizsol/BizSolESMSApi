@@ -18,5 +18,7 @@ namespace Bizsol_ESMS_API.Model
         public IEnumerable<dynamic>? Top10MaximumOrderParty { get; set; }
         public IEnumerable<dynamic>? ReorderLevelData { get; set; }
         public IEnumerable<dynamic>? UserWeeklyReport { get; set; }
+        public IEnumerable<dynamic>? FastMovingParts { get; set; }
+        public IEnumerable<dynamic>? FastMovingReorderLevelData { get; set; }
     }
 }

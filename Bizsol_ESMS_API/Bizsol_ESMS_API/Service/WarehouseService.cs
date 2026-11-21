@@ -20,7 +20,9 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Code", model.Code);
                 parameters.Add("p_WarehouseName", model.WarehouseName);
                 parameters.Add("p_WarehouseType", model.WarehouseType);
-                parameters.Add("p_Address", model.Address);
+                parameters.Add("p_AddressLine1", model.AddressLine1);
+                parameters.Add("p_AddressLine2", model.AddressLine2);
+                parameters.Add("p_DisplayName", model.DisplayName);
                 parameters.Add("p_Pin", model.Pin);
                 parameters.Add("p_City", model.City);
                 parameters.Add("p_GSTIN", model.GSTIN);
@@ -48,7 +50,9 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Code", code);
                 parameters.Add("p_WarehouseName", null);
                 parameters.Add("p_WarehouseType", null);
-                parameters.Add("p_Address", null);
+                parameters.Add("p_AddressLine1", null);
+                parameters.Add("p_AddressLine2", null);
+                parameters.Add("p_DisplayName", null);
                 parameters.Add("p_Pin", null);
                 parameters.Add("p_City", null);
                 parameters.Add("p_GSTIN", null);
@@ -76,7 +80,9 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Code", null);
                 parameters.Add("p_WarehouseName", null);
                 parameters.Add("p_WarehouseType", null);
-                parameters.Add("p_Address", null);
+                parameters.Add("p_AddressLine1", null);
+                parameters.Add("p_AddressLine2", null);
+                parameters.Add("p_DisplayName", null);
                 parameters.Add("p_Pin", null);
                 parameters.Add("p_City", null);
                 parameters.Add("p_GSTIN", null);
@@ -100,7 +106,9 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Code", code);
                 parameters.Add("p_WarehouseName", null);
                 parameters.Add("p_WarehouseType", null);
-                parameters.Add("p_Address", null);
+                parameters.Add("p_AddressLine1", null);
+                parameters.Add("p_AddressLine2", null);
+                parameters.Add("p_DisplayName", null);
                 parameters.Add("p_Pin", null);
                 parameters.Add("p_City", null);
                 parameters.Add("p_GSTIN", null);
@@ -124,7 +132,9 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Code", null);
                 parameters.Add("p_WarehouseName", null);
                 parameters.Add("p_WarehouseType", null);
-                parameters.Add("p_Address", null);
+                parameters.Add("p_AddressLine1", null);
+                parameters.Add("p_AddressLine2", null);
+                parameters.Add("p_DisplayName", null);
                 parameters.Add("p_Pin", null);
                 parameters.Add("p_City", null);
                 parameters.Add("p_GSTIN", null);

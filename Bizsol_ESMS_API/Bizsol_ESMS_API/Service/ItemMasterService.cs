@@ -84,6 +84,23 @@ namespace Bizsol_ESMS_API.Service
                 return result.ToList();
             }
         }
+        public async Task<dynamic> UpdateItemIsMovingFast(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int itemMaster_Code, string isMovingFast, int userMaster_Code)
+        {
+            var flag = string.Equals(isMovingFast, "Y", StringComparison.OrdinalIgnoreCase) ? "Y" : "N";
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "UPDATE_IS_MOVING_FAST");
+                parameters.Add("p_FromDate", "");
+                parameters.Add("p_ToDate", "");
+                parameters.Add("p_Code", itemMaster_Code);
+                parameters.Add("p_IsMovingFast", flag);
+                parameters.Add("p_UserMaster_Code", userMaster_Code);
+                var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_FastMovingParts", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+
         public async Task<IEnumerable<dynamic>> GetItemDetails(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,int BrandMaster_Code)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))

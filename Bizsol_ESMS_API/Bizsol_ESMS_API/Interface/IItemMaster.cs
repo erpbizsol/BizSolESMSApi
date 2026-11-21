@@ -10,6 +10,7 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<dynamic> DeleteItem(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int code, int UserMaster_Code);
         public abstract Task<IEnumerable<dynamic>> GetItemDetails(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
         public abstract Task<IEnumerable<dynamic>> GetItemDetails(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails,int BrandMaster_Code);
+        public abstract Task<dynamic> UpdateItemIsMovingFast(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int itemMaster_Code, string isMovingFast, int userMaster_Code);
 
     }
 }
