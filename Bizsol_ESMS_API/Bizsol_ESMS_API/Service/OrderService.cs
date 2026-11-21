@@ -618,6 +618,30 @@ namespace Bizsol_ESMS_API.Service
             vmDailyStockReport.Top10MaximumOrderParty = CommonFunctions.DatatableToDynamicList(dataTables[13]);
             vmDailyStockReport.ReorderLevelData = CommonFunctions.DatatableToDynamicList(dataTables[14]);
             vmDailyStockReport.UserWeeklyReport = CommonFunctions.DatatableToDynamicList(dataTables[15]);
+
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters fastParams = new DynamicParameters();
+                fastParams.Add("p_Mode", "LOCATE");
+                fastParams.Add("p_FromDate", FromDate);
+                fastParams.Add("p_ToDate", ToDate);
+                fastParams.Add("p_Code", 0);
+                fastParams.Add("p_IsMovingFast", "");
+                fastParams.Add("p_UserMaster_Code", bizsolESMSConnectionDetails.UserMaster_Code);
+                var fastMoving = await conn.QueryAsync<dynamic>("USP_FastMovingParts", fastParams, commandType: CommandType.StoredProcedure);
+                vmDailyStockReport.FastMovingParts = fastMoving.ToList();
+
+                DynamicParameters reorderParams = new DynamicParameters();
+                reorderParams.Add("p_Mode", "REORDER_LOCATE");
+                reorderParams.Add("p_FromDate", FromDate);
+                reorderParams.Add("p_ToDate", ToDate);
+                reorderParams.Add("p_Code", 0);
+                reorderParams.Add("p_IsMovingFast", "");
+                reorderParams.Add("p_UserMaster_Code", bizsolESMSConnectionDetails.UserMaster_Code);
+                var fastReorder = await conn.QueryAsync<dynamic>("USP_FastMovingParts", reorderParams, commandType: CommandType.StoredProcedure);
+                vmDailyStockReport.FastMovingReorderLevelData = fastReorder.ToList();
+            }
+
             return vmDailyStockReport;
         }
         public async Task<IEnumerable<dynamic>> GetScanAndBillData(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)

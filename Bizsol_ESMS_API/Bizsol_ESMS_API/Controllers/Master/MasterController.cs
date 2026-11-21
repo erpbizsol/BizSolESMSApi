@@ -1568,6 +1568,30 @@ namespace Bizsol_ESMS_API.Controllers.Master
         }
 
         [HttpGet]
+        [Route("UpdateItemIsMovingFast")]
+        public async Task<IActionResult> UpdateItemIsMovingFast(int ItemMaster_Code, string IsMovingFast, int UserMaster_Code)
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _IItemMaster.UpdateItemIsMovingFast(
+                        _bizsolESMSConnectionDetails, ItemMaster_Code, IsMovingFast, UserMaster_Code);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpGet]
         [Route("ShowItemMaster")]
         public async Task<IActionResult> ShowItemMaster()
         {
