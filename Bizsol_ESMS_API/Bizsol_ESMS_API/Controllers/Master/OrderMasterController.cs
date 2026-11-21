@@ -1863,5 +1863,58 @@ namespace Bizsol_ESMS_API.Controllers.Master
 
         #endregion GetScanAndBillData
 
+        [HttpGet]
+        [Route("GetClientType")]
+        public async Task<IActionResult> GetClientType()
+        {
+            try
+            {
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.GetClientType(_bizsolESMSConnectionDetails);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("UpdateIsInvoicedInDMS")]
+        public async Task<IActionResult> UpdateIsInvoicedInDMS([FromQuery] int p_DispatchMaster_Code, [FromQuery] string IsInvoicedInDMS)
+        {
+            try
+            {
+                if (p_DispatchMaster_Code <= 0)
+                    return BadRequest("Invalid Code");
+
+                IsInvoicedInDMS = (IsInvoicedInDMS ?? string.Empty).Trim().ToUpper();
+                if (IsInvoicedInDMS != "Y" && IsInvoicedInDMS != "N")
+                    return BadRequest("IsInvoicedInDMS must be 'Y' or 'N'");
+
+                var _bizsolESMSConnectionDetails = CommonFunctions.InitializeERPConnection(HttpContext);
+                if (_bizsolESMSConnectionDetails.DefultMysqlTemp != null)
+                {
+                    var result = await _Order.UpdateIsInvoicedInDMS(_bizsolESMSConnectionDetails, p_DispatchMaster_Code, IsInvoicedInDMS);
+                    return Ok(result);
+                }
+                else
+                {
+                    return StatusCode(500, "Error To Fetch Connection String");
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+       
     }
 }

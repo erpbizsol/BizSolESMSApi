@@ -44,5 +44,9 @@ namespace Bizsol_ESMS_API.Interface
         public abstract Task<VM_DailyStockReport> GetDailyStockReport(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, string FromDate, string ToDate);
         public abstract Task<IEnumerable<dynamic>> GetScanAndBillData(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
         public abstract Task<VM_OrderPickingPrint> GetOrderPickingPrint(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails, int OrderMaster_Code);
+        public abstract Task<IEnumerable<dynamic>> GetClientType(BizsolESMSConnectionDetails _BizsolESMSConnectionDetails);
+        public abstract Task<object> UpdateIsInvoicedInDMS(BizsolESMSConnectionDetails connectionDetails, int p_DispatchMaster_Code, string isInvoicedInDMS);
+     
+
     }
 }

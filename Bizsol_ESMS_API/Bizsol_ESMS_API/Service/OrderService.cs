@@ -10,9 +10,9 @@ using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
 namespace Bizsol_ESMS_API.Service
 {
-    public class OrderService:IOrder
+    public class OrderService : IOrder
     {
-     
+
         string sp_name = "USP_OrderMaster";
         public async Task<IEnumerable<dynamic>> ShowOrderMaster(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
         {
@@ -34,7 +34,7 @@ namespace Bizsol_ESMS_API.Service
         }
         public async Task<VM_OrderMasterForShow> ShowOrderMasterByCode(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
         {
-          
+
             VM_OrderMasterForShow vM_OrderMaster = new VM_OrderMasterForShow();
             var parameters = new Dictionary<string, object>
             {
@@ -56,7 +56,7 @@ namespace Bizsol_ESMS_API.Service
             vM_OrderMaster.OrderDetial = CommonFunctions.DatatableToDynamicList(dataTables[1]);
             return vM_OrderMaster;
         }
-        public async Task<dynamic> DeleteOrderMaster(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code,int UserMaster_Code)
+        public async Task<dynamic> DeleteOrderMaster(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code, int UserMaster_Code)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
@@ -96,7 +96,7 @@ namespace Bizsol_ESMS_API.Service
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
                 DynamicParameters parameters = new DynamicParameters();
-;
+                ;
                 parameters.Add("p_AccountName", ClientName);
                 parameters.Add("p_ItemMaster_Code", ItemMaster_Code);
                 var result = await conn.QueryAsync<dynamic>("USP_GetItemReate", parameters, commandType: CommandType.StoredProcedure);
@@ -222,13 +222,13 @@ namespace Bizsol_ESMS_API.Service
                 return result.ToList();
             }
         }
-        public async Task<IEnumerable<dynamic>> ShowSalesReturnMasterDetail(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,int Code)
+        public async Task<IEnumerable<dynamic>> ShowSalesReturnMasterDetail(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
                 DynamicParameters parameters = new DynamicParameters();
 
-                parameters.Add("p_Code",Code);
+                parameters.Add("p_Code", Code);
                 parameters.Add("p_Mode", "GETSALERETURNITEM");
                 parameters.Add("p_UserMaster_Code", 0);
                 parameters.Add("p_ReasonMaster_Code", 0);
@@ -250,14 +250,14 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-        public async Task<dynamic> UpdateReasonMaster_CodeInSaleReturn(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,int Code,int ReasonMaster_Code)
+        public async Task<dynamic> UpdateReasonMaster_CodeInSaleReturn(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code, int ReasonMaster_Code)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("p_Mode", "UPDATEREASON");
-                parameters.Add("p_Code",Code);
-                parameters.Add("p_UserMaster_Code",0);
+                parameters.Add("p_Code", Code);
+                parameters.Add("p_UserMaster_Code", 0);
                 parameters.Add("p_ReasonMaster_Code", ReasonMaster_Code);
 
                 var result = await conn.QueryFirstOrDefaultAsync<dynamic>("USP_SalesReturnMaster", parameters, commandType: CommandType.StoredProcedure);
@@ -302,7 +302,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Mode", "LOCATE");
                 parameters.Add("p_Code", 0);
                 parameters.Add("p_ScanNo", "");
-                parameters.Add("p_UserMaster_Code",0);
+                parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>("USP_GetStockAuditDetails", parameters, commandType: CommandType.StoredProcedure);
 
                 return result.ToList();
@@ -315,14 +315,14 @@ namespace Bizsol_ESMS_API.Service
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("p_Code", 0);
                 parameters.Add("p_Mode", "SCAN");
-                parameters.Add("p_ScanNo",StockAudit.ScanNo);
+                parameters.Add("p_ScanNo", StockAudit.ScanNo);
                 parameters.Add("p_UserMaster_Code", StockAudit.UserMaster_Code);
                 var result = await conn.QueryAsync<dynamic>("USP_GetStockAuditDetails", parameters, commandType: CommandType.StoredProcedure);
 
                 return result.ToList();
             }
         }
-        public async Task<dynamic> ManualStockAudit(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,int Code,int UserMaster_Code)
+        public async Task<dynamic> ManualStockAudit(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code, int UserMaster_Code)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
@@ -368,7 +368,7 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-        public async Task<IEnumerable<dynamic>> GetTATReportList(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,string Month,string Year, string Type)
+        public async Task<IEnumerable<dynamic>> GetTATReportList(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, string Month, string Year, string Type)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
@@ -382,7 +382,7 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Remark", "");
                 parameters.Add("p_Month", Month.Trim());
                 parameters.Add("p_Year", Year.Trim());
-                parameters.Add("p_UserMaster_Code",0);
+                parameters.Add("p_UserMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>("USP_GetTATReport", parameters, commandType: CommandType.StoredProcedure);
 
                 return result.ToList();
@@ -436,7 +436,7 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-        public async Task<IEnumerable<dynamic>> GetSalesData(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,int p_Code)
+        public async Task<IEnumerable<dynamic>> GetSalesData(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int p_Code)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
@@ -508,7 +508,7 @@ namespace Bizsol_ESMS_API.Service
                 return result;
             }
         }
-        public async Task<dynamic> ValidateOrderConformation(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code, int OTP,int UserMaster_Code )
+        public async Task<dynamic> ValidateOrderConformation(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int Code, int OTP, int UserMaster_Code)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
@@ -516,12 +516,12 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_Mode", "Validate");
                 parameters.Add("p_Code", Code);
                 parameters.Add("p_OTP", OTP);
-                parameters.Add("p_UserMaster_Code",UserMaster_Code);
+                parameters.Add("p_UserMaster_Code", UserMaster_Code);
                 var result = await conn.QueryAsync<dynamic>("USP_SendOTPForDispatchValidation", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
         }
-        public async Task<dynamic> ValidateOrderExcelFormat(BizsolESMSConnectionDetails bizsolESMSConnectionDetails,string ClientType)
+        public async Task<dynamic> ValidateOrderExcelFormat(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, string ClientType)
         {
             using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
             {
@@ -543,6 +543,8 @@ namespace Bizsol_ESMS_API.Service
                 parameters.Add("p_FromDate", FromDate);
                 parameters.Add("p_ToDate", ToDate);
                 parameters.Add("p_ClientMaster_Code", ClientMaster_Code);
+                parameters.Add("p_IsInvoicedInDMS", "");
+                parameters.Add("p_DispatchMaster_Code", 0);
                 var result = await conn.QueryAsync<dynamic>("USP_Invoicegenerate", parameters, commandType: CommandType.StoredProcedure);
                 return result;
             }
@@ -671,5 +673,41 @@ namespace Bizsol_ESMS_API.Service
             }
             return vmOrderPickingPrint;
         }
+        public async Task<IEnumerable<dynamic>> GetClientType(BizsolESMSConnectionDetails bizsolESMSConnectionDetails)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "CLIENTTYPE");
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_UserMaster_Code", bizsolESMSConnectionDetails.UserMaster_Code);
+                parameters.Add("p_jsonData", "{}");
+                parameters.Add("p_jsonData1", "{}");
+                parameters.Add("p_AccountName", "");
+                parameters.Add("p_ItemName", "");
+                var result = await conn.QueryAsync<dynamic>(sp_name, parameters, commandType: CommandType.StoredProcedure);
+                return result.ToList();
+            }
+        }
+        public async Task<dynamic> UpdateIsInvoicedInDMS(BizsolESMSConnectionDetails bizsolESMSConnectionDetails, int p_DispatchMaster_Code, string p_IsInvoicedInDMS)
+        {
+            using (IDbConnection conn = new MySqlConnection(bizsolESMSConnectionDetails.DefultMysqlTemp))
+            {
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("p_Mode", "INVOICEDINDMS");
+                parameters.Add("p_Code", 0);
+                parameters.Add("p_UserMaster_Code", bizsolESMSConnectionDetails.UserMaster_Code);
+                parameters.Add("p_jsonData", "{}");
+                parameters.Add("p_FromDate", "");
+                parameters.Add("p_ToDate", "");
+                parameters.Add("p_ClientMaster_Code", 0);
+                parameters.Add("p_DispatchMaster_Code", p_DispatchMaster_Code);
+                parameters.Add("p_IsInvoicedInDMS", p_IsInvoicedInDMS);
+                var result = await conn.QueryAsync<dynamic>("USP_Invoicegenerate", parameters, commandType: CommandType.StoredProcedure);
+                return result;
+            }
+        }
+      
+
     }
 }
