@@ -1,5 +1,6 @@
 using Bizsol_ESMS_API.Interface;
 using Bizsol_ESMS_API.Service;
+using Bizsol_ESMS_API.Services;
 using Microsoft.Graph;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -67,6 +68,7 @@ builder.Services.AddTransient<IRetailerReplacementOut, RetailerReplacementOutSer
 builder.Services.AddTransient<IPriceListMaster, PriceListMasterService>();
 builder.Services.AddTransient<IPdfExtractionService, PdfExtractionService>();
 builder.Services.AddTransient<IStockAuditmaster, StockAuditmasterService>();
+builder.Services.AddTransient<IWarehouseStockTransferService, WarehouseStockTransferService>();
 
 builder.WebHost.ConfigureKestrel(options =>
 {
