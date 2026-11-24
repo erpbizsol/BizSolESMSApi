@@ -24,6 +24,7 @@ namespace Bizsol_ESMS_API.Model
         public string? BatchApplicable { get; set; }
         public string? MaintainExpiry { get; set; } 
         public string? IsActive { get; set; }
+        public string? IsNonStockItem { get; set; } = "N";
         public double? MRPNo { get; set; } = 0;
     }
 
