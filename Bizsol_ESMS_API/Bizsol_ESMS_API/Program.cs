@@ -69,6 +69,7 @@ builder.Services.AddTransient<IPriceListMaster, PriceListMasterService>();
 builder.Services.AddTransient<IPdfExtractionService, PdfExtractionService>();
 builder.Services.AddTransient<IStockAuditmaster, StockAuditmasterService>();
 builder.Services.AddTransient<IWarehouseStockTransferService, WarehouseStockTransferService>();
+builder.Services.AddTransient<IAccountAppIntegration, AccountAppIntegrationService>();
 
 builder.WebHost.ConfigureKestrel(options =>
 {
